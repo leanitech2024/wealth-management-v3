@@ -17,6 +17,8 @@ export const postSchema = z.object({
   categories: z.array(z.string()),
   author: z.string(),
   createdAt: z.coerce.date().transform((d) => d.toISOString()),
+  metaTitle: z.string().optional(),
+  metaDescription: z.string().optional(),
 });
 
 export type PostValues = z.infer<typeof postSchema>;
