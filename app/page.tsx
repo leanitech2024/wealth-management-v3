@@ -50,8 +50,8 @@ export default function Home() {
       <Stats />
       <Planning />
       <Services />
-      <Blogs />
       <Calculators />
+      <Blogs />
       <CTABanner />
       <Accordion02 />
       <CompanyLogos />

@@ -10,11 +10,7 @@ export default function Stats() {
           className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tighter'>
           Why Should You Choose Us?
         </h2>
-        <p
-          data-aos='fade-up'
-          className='text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground'>
-          Because after switching to us...
-        </p>
+
 
         <Blockquote>
           When a management with a reputation for brilliance, tackles a business

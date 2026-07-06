@@ -15,8 +15,24 @@ import { useInView } from 'react-intersection-observer';
 import { Highlighter } from './extends/highlighter';
 import ResponsiveButton from './shared/responsive-button';
 import { ScrollArea } from './ui/scroll-area';
+import { ArrowRightIcon } from 'lucide-react';
 
-export default function ServiceDrawer(props: (typeof services)[number]) {
+type ServiceDrawerProps = (typeof services)[number] & {
+  triggerClassName?: string;
+  triggerVariant?: 'link' | 'default' | 'outline' | 'secondary' | 'ghost' | 'destructive';
+  triggerText?: string;
+  showIcon?: boolean;
+};
+
+export default function ServiceDrawer(props: ServiceDrawerProps) {
+  const {
+    triggerClassName,
+    triggerVariant = 'link',
+    triggerText = 'Know more',
+    showIcon = false,
+    ...service
+  } = props;
+
   const { ref, inView } = useInView({
     root: null,
     rootMargin: '0px',
@@ -40,11 +56,12 @@ export default function ServiceDrawer(props: (typeof services)[number]) {
     <Drawer onOpenChange={handleOpenChange}>
       <DrawerTrigger asChild>
         <ResponsiveButton
-          variant={'link'}
+          variant={triggerVariant}
           className={
+            triggerClassName ||
             'underline underline-offset-2 hover:no-underline h-fit! px-0! rounded-none!'
           }>
-          Know more
+          {triggerText} {showIcon && <ArrowRightIcon className='size-4' />}
         </ResponsiveButton>
       </DrawerTrigger>
       <DrawerContent ref={ref} className={'min-h-fit'} inert>

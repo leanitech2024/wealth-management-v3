@@ -1,0 +1,18 @@
+# Ascent Wealth
+
+> Ascent Wealth is a registered Mutual Fund Distributor (ARN-109866) and wealth management consultancy in Chennai, India. We provide goal-based financial planning, SIPs, insurance, and fixed-income investment guidance.
+
+## Main Pages
+
+- [Home](https://ascentwealth.in/) - Main homepage with hero section, stats, calculators, and reviews.
+- [About Us](https://ascentwealth.in/about-us) - Details about our company history, experience, and structured process.
+- [Blogs](https://ascentwealth.in/blogs) - Financial advisory articles, news, and market insights.
+- [Disclaimer](https://ascentwealth.in/disclaimer) - Regulatory compliance, general information, and AMFI registered status disclaimer.
+- [Disclosure](https://ascentwealth.in/disclosure) - Transparency, SEBI regulations, and compensation disclosures.
+- [Privacy Policy](https://ascentwealth.in/privacy-policy) - Data protection, cookie policy, and user rights.
+
+## Contact Information
+
+- **Phone**: +91 7305953668
+- **Email**: info@ascentwealth.in
+- **Address**: Perungudi, Chennai, 600096, India

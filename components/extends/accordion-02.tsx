@@ -42,11 +42,7 @@ export function Accordion02() {
         </h2>
       </div>
 
-      <Blockquote>
-        Learn from the past, set vivid, detailed goals for the future, and live
-        in the only moment of time over which you have any control: now
-        <BlockquoteAuthor>Denis Waitley</BlockquoteAuthor>
-      </Blockquote>
+
 
       {isMobile && !isShowMore ? (
         <Accordion

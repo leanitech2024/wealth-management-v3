@@ -70,7 +70,9 @@ export default function TestimonialMarquee() {
   const reviewCount = googleReviews.length + testimonials.length;
 
   return (
-    <section className='w-full max-w-(--breakpoint-xl) mx-auto text-center pt-12 sm:pt-16 md:pt-20 lg:pt-24'>
+    <section
+      id='testimonials'
+      className='w-full max-w-(--breakpoint-xl) mx-auto text-center pt-12 sm:pt-16 md:pt-20 lg:pt-24'>
       <div className={'relative space-y-4 px-4 lg:px-0'}>
         <h2
           data-aos='fade-down'

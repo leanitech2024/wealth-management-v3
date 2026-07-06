@@ -1,5 +1,5 @@
 ---
-title: 'Step-by-Step Financial Planning Guide by Chennai Experts'
+title: 'Step-by-Step Financial Planning Guide'
 slug: 'step-by-step-financial-planning-guide-chennai'
 image: 'https://res.cloudinary.com/dxgckfhti/image/upload/v1780929833/Why_You_Need_a_Financial_Advisor_in_Chennai_for_Smart_Investment_Planning_lwcyrw.jpg'
 summary: 'Learn a step-by-step financial planning guide from the Best Financial Advisor in Chennai. Ascent Wealth helps you grow wealth with expert investment planning.'

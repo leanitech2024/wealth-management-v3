@@ -43,33 +43,10 @@ export default function NavMenu(props: NavMenuProps) {
   //   }
   // }, [isMobile, trackHash]);
 
-  // find which href have #, hashed href's only visible in "/" other page not
-  const hashedLinks = navlinks
-    .filter((link) => link.href.includes('#'))
-    .map((link) => link.href);
-
-  const homepageHashedLinks = navlinks
-    .filter((link) => link.href.includes('#') && link.href.startsWith('#'))
-    .map((link) => link.href);
-
-  // if current path is "/" then only show hashed href's otherwise show all except hashed href's
-  const filteredNavlinks =
-    pathname === '/'
-      ? navlinks
-      : navlinks.filter((link) => !hashedLinks.includes(link.href));
-
-  // if current path is "/" then only show hashed href's which starts with "#" otherwise show all except hashed href's
-  const finalNavlinks =
-    pathname === '/'
-      ? filteredNavlinks
-      : filteredNavlinks.filter(
-          (link) => !homepageHashedLinks.includes(link.href),
-        );
-
   return (
     <NavigationMenu {...navigationMenuProps}>
       <NavigationMenuList className='space-x-0 data-[orientation=vertical]:flex-col lg:gap-4 data-[orientation=vertical]:items-start data-[orientation=vertical]:justify-start'>
-        {finalNavlinks.map((link) => (
+        {navlinks.map((link) => (
           <NavigationMenuItem key={link.id}>
             <NavigationMenuLink
               asChild

@@ -2,12 +2,13 @@ import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
 // import { useInView } from 'react-intersection-observer';
 
-import { plannings } from '@/constants';
+import { plannings, services } from '@/constants';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { LazyPixelTransition } from './extends/lazy-components';
 import { LazyRiskProfileDialog } from './forms/lazy-components';
 import ResponsiveButton from './shared/responsive-button';
+import ServiceDrawer from './service-drawer';
 
 export default function PlanningCard({
   plan,
@@ -20,6 +21,10 @@ export default function PlanningCard({
   const isLast = idx === plannings.length - 1;
 
   const isSecondLast = idx === plannings.length - 2;
+
+  const goalPlanningService = services.find(
+    (s) => s.title === 'Goal Based Financial Planning'
+  );
 
   return (
     <div
@@ -58,21 +63,31 @@ export default function PlanningCard({
         <span className='uppercase font-medium text-xs md:text-sm text-muted-foreground'>
           {plan.category}
         </span>
-        <h4 className='my-3 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.02em]'>
+        <h3 className='my-3 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.02em]'>
           {plan.title}
-        </h4>
+        </h3>
         <p className='text-muted-foreground text-sm md:text-base'>
           {plan.details}
         </p>
         {!isLast ? (
-          <ResponsiveButton
-            data-aos='fade-right'
-            asChild
-            className='mt-6 rounded-full gap-3'>
-            <Link scroll={true} href={plan.tutorialLink}>
-              Learn More <ArrowRightIcon />
-            </Link>
-          </ResponsiveButton>
+          plan.category === 'Smart Investing' && goalPlanningService ? (
+            <ServiceDrawer
+              {...goalPlanningService}
+              triggerVariant='default'
+              triggerClassName='mt-6 rounded-full gap-3'
+              triggerText='Know more'
+              showIcon={true}
+            />
+          ) : (
+            <ResponsiveButton
+              data-aos='fade-right'
+              asChild
+              className='mt-6 rounded-full gap-3'>
+              <Link scroll={true} href={plan.tutorialLink} aria-label={`Learn more about ${plan.title}`}>
+                Learn More <ArrowRightIcon />
+              </Link>
+            </ResponsiveButton>
+          )
         ) : (
           <LazyRiskProfileDialog />
         )}

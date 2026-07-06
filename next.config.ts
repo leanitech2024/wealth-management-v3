@@ -14,6 +14,21 @@ const nextConfig: NextConfig = {
   },
   reactCompiler: true,
 
+  async redirects() {
+    return [
+      {
+        source: '/ascentwealth.in',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/index.html',
+        destination: '/',
+        permanent: true,
+      },
+    ];
+  },
+
   images: {
     remotePatterns: [
       // it will allow images from all external domains

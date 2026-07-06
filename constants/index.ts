@@ -21,12 +21,12 @@ export const navlinks = [
   {
     id: crypto.randomUUID(),
     label: 'Planning',
-    href: '#planning',
+    href: '/#planning',
   },
   {
     id: crypto.randomUUID(),
     label: 'Services',
-    href: '#services',
+    href: '/#services',
   },
   {
     id: crypto.randomUUID(),
@@ -36,22 +36,22 @@ export const navlinks = [
   {
     id: crypto.randomUUID(),
     label: 'Calculators',
-    href: '#calculators',
+    href: '/#calculators',
   },
   {
     id: crypto.randomUUID(),
     label: 'Free Consultation',
-    href: '#free-consultation',
+    href: '/#free-consultation',
   },
   {
     id: crypto.randomUUID(),
     label: 'FAQs',
-    href: '#faqs',
+    href: '/#faqs',
   },
   {
     id: crypto.randomUUID(),
     label: 'Contact Us',
-    href: '#contact-us',
+    href: '/#contact-us',
   },
 ];
 
@@ -173,42 +173,42 @@ export const footerLinks = {
     {
       id: crypto.randomUUID(),
       label: 'Important Links',
-      href: '#',
+      href: '/importantlinks',
     },
     {
       id: crypto.randomUUID(),
       label: 'Disclaimer',
-      href: '#',
+      href: '/disclaimer',
     },
     {
       id: crypto.randomUUID(),
       label: 'Disclosure',
-      href: '#',
+      href: '/disclosure',
     },
     {
       id: crypto.randomUUID(),
       label: 'Privacy Policy',
-      href: '#',
+      href: '/privacy-policy',
     },
     {
       id: crypto.randomUUID(),
       label: 'SID/SAI/KIM',
-      href: '#',
+      href: 'https://www.sebi.gov.in/filings/mutual-funds.html',
     },
     {
       id: crypto.randomUUID(),
       label: 'Code of Conduct',
-      href: '#',
+      href: '/codeof_conduct.pdf',
     },
     {
       id: crypto.randomUUID(),
       label: 'SEBI Circulars',
-      href: '#',
+      href: 'https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0',
     },
     {
       id: crypto.randomUUID(),
       label: 'AMFI Risk Factors',
-      href: '#',
+      href: 'https://www.amfiindia.com/investor/knowledge-center-info?zoneName=riskInMutualFunds',
     },
   ],
 };
@@ -464,9 +464,9 @@ export type ConsultationType = (typeof consultationTypes)[number];
 
 export const seo = {
   title:
-    'AMFI Registered Mutual Funds Distributor and Your Path to Prosperity Starts Here',
+    'Best Financial Advisor in Chennai | Ascent Wealth',
   description:
-    'Ascent Wealth is your trusted MF advisor, offering a progressive plan for a secured wealth creation. We specialize in Mutual Funds, Fixed Income, Insurance, NCDs, PMS and more, helping you achieve your financial goals with expert guidance.  Contact Us +91 7305953668',
+    'Looking for the best financial advisor in Chennai? Expert financial consultant services for investment planning, wealth management, and retirement planning.',
   keywords: [
     'Best Financial Advisor in Chennai',
     'Financial Advisor in Chennai',

@@ -37,8 +37,8 @@ export async function generateMetadata(
   const parentInfo = await parent;
 
   return {
-    title: post.title,
-    description: post.summary,
+    title: post.metaTitle || post.title,
+    description: post.metaDescription || post.summary,
     keywords: post.categories,
     creator: post.author,
     alternates: {
@@ -49,8 +49,8 @@ export async function generateMetadata(
     },
     openGraph: {
       determiner: parentInfo.openGraph?.determiner,
-      title: post.title,
-      description: post.summary,
+      title: post.metaTitle || post.title,
+      description: post.metaDescription || post.summary,
       images: [
         {
           url: `${post.image}`,

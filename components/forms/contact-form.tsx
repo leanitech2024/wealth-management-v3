@@ -106,13 +106,10 @@ export default function ContactForm() {
   };
 
   return (
-    <div className='border p-1 bg-muted w-full max-w-lg mx-auto'>
-      <Card className='relative isolate bg-background/70 shadow-none lg:ms-auto rounded-none p-4 gap-4 h-full justify-between'>
+    <div className='border p-1 bg-muted w-full h-full'>
+      <Card className='relative isolate bg-background/70 shadow-none lg:ms-auto rounded-none p-4 gap-4 h-full flex flex-col justify-start'>
         <CardHeader className={'px-0'}>
           <CardTitle>Contact Us</CardTitle>
-          <CardDescription>
-            We&apos;d love to hear from you. Please fill out this form.
-          </CardDescription>
 
           {isDev && (
             <CardAction>
@@ -128,8 +125,8 @@ export default function ContactForm() {
             </CardAction>
           )}
         </CardHeader>
-        <CardContent className='px-0'>
-          <form onSubmit={form.handleSubmit(onSubmit, onError)}>
+        <CardContent className='px-0 flex-1 flex flex-col'>
+          <form onSubmit={form.handleSubmit(onSubmit, onError)} className='flex-1 flex flex-col'>
             <FieldSet className='grid gap-4'>
               <FieldGroup className=' gap-4'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
@@ -211,62 +208,28 @@ export default function ContactForm() {
                       <FieldLabel htmlFor='message'>Message</FieldLabel>
                       <Textarea
                         id='message'
-                        placeholder='Your feedback helps us improve...'
+                        placeholder='Message'
                         rows={6}
                         {...field}
                         aria-invalid={fieldState.invalid}
                       />
-                      {fieldState.error ? (
+                      {fieldState.error && (
                         <FieldError role='alert' errors={[fieldState.error]} />
-                      ) : (
-                        <FieldDescription>
-                          Share your thoughts about our service.
-                        </FieldDescription>
-                      )}
-                    </Field>
-                  )}
-                />
-
-                <Controller
-                  name='acceptTerms'
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field
-                      data-invalid={fieldState.invalid}
-                      aria-invalid={fieldState.invalid}
-                      orientation='horizontal'
-                      className='col-span-2 flex items-center gap-2'>
-                      <Checkbox
-                        id='acceptTerms'
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                        aria-invalid={fieldState.invalid}
-                      />
-
-                      {fieldState.error ? (
-                        <FieldError role='alert' errors={[fieldState.error]} />
-                      ) : (
-                        <FieldLabel
-                          htmlFor='acceptTerms'
-                          className='font-normal text-xs sm:text-sm lg:text-base inline-flex flex-wrap'>
-                          You agree to our
-                          <Link href='#' className='underline'>
-                            terms and conditions
-                          </Link>
-                        </FieldLabel>
                       )}
                     </Field>
                   )}
                 />
               </FieldGroup>
             </FieldSet>
-            <ResponsiveButton
-              data-aos='fade-down'
-              disabled={isPending}
-              className='mt-6 w-full'
-              type='submit'>
-              {isPending ? 'Sending...' : 'Send Message'}
-            </ResponsiveButton>
+            <div className='mt-auto pt-6 border-t border-border/40 w-full'>
+              <ResponsiveButton
+                data-aos='fade-down'
+                disabled={isPending}
+                className='w-full'
+                type='submit'>
+                {isPending ? 'Sending...' : 'Send Message'}
+              </ResponsiveButton>
+            </div>
           </form>
         </CardContent>
       </Card>

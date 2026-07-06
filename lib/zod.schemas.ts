@@ -31,9 +31,7 @@ export const contactFormSchema = z.object({
     .string()
     .min(1, 'Message is required')
     .max(500, 'Message is too long'),
-  acceptTerms: z
-    .boolean()
-    .refine((val) => val === true, 'You must accept the terms and conditions'),
+  acceptTerms: z.boolean().optional(),
 });
 
 export const consultationSchema = z.object({

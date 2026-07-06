@@ -130,13 +130,9 @@ export function BlogCarousel() {
       className='w-full'>
       <CarouselContent className='-ml-1'>
         {sortedPosts.map((post, index) => (
-          <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3'>
-            <div className='p-1'>
-              <Card className={'p-0'}>
-                <CardContent className='p-0'>
-                  <BlogCard post={post} />
-                </CardContent>
-              </Card>
+          <CarouselItem key={index} className='md:basis-1/2 lg:basis-1/3 flex items-stretch'>
+            <div className='p-1 w-full flex'>
+              <BlogCard post={post} />
             </div>
           </CarouselItem>
         ))}
@@ -185,9 +181,9 @@ export function PrevButton() {
       size={'icon-sm'}
       className={cn('size-8 rounded-full')}
       disabled={!canScrollPrev}
-      onClick={scrollPrev}>
+      onClick={scrollPrev}
+      aria-label='Previous slide'>
       <ArrowLeft />
-      <span className='sr-only'>Previous slide</span>
     </Button>
   );
 }
@@ -202,9 +198,9 @@ export function NextButton() {
       size={'icon-sm'}
       className={cn('size-8 rounded-full')}
       disabled={!canScrollNext}
-      onClick={scrollNext}>
+      onClick={scrollNext}
+      aria-label='Next slide'>
       <ArrowRight />
-      <span className='sr-only'>Next slide</span>
     </Button>
   );
 }

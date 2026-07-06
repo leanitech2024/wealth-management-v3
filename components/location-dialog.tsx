@@ -1,6 +1,5 @@
 'use client';
 
-import { Sparkles } from '@/assets/icons/animated-icons/Sparkles';
 import { buttonVariants } from '@/components/ui/button';
 import {
   Dialog,
@@ -14,7 +13,7 @@ import { ShadCNShinyButton } from './extends/shadcn-shiny-btn';
 
 import { useAutoOpenDialog } from '@/hooks/use-auto-open-dialog';
 import { useIsMobile } from '@/hooks/use-mobile';
-import { IconMapPinDown } from '@tabler/icons-react';
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { Separator } from './ui/separator';
 
@@ -31,23 +30,22 @@ export default function LocationDialog() {
       onOpenChange={(open) => (open ? openDialog() : closeDialog())}>
       <DialogTrigger asChild>
         <ShadCNShinyButton
-          icon={<Sparkles className='h-5! w-5!' />}
+          icon={<Star className='h-5! w-5! fill-yellow-400 stroke-yellow-400' />}
           className={buttonVariants({
             size: isMobile ? 'sm' : 'lg',
-            className: 'rounded-full',
+            className: 'rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center!',
           })}>
-          Know More
+          Google Review
         </ShadCNShinyButton>
       </DialogTrigger>
       <DialogContent className='data-[state=open]:zoom-in-0! data-[state=open]:duration-600 sm:max-w-lg w-full gap-2'>
         <DialogHeader>
           <DialogTitle className='flex items-center gap-2'>
-            <IconMapPinDown className={'size-4'} />
-            Our Location
+            <Star className='h-5 w-5 fill-yellow-400 stroke-yellow-400' />
+            Google Review
           </DialogTitle>
           <DialogDescription>
-            Visit us at our office to explore personalized financial solutions
-            tailored to your goals.
+            Scan the QR code or view our location to write a review on Google and explore personalized financial solutions.
           </DialogDescription>
         </DialogHeader>
         <Separator className={'my-2'} />

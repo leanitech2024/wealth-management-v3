@@ -60,9 +60,9 @@ export default function ConsultationDialog() {
     control: form.control,
     setValue: form.setValue,
     storage: sessionStorage, // Use sessionStorage instead of localStorage
-    validate: true, // Trigger validation when data is restored
-    dirty: true, // Mark form as dirty
-    touch: true, // Mark fields as touched
+    validate: false, // Do not trigger validation when data is restored
+    dirty: false, // Do not mark form as dirty on load
+    touch: false, // Do not mark fields as touched on load
     debounceDelay: 300, // Save after 300ms of inactivity
     // onDataRestored: () => {
     //   toast.success('Restored your previous consultation data!', {
@@ -130,7 +130,7 @@ export default function ConsultationDialog() {
     <Dialog open={isOpen} onOpenChange={toggleDialog}>
       <FormProvider {...form}>
         <DialogTrigger asChild>
-          <ResponsiveButton className={'rounded-full!'}>
+          <ResponsiveButton className={'rounded-full! h-11! md:h-12! cursor-pointer flex! items-center! justify-center!'}>
             Take a free consultation <ArrowUpRight className='size-4' />
           </ResponsiveButton>
         </DialogTrigger>

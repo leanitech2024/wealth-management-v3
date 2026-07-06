@@ -32,7 +32,7 @@ export const NavigationSheet = () => {
       </VisuallyHidden>
 
       <SheetTrigger asChild>
-        <Button variant='outline' size='icon' className='rounded-full'>
+        <Button variant='outline' size='icon' className='rounded-full' aria-label='Toggle menu'>
           <Menu />
         </Button>
       </SheetTrigger>

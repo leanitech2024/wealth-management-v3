@@ -19,7 +19,7 @@ export default function Calculators() {
         <h2
           data-aos='fade-up'
           className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-center'>
-          Unleash Your Creativity
+          Calculators
         </h2>
         <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
           {calculators.map((calculator) => (
@@ -33,9 +33,9 @@ export default function Calculators() {
                   <calculator.icon className='size-6' />
                 </div>
                 <CardTitle>
-                  <h4 className='text-base lg:text-lg font-semibold'>
+                  <h3 className='text-base lg:text-lg font-semibold'>
                     {calculator.title}
-                  </h4>
+                  </h3>
                 </CardTitle>
                 <CardDescription>
                   <p className='mt-1 text-foreground/80 text-sm md:text-base'>

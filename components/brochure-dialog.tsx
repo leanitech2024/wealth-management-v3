@@ -84,7 +84,10 @@ export default function BrochureDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <InteractiveHoverButton
-          className={cn('rounded-full', isMobile && 'py-1.5 text-sm')}
+          className={cn(
+            'rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!',
+            isMobile && 'text-sm'
+          )}
           icon={<IconPdf className='h-5! w-5!' />}>
           Download Brochure
         </InteractiveHoverButton>

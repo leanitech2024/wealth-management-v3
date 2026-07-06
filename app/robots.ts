@@ -12,7 +12,6 @@ export default function robots(): MetadataRoute.Robots {
       userAgent: '*',
       allow: '/',
       disallow: '/private/',
-      crawlDelay: 10,
     },
     sitemap: `${BASE_URL}/sitemap.xml`,
   };

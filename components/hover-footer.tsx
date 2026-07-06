@@ -79,14 +79,14 @@ const footerLinks = [
 ];
 
 const resources = [
-  { id: crypto.randomUUID(), label: 'Important Links', href: '#' },
-  { id: crypto.randomUUID(), label: 'Disclaimer ', href: '#' },
-  { id: crypto.randomUUID(), label: 'Disclosure ', href: '#' },
-  { id: crypto.randomUUID(), label: 'Privacy Policy', href: '#' },
-  { id: crypto.randomUUID(), label: 'SID/SAI/KIM', href: '#' },
-  { id: crypto.randomUUID(), label: 'Code of Conduct', href: '#' },
-  { id: crypto.randomUUID(), label: 'SEBI Circulars', href: '#' },
-  { id: crypto.randomUUID(), label: 'AMFI Risk Factors', href: '#' },
+  { id: crypto.randomUUID(), label: 'Important Links', href: '/importantlinks' },
+  { id: crypto.randomUUID(), label: 'Disclaimer ', href: '/disclaimer' },
+  { id: crypto.randomUUID(), label: 'Disclosure ', href: '/disclosure' },
+  { id: crypto.randomUUID(), label: 'Privacy Policy', href: '/privacy-policy' },
+  { id: crypto.randomUUID(), label: 'SID/SAI/KIM', href: 'https://www.sebi.gov.in/filings/mutual-funds.html' },
+  { id: crypto.randomUUID(), label: 'Code of Conduct', href: '/codeof_conduct.pdf' },
+  { id: crypto.randomUUID(), label: 'SEBI Circulars', href: 'https://www.sebi.gov.in/sebiweb/home/HomeAction.do?doListing=yes&sid=1&ssid=7&smid=0' },
+  { id: crypto.randomUUID(), label: 'AMFI Risk Factors', href: 'https://www.amfiindia.com/investor/knowledge-center-info?zoneName=riskInMutualFunds' },
 ];
 
 // Contact info data
@@ -282,7 +282,7 @@ export function HoverFooter() {
           <span className={'text-sm'}>ARN-109866</span>
           <Separator orientation='vertical' />
           <span className={'text-sm'}>
-            Date of initial registration &mdash; 02-Apr-2025
+            Date of initial registration &mdash; 16-Mar-2016
           </span>
           <Separator orientation='vertical' />
           <span className={'text-sm'}>
@@ -302,6 +302,7 @@ export function HoverFooter() {
               <div key={resource.id} className={'text-sm'}>
                 <Link
                   href={resource.href}
+                  target={resource.href.startsWith('http') || resource.href.endsWith('.pdf') ? '_blank' : '_self'}
                   className='hover:text-primary transition-colors'>
                   {resource.label}
                 </Link>

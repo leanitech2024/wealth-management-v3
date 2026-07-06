@@ -26,7 +26,7 @@ export default function BlogCard(props: BlogCardProps) {
   }
 
   return (
-    <Card className='shadow-none py-0 gap-3'>
+    <Card className='shadow-none py-0 gap-3 h-full w-full flex flex-col'>
       <CardHeader className='p-2 pb-0'>
         <div className='aspect-video w-full h-full bg-muted rounded-lg overflow-hidden'>
           {/* <Image
@@ -41,7 +41,7 @@ export default function BlogCard(props: BlogCardProps) {
             src={splitUrl(post.image)}
             width={500}
             quality={50}
-            className='object-cover w-full h-full rounded-lg'
+            className='object-contain w-full h-full rounded-lg'
             // priority={i < 3}
           />
           {/* <Image
@@ -51,35 +51,38 @@ export default function BlogCard(props: BlogCardProps) {
           /> */}
         </div>
       </CardHeader>
-      <CardContent className='pt-0 pb-5 px-3 lg:px-5 space-y-4'>
-        <div className='flex flex-wrap gap-2 line-clamp-1'>
-          {post.categories.slice(0, 2).map((category, index) => (
-            <Badge key={index} variant='outline'>
-              {category}
-            </Badge>
-          ))}
+      <CardContent className='pt-0 pb-5 px-3 lg:px-5 flex-1 flex flex-col justify-between gap-4'>
+        <div className='flex-1 space-y-4'>
+          <div className='flex flex-wrap gap-2 line-clamp-1'>
+            {post.categories.slice(0, 2).map((category, index) => (
+              <Badge key={index} variant='outline'>
+                {category}
+              </Badge>
+            ))}
+          </div>
+
+          <Link prefetch='auto' href={`/blogs/${post.slug}`} className={'block'}>
+            <h3 className='mt-4 text-lg sm:text-xl md:text-xl lg:text-2xl font-semibold underline underline-offset-2 tracking-[-0.015em] hover:no-underline'>
+              {post.title}
+            </h3>
+          </Link>
+
+          <CardAction className={''}>
+            <Link
+              className={buttonVariants({
+                variant: 'link',
+                size: 'sm',
+                className:
+                  'text-muted-foreground! p-0! h-fit! rounded-none! hover:text-primary! transition-colors! delay-150! duration-300! ease-linear!',
+              })}
+              href={`/blogs/${post.slug}`}
+              aria-label={`Read more about ${post.title}`}>
+              Read more &rarr;
+            </Link>
+          </CardAction>
         </div>
 
-        <Link prefetch='auto' href={`/blogs/${post.slug}`} className={'block'}>
-          <h3 className='mt-4 text-lg sm:text-xl md:text-xl lg:text-2xl line-clamp-1 font-semibold underline underline-offset-2 tracking-[-0.015em] hover:no-underline'>
-            {post.title}
-          </h3>
-        </Link>
-
-        <CardAction className={''}>
-          <Link
-            className={buttonVariants({
-              variant: 'link',
-              size: 'sm',
-              className:
-                'text-muted-foreground! p-0! h-fit! rounded-none! hover:text-primary! transition-colors! delay-150! duration-300! ease-linear!',
-            })}
-            href={`/blogs/${post.slug}`}>
-            Read more &rarr;
-          </Link>
-        </CardAction>
-
-        <div className='flex flex-wrap gap-2 items-center justify-between'>
+        <div className='flex flex-wrap gap-2 items-center justify-between pt-4 border-t mt-auto'>
           <div className='flex items-center gap-2'>
             <Avatar>
               <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />

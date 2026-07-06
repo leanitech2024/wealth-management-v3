@@ -54,12 +54,12 @@ export default function Contact() {
           We&apos;d love to hear from you. Please fill out this form or shoot us
           an email.
         </p>
-        <div className='flex flex-col lg:flex-row gap-16 md:gap-10'>
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:col-span-2 *:border *:p-4 lg:*:p-6 *:bg-background gap-1 border p-1 bg-muted max-w-3xl mx-auto w-full'>
+        <div className='grid grid-cols-1 lg:grid-cols-[1fr_minmax(0,28rem)] gap-16 md:gap-10'>
+          <div className='grid grid-cols-1 sm:grid-cols-2 *:border *:p-4 lg:*:p-6 *:bg-background gap-1 border p-1 bg-muted w-full h-full'>
             {contactInfo.map((contact) => (
               <div
                 key={contact.id}
-                className={'space-y-2 ms:space-y-4 xl:space-y-6'}>
+                className={'space-y-2 sm:space-y-4'}>
                 <div className='size-6 sm:size-8 md:size-10 xl:size-12 flex items-center justify-center bg-foreground/5 dark:bg-foreground/10 text-foreground border border-foreground/3 rounded-xl'>
                   <contact.icon className={'size-4 xl:size-6'} />
                 </div>

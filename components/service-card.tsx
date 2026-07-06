@@ -33,9 +33,9 @@ export default async function ServiceCard(props: (typeof services)[number]) {
         className='flex flex-col border rounded-xl overflow-hidden shadow-none gap-4 pb-0'>
         <CardHeader>
           <CardTitle>
-            <h4 className='text-base md:text-lg xl:text-xl font-semibold tracking-tight'>
+            <h3 className='text-base md:text-lg xl:text-xl font-semibold tracking-tight'>
               {title}
-            </h4>
+            </h3>
           </CardTitle>
           <CardDescription>
             <p className='text-muted-foreground text-sm lg:text-base line-clamp-3'>
