@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
     // turbopackFileSystemCacheForDev: isDev,
     webVitalsAttribution: ['CLS', 'LCP'],
   },
+  turbopack: {
+    root: process.cwd(),
+  },
   reactCompiler: true,
 
   async redirects() {
