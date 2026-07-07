@@ -1,7 +1,7 @@
 ---
 title: 'Common Financial Mistakes People Make (And How Advisors Fix Them)'
 slug: 'common-financial-mistakes-chennai'
-image: 'https://res.cloudinary.com/dxgckfhti/image/upload/v1768552173/blog_cover_55_loik4k.jpg'
+image: 'https://res.cloudinary.com/dxgckfhti/image/upload/v1783355493/Gemini_Generated_Image_8c0fgh8c0fgh8c0f_huulsb.png'
 summary: 'Avoid common financial mistakes with guidance from the Best Financial Advisor in Chennai. Ascent Wealth helps you grow and protect your wealth with expert financial planning.'
 content: 'Money management involves making smart financial decisions that will help you reach your desired goals in the future.'
 categories:
