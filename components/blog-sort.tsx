@@ -14,7 +14,7 @@ import {
 export default function BlogFilter() {
   const [sortOrder, setSortOrder] = useQueryState('sort', {
     history: 'replace',
-    defaultValue: 'asc',
+    defaultValue: 'desc',
   });
 
   // const sortedPosts = allPosts.sort((a, b) => {

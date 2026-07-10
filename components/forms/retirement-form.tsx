@@ -68,7 +68,7 @@ export default function RetirementForm(props: RetirementFormProps) {
     control: form.control,
     setValue: form.setValue,
     storage: sessionStorage, // Use sessionStorage instead of localStorage
-    validate: true, // Trigger validation when data is restored
+    validate: false, // Trigger validation when data is restored
     dirty: true, // Mark form as dirty
     touch: true, // Mark fields as touched
     debounceDelay: 300, // Save after 300ms of inactivity

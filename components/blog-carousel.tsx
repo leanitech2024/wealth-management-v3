@@ -100,9 +100,9 @@ export function BlogCarousel() {
   // });
   const [sortOrder] = useQueryState('sort', {
     history: 'replace',
-    defaultValue: 'asc',
+    defaultValue: 'desc',
   });
-  const sortedPosts = allPosts.sort((a, b) => {
+  const sortedPosts = [...allPosts].sort((a, b) => {
     // sort by createdAt: string;
     if (sortOrder === 'asc') {
       return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();

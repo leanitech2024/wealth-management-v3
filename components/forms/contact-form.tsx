@@ -127,8 +127,8 @@ export default function ContactForm() {
         </CardHeader>
         <CardContent className='px-0 flex-1 flex flex-col'>
           <form onSubmit={form.handleSubmit(onSubmit, onError)} className='flex-1 flex flex-col'>
-            <FieldSet className='grid gap-4'>
-              <FieldGroup className=' gap-4'>
+            <FieldSet className='flex-1 flex flex-col gap-4'>
+              <FieldGroup className='flex-1 flex flex-col gap-4'>
                 <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                   <Controller
                     name='firstName'
@@ -204,12 +204,13 @@ export default function ContactForm() {
                   render={({ field, fieldState }) => (
                     <Field
                       data-invalid={fieldState.invalid}
-                      aria-invalid={fieldState.invalid}>
+                      aria-invalid={fieldState.invalid}
+                      className='flex-1 flex flex-col'>
                       <FieldLabel htmlFor='message'>Message</FieldLabel>
                       <Textarea
                         id='message'
                         placeholder='Message'
-                        rows={6}
+                        className='flex-1 min-h-[120px] resize-none'
                         {...field}
                         aria-invalid={fieldState.invalid}
                       />
@@ -221,9 +222,8 @@ export default function ContactForm() {
                 />
               </FieldGroup>
             </FieldSet>
-            <div className='mt-auto pt-6 border-t border-border/40 w-full'>
+            <div className='mt-auto pt-6 w-full'>
               <ResponsiveButton
-                data-aos='fade-down'
                 disabled={isPending}
                 className='w-full'
                 type='submit'>

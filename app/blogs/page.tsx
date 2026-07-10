@@ -2,6 +2,8 @@ import BlogsCard from '@/components/blogs-card';
 import { LazyBlogSort } from '@/components/lazy-components';
 import Banner from '@/components/shared/banner';
 import { CTABlock } from '@/components/shared/cta-block';
+import { Suspense } from 'react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 export default function BlogsPage(props: PageProps<'/blogs'>) {
   // const sortedPosts = allPosts.sort((a, b) => {
@@ -22,14 +24,16 @@ export default function BlogsPage(props: PageProps<'/blogs'>) {
       <Banner />
 
       <section className={'space-y-6'}>
-        <div className='flex flex-wrap gap-4 items-end justify-between'>
-          <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight'>
-            Our Latest Posts
-          </h2>
-          <LazyBlogSort />
-        </div>
+        <Suspense fallback={<Skeleton className='h-96 w-full' />}>
+          <div className='flex flex-wrap gap-4 items-end justify-between'>
+            <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight'>
+              Our Latest Posts
+            </h2>
+            <LazyBlogSort />
+          </div>
 
-        <BlogsCard />
+          <BlogsCard />
+        </Suspense>
       </section>
 
       <CTABlock />

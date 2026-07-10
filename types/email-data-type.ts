@@ -7,6 +7,11 @@ import {
   SIPCalculatorValues,
   VacationCalculatorValues,
   WeddingCalculatorValues,
+  CostOfDelayCalculatorValues,
+  GoalPlannerCalculatorValues,
+  InflationCalculatorValues,
+  SIPStepUpCalculatorValues,
+  SWPCalculatorValues,
 } from '@/lib/zod.schemas';
 
 export type EmailData =
@@ -17,4 +22,9 @@ export type EmailData =
   | RetirementCalculatorValues
   | WeddingCalculatorValues
   | VacationCalculatorValues
+  | CostOfDelayCalculatorValues
+  | GoalPlannerCalculatorValues
+  | InflationCalculatorValues
+  | SIPStepUpCalculatorValues
+  | SWPCalculatorValues
   | ConsultationFormValues;

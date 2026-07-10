@@ -72,7 +72,7 @@ export default function TestimonialMarquee() {
   return (
     <section
       id='testimonials'
-      className='w-full max-w-(--breakpoint-xl) mx-auto text-center pt-12 sm:pt-16 md:pt-20 lg:pt-24'>
+      className='w-full max-w-(--breakpoint-xl) mx-auto text-center pt-10'>
       <div className={'relative space-y-4 px-4 lg:px-0'}>
         <h2
           data-aos='fade-down'
@@ -83,7 +83,7 @@ export default function TestimonialMarquee() {
         <p
           data-aos='fade-up'
           className='text-center text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl'>
-          Real stories from people who use and love our product every day
+          Real stories from people who use and love our services every day
         </p>
 
         <div
@@ -107,7 +107,7 @@ export default function TestimonialMarquee() {
 
         <Blockquote>
           Learn from the past, set vivid, detailed goals for the future, and
-          live in the only moment of time over which you have any control: now
+          live in the only moment of time over which you have any control now
           <BlockquoteAuthor>Denis Waitley</BlockquoteAuthor>
         </Blockquote>
       </div>

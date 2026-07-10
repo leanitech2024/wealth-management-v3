@@ -33,7 +33,7 @@ export function Accordion02() {
   return (
     <section
       id='faqs'
-      className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 lg:space-y-8 py-12 sm:py-16 md:py-20 lg:py-24'>
+      className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 lg:space-y-8 py-10'>
       <div className='text-center w-full'>
         <h2
           data-aos='fade-down'

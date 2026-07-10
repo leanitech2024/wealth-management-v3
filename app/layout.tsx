@@ -2,6 +2,7 @@ import { HoverFooter } from '@/components/hover-footer';
 import { DevtoolsBlocker } from '@/components/shared/devtools-blocker';
 import Navbar from '@/components/shared/navbar';
 import { Toaster } from '@/components/ui/sonner';
+import { Suspense } from 'react';
 import { seo } from '@/constants';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
@@ -14,6 +15,7 @@ import { LazyAnalytics } from '@/components/analytics';
 import { LazyWhatsappWidget } from '@/components/lazy-components';
 import VercelProducts from '@/components/vercel-products';
 import AOSProvider from '@/providers/aos-provider';
+import ScrollToTop from '@/components/scroll-to-top';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
@@ -111,12 +113,17 @@ export default function RootLayout({
           disableTransitionOnChange>
           <AOSProvider>
             {!isDev ? <DevtoolsBlocker /> : null}
-            <Navbar />
-            <NuqsAdapter>{children}</NuqsAdapter>
-            <HoverFooter />
+            <NuqsAdapter>
+              <Suspense fallback={null}>
+                <Navbar />
+              </Suspense>
+              {children}
+              <HoverFooter />
+            </NuqsAdapter>
             <Toaster richColors closeButton position='top-center' />
           </AOSProvider>
           <LazyWhatsappWidget />
+          <ScrollToTop />
         </ThemeProvider>
         <VercelProducts />
         <LazyAnalytics />

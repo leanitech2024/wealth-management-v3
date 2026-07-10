@@ -48,7 +48,7 @@ export function CTABlock() {
                   size='lg'
                   className='group w-full gap-2 sm:w-auto'
                   asChild>
-                  <Link prefetch href={'/#contact-us'}>
+                  <Link prefetch href={'/?contact=true'}>
                     Speak with us
                     <MessageSquare className='h-4 w-4 transition-transform group-hover:scale-110' />
                   </Link>

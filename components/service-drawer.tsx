@@ -14,8 +14,9 @@ import { services } from '@/constants';
 import { useInView } from 'react-intersection-observer';
 import { Highlighter } from './extends/highlighter';
 import ResponsiveButton from './shared/responsive-button';
-import { ScrollArea } from './ui/scroll-area';
+
 import { ArrowRightIcon } from 'lucide-react';
+import { Blockquote, BlockquoteAuthor } from './extends/blockquote';
 
 type ServiceDrawerProps = (typeof services)[number] & {
   triggerClassName?: string;
@@ -64,9 +65,9 @@ export default function ServiceDrawer(props: ServiceDrawerProps) {
           {triggerText} {showIcon && <ArrowRightIcon className='size-4' />}
         </ResponsiveButton>
       </DrawerTrigger>
-      <DrawerContent ref={ref} className={'min-h-fit'} inert>
-        <div className='mx-auto w-full max-w-(--breakpoint-sm) flex flex-col h-full px-4'>
-          <div className={'py-0'}>
+      <DrawerContent ref={ref} className={'min-h-fit'}>
+        <div className='w-full flex flex-col h-full'>
+          <div className='mx-auto w-full max-w-(--breakpoint-sm) px-4 py-0'>
             <DrawerHeader className={''}>
               <DrawerTitle
                 className={
@@ -80,29 +81,42 @@ export default function ServiceDrawer(props: ServiceDrawerProps) {
                   {props.title}
                 </Highlighter>
               </DrawerTitle>
-              <DrawerDescription>
-                When a management with a reputation for brilliance, tackles a
-                business with a reputation for bad economics, it is the
-                reputation of the business that remains intact...
+              <DrawerDescription className='sr-only'>
+                Details about {props.title}
               </DrawerDescription>
             </DrawerHeader>
           </div>
 
-          <ScrollArea className='h-96 w-full pt-4'>
-            {props.description.map((para, index) => (
-              <p
-                key={index}
-                className='mb-2 lg:mb-4 text-sm text-muted-foreground'>
-                {para}
-              </p>
-            ))}
-          </ScrollArea>
-          <DrawerFooter className='mt-auto p-2'>
-            {/* <Button>Submit</Button> */}
-            <DrawerClose asChild>
-              <ResponsiveButton variant='outline'>Close</ResponsiveButton>
-            </DrawerClose>
-          </DrawerFooter>
+          <div className='h-96 w-full overflow-y-auto'>
+            <div className='mx-auto w-full max-w-(--breakpoint-sm) px-4 pt-4 pb-2'>
+              {props.quote && (() => {
+                const parts = props.quote.split(/ - | – /);
+                const text = parts[0]?.replace(/^"+|"+$/g, '') || '';
+                const author = parts[1] || '';
+                return (
+                  <Blockquote variant='3' className='mb-6 text-start py-1 pr-0 text-sm sm:text-base md:text-lg'>
+                    {text}
+                    {author && <BlockquoteAuthor>{author}</BlockquoteAuthor>}
+                  </Blockquote>
+                );
+              })()}
+              {props.description.map((para, index) => (
+                <p
+                  key={index}
+                  className='mb-2 lg:mb-4 text-sm text-muted-foreground'>
+                  {para}
+                </p>
+              ))}
+            </div>
+          </div>
+          
+          <div className='mx-auto w-full max-w-(--breakpoint-sm) px-4 mt-auto p-2'>
+            <DrawerFooter className='p-0'>
+              <DrawerClose asChild>
+                <ResponsiveButton variant='outline'>Close</ResponsiveButton>
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
         </div>
       </DrawerContent>
     </Drawer>

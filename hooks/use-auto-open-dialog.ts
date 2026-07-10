@@ -10,83 +10,57 @@ interface UseAutoOpenDialogReturn {
 
 /**
  * Custom hook for managing auto-opening dialogs with local storage persistence.
- * Initially opens the dialog, then re-opens it automatically after specified interval if closed.
- *
- * @param dialogId - Unique identifier for the dialog (used as localStorage key)
- * @param intervalMinutes - Number of minutes before auto-opening closed dialog (default: 15)
- * @returns Object containing isOpen state and openDialog/closeDialog functions
- *
- * @example
- * const { isOpen, openDialog } = useAutoOpenDialog('location-dialog', 15);
- *
- * // In JSX:
- * <Dialog open={isOpen} onOpenChange={(open) => !open ? null : openDialog()}>
+ * Opens the dialog automatically only once.
  */
 export function useAutoOpenDialog(
   dialogId: string,
   intervalMinutes: number = 15,
 ): UseAutoOpenDialogReturn {
   const [isOpen, setIsOpen] = useState(false);
-  // const [isMounted, setIsMounted] = useState(false);
 
-  const storageKey = `dialog_${dialogId}`;
-  const timestampKey = `${storageKey}_timestamp`;
+  const storageKey = `dialog_${dialogId}_last_opened`;
 
   const openDialog = useCallback(() => {
     setIsOpen(true);
-    // Update timestamp when dialog is opened
     if (typeof window !== 'undefined') {
-      localStorage.setItem(timestampKey, Date.now().toString());
+      localStorage.setItem(storageKey, Date.now().toString());
     }
-  }, [timestampKey]);
+  }, [storageKey]);
 
-  const closeDialog = () => {
+  const closeDialog = useCallback(() => {
     setIsOpen(false);
-  };
+  }, []);
 
-  const shouldAutoOpen = useCallback(() => {
-    if (typeof window === 'undefined') return false;
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
 
-    const lastOpenedTimestamp = localStorage.getItem(timestampKey);
+    const lastOpenedStr = localStorage.getItem(storageKey);
+    let shouldOpen = false;
 
-    // If no timestamp exists, this is first visit - open the dialog
-    if (!lastOpenedTimestamp) {
-      return true;
+    if (!lastOpenedStr) {
+      shouldOpen = true;
+    } else {
+      const lastOpened = parseInt(lastOpenedStr, 10);
+      if (!isNaN(lastOpened)) {
+        const diffMs = Date.now() - lastOpened;
+        const intervalMs = intervalMinutes * 60 * 1000;
+        if (diffMs >= intervalMs) {
+          shouldOpen = true;
+        }
+      } else {
+        shouldOpen = true;
+      }
     }
 
-    const now = Date.now();
-    const lastOpened = parseInt(lastOpenedTimestamp, 10);
-    const intervalMs = intervalMinutes * 60 * 1000;
-    const timeSinceLastOpen = now - lastOpened;
-
-    // Auto-open if interval has passed
-    return timeSinceLastOpen >= intervalMs;
-  }, [intervalMinutes, timestampKey]);
-
-  // Initial mount and setup
-  useEffect(() => {
-    // setIsMounted(true);
-
-    // Check if dialog should be auto-opened on mount
-    // if (shouldAutoOpen()) {
-    //   openDialog();
-    // }
-
-    // Set up interval to check every minute if dialog should auto-open
-    const intervalId = setInterval(() => {
-      if (shouldAutoOpen() && !isOpen) {
+    if (shouldOpen) {
+      // Auto open once on initial mount after a slight delay
+      const timer = setTimeout(() => {
         openDialog();
-      }
-    }, 60 * 1000); // Check every minute
+      }, 3000); // 3 seconds delay for better UX
 
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [isOpen, intervalMinutes, openDialog, shouldAutoOpen]);
-
-  if (shouldAutoOpen()) {
-    openDialog();
-  }
+      return () => clearTimeout(timer);
+    }
+  }, [openDialog, storageKey, intervalMinutes]);
 
   return {
     isOpen,

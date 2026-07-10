@@ -11,7 +11,7 @@ export default function Logo({ className }: LogoProps) {
     <Image
       src="/Ascent Wealth Logo.svg"
       alt="Ascent Wealth"
-      className={className || "w-auto h-12"}
+      className={className || "w-auto h-16"}
       width={1920}
       height={544}
       priority

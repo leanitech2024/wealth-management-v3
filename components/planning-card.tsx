@@ -9,6 +9,7 @@ import { LazyPixelTransition } from './extends/lazy-components';
 import { LazyRiskProfileDialog } from './forms/lazy-components';
 import ResponsiveButton from './shared/responsive-button';
 import ServiceDrawer from './service-drawer';
+import { Blockquote, BlockquoteAuthor } from './extends/blockquote';
 
 export default function PlanningCard({
   plan,
@@ -24,6 +25,10 @@ export default function PlanningCard({
 
   const goalPlanningService = services.find(
     (s) => s.title === 'Goal Based Financial Planning'
+  );
+
+  const ascentPlanningService = services.find(
+    (s) => s.title === "It's Time To Begin Your Ascent!"
   );
 
   return (
@@ -48,7 +53,7 @@ export default function PlanningCard({
         //   : 'md:odd:flex-row-reverse',
         'md:even:flex-row-reverse',
       )}>
-      <div className='w-full h-full rounded-xl'>
+      <div className='w-full h-full rounded-xl lg:max-w-[320px] xl:max-w-[350px] 2xl:max-w-[380px] mx-auto'>
         <div className={'aspect-square w-full h-full'}>
           <Image
             src={plan.image}
@@ -59,14 +64,22 @@ export default function PlanningCard({
           />
         </div>
       </div>
-      <div className='basis-1/2 shrink-0'>
-        <span className='uppercase font-medium text-xs md:text-sm text-muted-foreground'>
+      <div className='basis-1/2 shrink-0 flex flex-col justify-center h-full'>
+        <span className='uppercase font-medium text-xs md:text-sm xl:text-base text-muted-foreground'>
           {plan.category}
         </span>
-        <h3 className='my-3 text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-[-0.02em]'>
+        <h3 className='my-3 xl:my-4 2xl:my-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] leading-tight xl:leading-tight 2xl:leading-tight'>
           {plan.title}
         </h3>
-        <p className='text-muted-foreground text-sm md:text-base'>
+        {plan.quote && (
+          <Blockquote variant='3' className='my-6 xl:my-8 2xl:my-10 text-start py-1 pr-0 lg:text-lg xl:text-xl 2xl:text-2xl'>
+            {plan.quote}
+            {plan.quoteAuthor && (
+              <BlockquoteAuthor>{plan.quoteAuthor}</BlockquoteAuthor>
+            )}
+          </Blockquote>
+        )}
+        <p className='text-muted-foreground text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed lg:leading-loose xl:leading-loose 2xl:leading-loose'>
           {plan.details}
         </p>
         {!isLast ? (
@@ -74,7 +87,15 @@ export default function PlanningCard({
             <ServiceDrawer
               {...goalPlanningService}
               triggerVariant='default'
-              triggerClassName='mt-6 rounded-full gap-3'
+              triggerClassName='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
+              triggerText='Know more'
+              showIcon={true}
+            />
+          ) : plan.category === 'Dream Planning' && ascentPlanningService ? (
+            <ServiceDrawer
+              {...ascentPlanningService}
+              triggerVariant='default'
+              triggerClassName='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
               triggerText='Know more'
               showIcon={true}
             />
@@ -82,7 +103,7 @@ export default function PlanningCard({
             <ResponsiveButton
               data-aos='fade-right'
               asChild
-              className='mt-6 rounded-full gap-3'>
+              className='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
               <Link scroll={true} href={plan.tutorialLink} aria-label={`Learn more about ${plan.title}`}>
                 Learn More <ArrowRightIcon />
               </Link>

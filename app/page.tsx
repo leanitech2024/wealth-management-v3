@@ -1,7 +1,6 @@
 import Blogs from '@/components/blogs';
 import Calculators from '@/components/calculators';
 import CompanyLogos from '@/components/company-logos';
-import Contact from '@/components/contact';
 import CTABanner from '@/components/cta-banner';
 import { Accordion02 } from '@/components/extends/accordion-02';
 import { ScrollProgress } from '@/components/extends/scroll-progress';
@@ -51,12 +50,11 @@ export default function Home() {
       <Planning />
       <Services />
       <Calculators />
-      <Blogs />
       <CTABanner />
+      <Blogs />
       <Accordion02 />
       <CompanyLogos />
       <TestimonialMarquee />
-      <Contact />
       <ScrollProgress />
 
       {/* Add JSON-LD to your page */}

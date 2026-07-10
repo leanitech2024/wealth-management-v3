@@ -130,7 +130,7 @@ export default function ConsultationDialog() {
     <Dialog open={isOpen} onOpenChange={toggleDialog}>
       <FormProvider {...form}>
         <DialogTrigger asChild>
-          <ResponsiveButton className={'rounded-full! h-11! md:h-12! cursor-pointer flex! items-center! justify-center!'}>
+          <ResponsiveButton className={'rounded-full! h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!'}>
             Take a free consultation <ArrowUpRight className='size-4' />
           </ResponsiveButton>
         </DialogTrigger>

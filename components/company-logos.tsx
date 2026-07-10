@@ -1,19 +1,18 @@
 import { companyLogos } from '@/constants';
 import Image from 'next/image';
-import { Blockquote, BlockquoteAuthor } from './extends/blockquote';
 import { Marquee } from './marque';
 import { Card } from './ui/card';
 
 function LogoCard({ id, imgSrc }: (typeof companyLogos)[number]) {
   return (
-    <Card className={'p-2 rounded-none'}>
-      <div className='flex items-center justify-center rounded-sm overflow-hidden'>
+    <Card className='w-48 h-24 p-1 rounded-none flex items-center justify-center shrink-0 py-0! px-0! gap-0!'>
+      <div className='flex items-center justify-center w-full h-full rounded-sm overflow-hidden p-1'>
         <Image
           src={imgSrc}
           alt={`Company Logo ${id}`}
           width={150}
           height={48}
-          className='h-16 w-auto object-contain'
+          className='max-h-20 w-auto object-contain'
         />
       </div>
     </Card>
@@ -21,6 +20,9 @@ function LogoCard({ id, imgSrc }: (typeof companyLogos)[number]) {
 }
 
 export default function CompanyLogos() {
+  const firstHalf = companyLogos.slice(0, Math.ceil(companyLogos.length / 2));
+  const secondHalf = companyLogos.slice(Math.ceil(companyLogos.length / 2));
+
   return (
     <section
       id='company-logos'
@@ -30,21 +32,16 @@ export default function CompanyLogos() {
         className='text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-[1.15]! font-semibold tracking-[-0.035em]'>
         Our Trusted Partners
       </h2>
-      <Blockquote>
-        Don&apos;t save what is left after spending, but spend what is left
-        after saving
-        <BlockquoteAuthor>Warren Buffet</BlockquoteAuthor>
-      </Blockquote>
       <div className='relative flex w-full flex-col items-center justify-center gap-1 space-y-4 overflow-hidden'>
         {/* Marquee moving left to right (default) */}
         <Marquee pauseOnHover repeat={3} className='[--duration:120s]'>
-          {companyLogos.map((logo) => (
+          {firstHalf.map((logo) => (
             <LogoCard key={logo.id} {...logo} />
           ))}
         </Marquee>
         {/* Marquee moving right to left (reverse) */}
         <Marquee pauseOnHover reverse repeat={3} className='[--duration:120s]'>
-          {companyLogos.map((logo) => (
+          {secondHalf.map((logo) => (
             <LogoCard key={logo.id} {...logo} />
           ))}
         </Marquee>

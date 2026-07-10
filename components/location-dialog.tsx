@@ -33,7 +33,7 @@ export default function LocationDialog() {
           icon={<Star className='h-5! w-5! fill-yellow-400 stroke-yellow-400' />}
           className={buttonVariants({
             size: isMobile ? 'sm' : 'lg',
-            className: 'rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center!',
+            className: 'rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!',
           })}>
           Google Review
         </ShadCNShinyButton>

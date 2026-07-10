@@ -4,7 +4,7 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 import { SparklesIcon } from 'lucide-react';
 import { useState } from 'react';
-import ResponsiveButton from '../shared/responsive-button';
+import { InteractiveHoverButton } from '../extends/interactive-hover-button';
 import { Button } from '../ui/button';
 import {
   Dialog,
@@ -29,6 +29,11 @@ import RetirementForm from './retirement-form';
 import SIPForm from './sip-form';
 import VacationForm from './vacation-form';
 import WeddingForm from './wedding-form';
+import CostOfDelayForm from './cost-of-delay-form';
+import GoalPlannerForm from './goal-planner-form';
+import InflationForm from './inflation-form';
+import SIPStepUpForm from './sip-step-up-form';
+import SWPForm from './swp-form';
 
 type CaclculatorDrawerDialogProps = {
   title: string;
@@ -59,9 +64,11 @@ export default function CaclculatorDrawerDialog(
       <>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button variant={'secondary'} className={'w-full'}>
-              Get free calculation <SparklesIcon className={'size-4'} />
-            </Button>
+            <InteractiveHoverButton
+              className='w-full rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!'
+              icon={<SparklesIcon className='h-5! w-5!' />}>
+              Get free calculation
+            </InteractiveHoverButton>
           </DialogTrigger>
           <DialogContent className={cn('sm:max-w-5xl', animation.zoom)}>
             <DialogHeader className={'sr-only'}>
@@ -117,6 +124,46 @@ export default function CaclculatorDrawerDialog(
                 {...props}
               />
             )}
+            {title === 'Cost of Delay' && (
+              <CostOfDelayForm
+                onParentClose={setOpen}
+                onOpenEmail={setIsEmailDialogOpen}
+                onUpdateSessionKey={setSessionStorageKey}
+                {...props}
+              />
+            )}
+            {title === 'Goal Planner' && (
+              <GoalPlannerForm
+                onParentClose={setOpen}
+                onOpenEmail={setIsEmailDialogOpen}
+                onUpdateSessionKey={setSessionStorageKey}
+                {...props}
+              />
+            )}
+            {title === 'Inflation Calculator' && (
+              <InflationForm
+                onParentClose={setOpen}
+                onOpenEmail={setIsEmailDialogOpen}
+                onUpdateSessionKey={setSessionStorageKey}
+                {...props}
+              />
+            )}
+            {title === 'SIP Step-Up Calculator' && (
+              <SIPStepUpForm
+                onParentClose={setOpen}
+                onOpenEmail={setIsEmailDialogOpen}
+                onUpdateSessionKey={setSessionStorageKey}
+                {...props}
+              />
+            )}
+            {title === 'SWP Calculator' && (
+              <SWPForm
+                onParentClose={setOpen}
+                onOpenEmail={setIsEmailDialogOpen}
+                onUpdateSessionKey={setSessionStorageKey}
+                {...props}
+              />
+            )}
           </DialogContent>
         </Dialog>
         <EmailDialog
@@ -132,12 +179,11 @@ export default function CaclculatorDrawerDialog(
     <>
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <ResponsiveButton
-            data-aos='fade-up'
-            variant={'secondary'}
-            className={'w-full'}>
-            Get free calculation <SparklesIcon className={'size-4'} />
-          </ResponsiveButton>
+          <InteractiveHoverButton
+            className='w-full rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!'
+            icon={<SparklesIcon className='h-5! w-5!' />}>
+            Get free calculation
+          </InteractiveHoverButton>
         </DrawerTrigger>
         <DrawerContent className='p-6 min-h-fit'>
           <DrawerHeader>
@@ -187,6 +233,46 @@ export default function CaclculatorDrawerDialog(
           )}
           {title === 'Vacation Calculator' && (
             <VacationForm
+              onParentClose={setOpen}
+              onOpenEmail={setIsEmailDialogOpen}
+              onUpdateSessionKey={setSessionStorageKey}
+              {...props}
+            />
+          )}
+          {title === 'Cost of Delay' && (
+            <CostOfDelayForm
+              onParentClose={setOpen}
+              onOpenEmail={setIsEmailDialogOpen}
+              onUpdateSessionKey={setSessionStorageKey}
+              {...props}
+            />
+          )}
+          {title === 'Goal Planner' && (
+            <GoalPlannerForm
+              onParentClose={setOpen}
+              onOpenEmail={setIsEmailDialogOpen}
+              onUpdateSessionKey={setSessionStorageKey}
+              {...props}
+            />
+          )}
+          {title === 'Inflation Calculator' && (
+            <InflationForm
+              onParentClose={setOpen}
+              onOpenEmail={setIsEmailDialogOpen}
+              onUpdateSessionKey={setSessionStorageKey}
+              {...props}
+            />
+          )}
+          {title === 'SIP Step-Up Calculator' && (
+            <SIPStepUpForm
+              onParentClose={setOpen}
+              onOpenEmail={setIsEmailDialogOpen}
+              onUpdateSessionKey={setSessionStorageKey}
+              {...props}
+            />
+          )}
+          {title === 'SWP Calculator' && (
+            <SWPForm
               onParentClose={setOpen}
               onOpenEmail={setIsEmailDialogOpen}
               onUpdateSessionKey={setSessionStorageKey}

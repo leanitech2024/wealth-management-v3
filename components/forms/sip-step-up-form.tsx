@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
-import { sipSchema, type SIPCalculatorValues } from '@/lib/zod.schemas';
+import { sipStepUpSchema, type SIPStepUpCalculatorValues } from '@/lib/zod.schemas';
 import { Button } from '../ui/button';
 import { DialogClose, DialogFooter } from '../ui/dialog';
 import { DrawerClose, DrawerFooter } from '../ui/drawer';
@@ -29,7 +29,7 @@ import { Input } from '../ui/input';
 import { Separator } from '../ui/separator';
 import { Slider } from '../ui/slider';
 
-type SIPFormProps = {
+type SIPStepUpFormProps = {
   title: string;
   desc: string;
   onParentClose: Dispatch<SetStateAction<boolean>>;
@@ -37,30 +37,31 @@ type SIPFormProps = {
   onUpdateSessionKey: Dispatch<SetStateAction<SessionKey | undefined>>;
 };
 
-export default function SIPForm(props: SIPFormProps) {
+export default function SIPStepUpForm(props: SIPStepUpFormProps) {
   const { title, desc, onParentClose, onOpenEmail, onUpdateSessionKey } = props;
 
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
-  const form = useForm<SIPCalculatorValues>({
-    resolver: zodResolver(sipSchema),
+  const form = useForm<SIPStepUpFormValues>({
+    resolver: zodResolver(sipStepUpSchema),
     defaultValues: {
       name: '',
-      sipAmount: '',
-      noOfYears: 0,
-      expectedReturn: 0,
+      initialMonthlySip: '10000',
+      annualStepUp: 10,
+      expectedReturn: 12,
+      timePeriod: 20,
     },
     mode: 'onChange',
   });
 
-  useFormPersist('sip-form', {
+  useFormPersist('sip-step-up-form', {
     control: form.control,
     setValue: form.setValue,
-    storage: sessionStorage, // Use sessionStorage instead of localStorage
-    validate: false, // Trigger validation when data is restored
-    dirty: true, // Mark form as dirty
-    touch: true, // Mark fields as touched
-    debounceDelay: 300, // Save after 300ms of inactivity
+    storage: sessionStorage,
+    validate: false,
+    dirty: true,
+    touch: true,
+    debounceDelay: 300,
     onDataRestored: () => {
       toast.success('Restored your previous calculation data!', {
         description: 'You can continue where you left off.',
@@ -73,35 +74,31 @@ export default function SIPForm(props: SIPFormProps) {
         position: 'bottom-left',
       });
     },
-    timeout: 1000 * 60 * 60 * 24, // 24 hours
+    timeout: 1000 * 60 * 60 * 24,
   });
 
-  const onError: SubmitErrorHandler<SIPCalculatorValues> = (errors) => {
-    // console.log('Form errors:', errors);
+  const onError: SubmitErrorHandler<SIPStepUpFormValues> = (errors) => {
     Object.keys(errors).forEach((fieldName) => {
-      const fieldError = errors[fieldName as keyof SIPCalculatorValues];
+      const fieldError = errors[fieldName as keyof SIPStepUpFormValues];
       toast.error(fieldError?.message, {
         description: ' Please check the ' + fieldName + ' field.',
       });
     });
   };
 
-  const onSubmit: SubmitHandler<SIPCalculatorValues> = (data) => {
-    // console.log('Form data:', data);
-    toast.success(<pre>{`${JSON.stringify(data, null, 2)}`}</pre>, {
-      description: 'SIP Calculation submitted successfully!',
+  const onSubmit: SubmitHandler<SIPStepUpFormValues> = (data) => {
+    toast.success('SIP Step-Up calculation submitted successfully!', {
+      description: 'Your growth snapshot is being compiled.',
       position: 'bottom-right',
     });
-    onOpenEmail(true); // open next dialog
-    onParentClose(false); // close the calculator modal
-    onUpdateSessionKey('sip-form');
+    onOpenEmail(true);
+    onParentClose(false);
+    onUpdateSessionKey('sip-step-up-form');
   };
 
   return (
-    <form
-      className={'space-y-4'}
-      onSubmit={form.handleSubmit(onSubmit, onError)}>
-      <FieldSet className={'pb-2'}>
+    <form className='space-y-4' onSubmit={form.handleSubmit(onSubmit, onError)}>
+      <FieldSet className='pb-2'>
         <FieldLegend className={cn(isDesktop ? '' : 'sr-only')}>
           {title}
         </FieldLegend>
@@ -111,18 +108,16 @@ export default function SIPForm(props: SIPFormProps) {
 
         {isDesktop ? <FieldSeparator /> : null}
 
-        <FieldGroup className={'grid grid-cols-1 lg:grid-cols-2 gap-4'}>
+        <FieldGroup className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
           <Controller
             name='name'
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field
-                data-invalid={fieldState.invalid}
-                aria-invalid={fieldState.invalid}>
+              <Field data-invalid={fieldState.invalid} aria-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor='name'>Name</FieldLabel>
                 <Input
                   id='name'
-                  placeholder='ex. Evil Rabbit'
+                  placeholder='ex. John Doe'
                   {...field}
                   aria-invalid={fieldState.invalid}
                 />
@@ -136,15 +131,13 @@ export default function SIPForm(props: SIPFormProps) {
           />
 
           <Controller
-            name='sipAmount'
+            name='initialMonthlySip'
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field
-                data-invalid={fieldState.invalid}
-                aria-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor='investment-amount'>SIP amount</FieldLabel>
+              <Field data-invalid={fieldState.invalid} aria-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor='initial-monthly-sip'>Initial Monthly SIP (₹)</FieldLabel>
                 <Input
-                  id='investment-amount'
+                  id='initial-monthly-sip'
                   placeholder='ex. 10000'
                   {...field}
                   aria-invalid={fieldState.invalid}
@@ -153,7 +146,7 @@ export default function SIPForm(props: SIPFormProps) {
                   <FieldError role='alert' errors={[fieldState.error]} />
                 ) : (
                   <FieldDescription>
-                    Enter the amount you plan to invest as a SIP
+                    Enter the starting monthly investment amount
                   </FieldDescription>
                 )}
               </Field>
@@ -161,36 +154,24 @@ export default function SIPForm(props: SIPFormProps) {
           />
         </FieldGroup>
 
-        <FieldGroup className={'gap-4'}>
+        <FieldGroup className='grid grid-cols-1 gap-4 mt-4'>
           <Controller
-            name='noOfYears'
+            name='annualStepUp'
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field
-                data-invalid={fieldState.invalid}
-                aria-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor='no-of-years'>No. of years</FieldLabel>
-                {fieldState.error ? (
-                  <FieldError role='alert' errors={[fieldState.error]} />
-                ) : (
-                  <FieldDescription>
-                    Set the number of years you plan to invest (
-                    <span className='font-medium tabular-nums'>
-                      {/* {noOfYears[0]} */}
-                      {field.value}
-                    </span>
-                    )
-                  </FieldDescription>
-                )}
+              <Field data-invalid={fieldState.invalid} aria-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor='annual-step-up'>
+                  Annual Step-Up: <span className='font-semibold tabular-nums'>{field.value}%</span>
+                </FieldLabel>
                 <Slider
-                  id='no-of-years'
+                  id='annual-step-up'
                   value={[field.value]}
-                  onValueChange={(e) => {
-                    field.onChange(e[0]);
-                  }}
+                  onValueChange={(e) => field.onChange(e[0])}
+                  min={0}
                   max={50}
                   step={1}
                 />
+                {fieldState.error && <FieldError role='alert' errors={[fieldState.error]} />}
               </Field>
             )}
           />
@@ -199,34 +180,40 @@ export default function SIPForm(props: SIPFormProps) {
             name='expectedReturn'
             control={form.control}
             render={({ field, fieldState }) => (
-              <Field
-                data-invalid={fieldState.invalid}
-                aria-invalid={fieldState.invalid}>
+              <Field data-invalid={fieldState.invalid} aria-invalid={fieldState.invalid}>
                 <FieldLabel htmlFor='expected-return'>
-                  Expected Return
+                  Expected Return: <span className='font-semibold tabular-nums'>{field.value}% p.a.</span>
                 </FieldLabel>
-
-                {fieldState.error ? (
-                  <FieldError role='alert' errors={[fieldState.error]} />
-                ) : (
-                  <FieldDescription>
-                    Set expected return rate (
-                    <span className='font-medium tabular-nums'>
-                      {/* {expectedReturn[0]} */}
-                      {field.value}
-                    </span>
-                    %)
-                  </FieldDescription>
-                )}
                 <Slider
-                  id='higher-education-age'
+                  id='expected-return'
                   value={[field.value]}
-                  onValueChange={(e) => {
-                    field.onChange(e[0]);
-                  }}
-                  max={13}
+                  onValueChange={(e) => field.onChange(e[0])}
+                  min={1}
+                  max={30}
+                  step={0.5}
+                />
+                {fieldState.error && <FieldError role='alert' errors={[fieldState.error]} />}
+              </Field>
+            )}
+          />
+
+          <Controller
+            name='timePeriod'
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid} aria-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor='time-period'>
+                  Time Period: <span className='font-semibold tabular-nums'>{field.value} years</span>
+                </FieldLabel>
+                <Slider
+                  id='time-period'
+                  value={[field.value]}
+                  onValueChange={(e) => field.onChange(e[0])}
+                  min={1}
+                  max={40}
                   step={1}
                 />
+                {fieldState.error && <FieldError role='alert' errors={[fieldState.error]} />}
               </Field>
             )}
           />
@@ -260,3 +247,5 @@ export default function SIPForm(props: SIPFormProps) {
     </form>
   );
 }
+
+type SIPStepUpFormValues = SIPStepUpCalculatorValues;

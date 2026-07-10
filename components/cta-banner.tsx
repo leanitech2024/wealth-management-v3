@@ -6,8 +6,8 @@ export default function CTABanner() {
   return (
     <section
       id='free-consultation'
-      className='max-w-(--breakpoint-xl) mx-auto h-screen'>
-      <div className='dark:border relative overflow-hidden h-full dark:bg-background text-foreground rounded-2xl px-6 md:px-14 w-full flex flex-col items-center justify-center'>
+      className='max-w-(--breakpoint-xl) mx-auto w-full px-4 sm:px-6 py-10'>
+      <div className='dark:border relative overflow-hidden dark:bg-background text-foreground rounded-2xl px-6 md:px-14 py-12 md:py-16 w-full flex flex-col items-center justify-center'>
         <LazyAnimatedGridPattern
           numSquares={90}
           maxOpacity={0.1}

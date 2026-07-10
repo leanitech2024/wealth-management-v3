@@ -2,6 +2,7 @@
 
 import { allPosts } from '@/.content-collections/generated';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useQueryState } from 'nuqs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import BlogCard from './blog-card';
 
@@ -11,14 +12,17 @@ const DESKTOP_LOAD_THRESHOLD = 1600;
 const LOAD_MORE_DELAY = 700;
 
 export default function BlogsCard() {
+  const [sortOrder] = useQueryState('sort', {
+    history: 'replace',
+    defaultValue: 'desc',
+  });
+
   const sortedPosts = [...allPosts].sort((a, b) => {
-    // sort by createdAt: string;
-    // if (sortOrder === 'asc') {
-    //   return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-    // } else {
-    //   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    // }
-    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    if (sortOrder === 'asc') {
+      return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+    } else {
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
   });
 
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);

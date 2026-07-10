@@ -1,11 +1,8 @@
 'use client';
 
 import { BackgroundPattern } from '@/components/extends/background-pattern';
-import { Badge } from '@/components/ui/badge';
-import { IconPointFilled } from '@tabler/icons-react';
 import Link from 'next/link';
 import { AuroraText } from './extends/aurora-text';
-import RocketIcon from './extends/icons/rocket';
 import { LazyConsultationDialog } from './forms/lazy-components';
 import { LazyBrochureDownload, LazyLocationDialog } from './lazy-components';
 import { ShadCNShinyButton } from './extends/shadcn-shiny-btn';
@@ -22,20 +19,6 @@ export default function Hero() {
       <BackgroundPattern />
 
       <div className='relative z-10 text-center max-w-3xl space-y-4 md:space-y-6'>
-        <Badge
-          variant='secondary'
-          className='rounded-full py-1 border-border'
-          asChild>
-          <Link href='#home'>
-            <RocketIcon
-              className='stroke-primary size-4 stroke-2 inline-block'
-              stroke='currentColor'
-              strokeWidth={2}
-            />{' '}
-            Start Your Wealth Journey
-            <IconPointFilled className='ml-1 mt-0.5 size-8 animate-pulse fill-green-500' />
-          </Link>
-        </Badge>
         <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter'>
           <span data-aos='flip-up'>
             <AuroraText
@@ -54,8 +37,8 @@ export default function Hero() {
         </p>
         <div className='mt-12 flex flex-wrap items-center justify-center gap-4'>
           <LazyConsultationDialog />
-          <LazyLocationDialog />
           <LazyBrochureDownload />
+          <LazyLocationDialog />
         </div>
       </div>
     </section>

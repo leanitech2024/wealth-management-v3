@@ -71,7 +71,7 @@ const Testimonials = () => (
         Success Stories
       </h2>
       <p className='mt-3 text-center text-muted-foreground text-xl'>
-        Real stories from people who use and love our product every day
+        Real stories from people who use and love our services every day
       </p>
 
       <div className='relative flex w-full flex-col items-center justify-center overflow-hidden'>

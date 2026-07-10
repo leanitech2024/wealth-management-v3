@@ -442,7 +442,7 @@ export default function AboutPage() {
           </div>
 
           <Button asChild>
-            <Link prefetch href={'/#contact-us'}>
+            <Link prefetch href={'/?contact=true'}>
               Let&apos;s Connect
             </Link>
           </Button>

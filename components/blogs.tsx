@@ -7,7 +7,7 @@ export default function Blogs() {
   return (
     <section
       id='blogs'
-      className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 py-12 sm:py-16 md:py-20 lg:py-24'>
+      className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 py-10'>
       <div className='flex flex-wrap gap-4 items-end justify-between'>
         <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight md:ml-6'>
           Blogs

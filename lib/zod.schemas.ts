@@ -224,6 +224,47 @@ export const riskProfileSchema = contactFormSchema
     }),
   });
 
+export const costOfDelaySchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  monthlyInvestment: z.string().min(1, 'Monthly investment is required'),
+  expectedReturn: z.float32().min(1, 'Expected return must be at least 1%').max(25, 'Expected return must be at most 25%'),
+  totalHorizon: z.float32().min(5, 'Total horizon must be at least 5 years').max(40, 'Total horizon must be at most 40 years'),
+  delayYears: z.float32().min(1, 'Delay starting must be at least 1 year').max(39, 'Delay starting must be at most 39 years'),
+}).refine((data) => data.delayYears < data.totalHorizon, {
+  message: 'Delay starting must be less than total horizon',
+  path: ['delayYears'],
+});
+
+export const goalPlannerSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  targetAmount: z.string().min(1, 'Target amount is required'),
+  timePeriod: z.float32().min(1, 'Time period must be at least 1 year').max(40, 'Time period must be at most 40 years'),
+  expectedReturn: z.float32().min(1, 'Expected return must be at least 1%').max(25, 'Expected return must be at most 25%'),
+});
+
+export const inflationSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  currentAmount: z.string().min(1, 'Current amount is required'),
+  inflationRate: z.float32().min(1, 'Inflation rate must be at least 1%').max(15, 'Inflation rate must be at most 15%'),
+  yearsFromNow: z.float32().min(1, 'Years must be at least 1 year').max(50, 'Years must be at most 50 years'),
+});
+
+export const sipStepUpSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  initialMonthlySip: z.string().min(1, 'Initial monthly SIP is required'),
+  annualStepUp: z.float32().min(0, 'Annual step-up must be at least 0%').max(50, 'Annual step-up must be at most 50%'),
+  expectedReturn: z.float32().min(1, 'Expected return must be at least 1%').max(30, 'Expected return must be at most 30%'),
+  timePeriod: z.float32().min(1, 'Time period must be at least 1 year').max(40, 'Time period must be at most 40 years'),
+});
+
+export const swpSchema = z.object({
+  name: z.string().min(1, 'Name is required'),
+  totalCorpus: z.string().min(1, 'Total corpus is required'),
+  monthlyWithdrawal: z.string().min(1, 'Monthly withdrawal is required'),
+  expectedReturn: z.float32().min(1, 'Expected return must be at least 1%').max(20, 'Expected return must be at most 20%'),
+  projectionPeriod: z.float32().min(5, 'Projection period must be at least 5 years').max(50, 'Projection period must be at most 50 years'),
+});
+
 export type RiskProfileFormValues = z.infer<typeof riskProfileSchema>;
 
 export type CommonCalculatorValues = z.infer<typeof commonCalculatorSchema>;
@@ -234,6 +275,11 @@ export type SIPCalculatorValues = z.infer<typeof sipSchema>;
 export type RetirementCalculatorValues = z.infer<typeof retirementSchema>;
 export type WeddingCalculatorValues = z.infer<typeof weddingSchema>;
 export type VacationCalculatorValues = z.infer<typeof vacationSchema>;
+export type CostOfDelayCalculatorValues = z.infer<typeof costOfDelaySchema>;
+export type GoalPlannerCalculatorValues = z.infer<typeof goalPlannerSchema>;
+export type InflationCalculatorValues = z.infer<typeof inflationSchema>;
+export type SIPStepUpCalculatorValues = z.infer<typeof sipStepUpSchema>;
+export type SWPCalculatorValues = z.infer<typeof swpSchema>;
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
 export type ConsultationFormValues = z.infer<typeof consultationSchema>;

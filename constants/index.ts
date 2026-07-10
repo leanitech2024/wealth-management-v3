@@ -5,6 +5,11 @@ import {
   IconMathSymbols,
   IconTimeDuration45,
   IconTimeline,
+  IconHourglass,
+  IconTarget,
+  IconTrendingUp,
+  IconStairsUp,
+  IconCash,
 } from '@tabler/icons-react';
 
 export const navlinks = [
@@ -30,11 +35,6 @@ export const navlinks = [
   },
   {
     id: crypto.randomUUID(),
-    label: 'Blogs',
-    href: '/blogs',
-  },
-  {
-    id: crypto.randomUUID(),
     label: 'Calculators',
     href: '/#calculators',
   },
@@ -45,13 +45,13 @@ export const navlinks = [
   },
   {
     id: crypto.randomUUID(),
-    label: 'FAQs',
-    href: '/#faqs',
+    label: 'Blogs',
+    href: '/blogs',
   },
   {
     id: crypto.randomUUID(),
-    label: 'Contact Us',
-    href: '/#contact-us',
+    label: 'FAQs',
+    href: '/#faqs',
   },
 ];
 
@@ -248,7 +248,7 @@ export const plannings = [
     title: "It's Time To Begin Your Ascent!",
     details:
       "Ready to take control of your financial future? We help you transform dreams into actionable plans—whether it's buying a home, funding education, or retiring comfortably. Let's design a personalized strategy that works for your life.",
-    tutorialLink: '#free-consultation',
+    tutorialLink: '/?contact=true',
     image: '/assets/2.jpg',
     direction: 'left',
   },
@@ -258,17 +258,22 @@ export const plannings = [
     title: 'Goal-Based Investments Planning',
     details:
       "Every rupee you invest should have a purpose. We guide you to set clear financial goals, understand your risk appetite, and choose investments that align with your timeline and needs. Because smart investing starts with knowing what you're working towards.",
-    tutorialLink: '#free-consultation',
+    tutorialLink: '/?contact=true',
     image: '/assets/4.jpg',
     direction: 'right',
+    quote:
+      "Every pound is a seedling. Invest your seedlings to create a tree. Re-invest your seedlings to grow a forest",
+    quoteAuthor: "George Choy",
   },
   {
     id: crypto.randomUUID(),
     category: 'Peace of Mind',
     title: 'Why Risk Profiling Matters for Your Peace of Mind',
+    quote: "Successful investing is about managing risk, not avoiding it",
+    quoteAuthor: "Ben Graham",
     details:
       "Feeling uncertain about the right investment moves? Our personalized risk profiling takes the guesswork out of the equation. We help you find that sweet spot between your goals, your comfort level, and what's realistic for your situation. No jargon, just clarity.",
-    tutorialLink: '#free-consultation',
+    tutorialLink: '/?contact=true',
     image: '/assets/8.jpg',
     direction: 'left',
   },
@@ -292,7 +297,7 @@ export const services = [
     // cover: '/assets/9.avif',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768586853/9_a7t573.avif',
-    quote: `"The doorstep to the temple of wisdom is a knowledge of our own ignorance" – Benjamin Franklin`,
+    quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
   },
   {
     id: crypto.randomUUID(),
@@ -311,7 +316,7 @@ export const services = [
     ],
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/v1771837158/1104819_gfbnfs.jpg',
-    quote: `"Planning is bringing the future into the present so that you can do something about it now" - Alan Lakein`,
+    quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
   },
   {
     id: crypto.randomUUID(),
@@ -329,7 +334,7 @@ export const services = [
     //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/507insurance.jpg',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580705/507insurance_rnbrp4.jpg',
-    quote: `""Luck is the flip side of risk. You cannot understand one without appreciating the other" - Morgan Housel`,
+    quote: `"The fundamental law of investing is the uncertainty of the future" - Peter L. Bernstein`,
   },
   {
     id: crypto.randomUUID(),
@@ -387,25 +392,35 @@ export const services = [
     //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/384eq.jpg',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580708/384eq_xrrg5d.jpg',
-    quote: `"The single greatest challenge you face as an investor is handling the truth about yourself" - Jason Zweig`,
+    quote: `"Don't let the fear of losing be greater than the excitement of winning" - Robert Kiyosaki`,
   },
   {
     id: crypto.randomUUID(),
     title: 'Goal Based Financial Planning',
     subtitle: 'Your future is created by what you do today, not tomorrow',
     description: [
-      `In Mutual Funds a goal oriented Systematic Investment Plan (SIP) is indeed a financial stress buster and wealth creation vehicle in the long term.`,
-      `When we mention about long term which means one being really patient for a stretched period of years and investing should be like watching plants grow.`,
-      `Accomplishment of goal set: Planning for children’s higher education or wedding expenses or foreign visits or buying a house or retirement corpus, a disciplined investment plays critical role where you continue in a systematic way towards your financial goals set.`,
+      `When planning finances around specific goals—short‑term or long‑term—it is vital to factor in evolving inflation, the time required to achieve each goal, the amount of savings available for investment, everyday liquidity needs, and your comfort with risk. Because these elements shape your financial stability, ensuring adequate insurance protection for life, health, property, and other exposures becomes a crucial pillar of comprehensive financial planning.`,
+      `In Mutual Funds a goal oriented Systematic Investment Plan (SIP) is indeed a financial stress buster and wealth creation vehicle in the long term. When we mention about long term which means one being really patient for a stretched period of years and investing should be like watching plants grow.`,
       `While we discuss about discipline in investments, it is also equally or more important to steadily invest for a considerably long term to achieve the desired results or outcome. That’s why goal-based investments assume significance will deliver better results.`,
       `Ascent Wealth helps clients with varying risk profiles accomplish their medium to long-term wealth creation goals.`,
     ],
-    // cover: '/images/services/664goalf.jpg',
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/664goalf.jpg',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580706/664goalf_y9effa.jpg',
-    quote: `"The best decisions draw on the dual strength of your investing brain: intuition and analysis. Feeling and thinking." - Jason Zweig`,
+    quote: `"Our goals can only be reached through a vehicle of a plan in which we must fervently believe and upon which we must vigorously act. There is no other route to success" - Pablo Picasso`,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: "It's Time To Begin Your Ascent!",
+    subtitle: 'Dream Planning',
+    description: [
+      `Life tosses many challenges at you when you try to realize long-term aspirations, which includes immediate monetary constraints and extensive list of investment options. Financial Planning is the process of designing, implementing and revisiting your personal financial strategy, that customized to guide you from where you are now, to where you want to be down the years.`,
+      `Budgeting is another important aspect while doing the financial planning. A careful budgeting exercise without compromising minor details can provide good scope for saving enough for investments without perceptible influence on the lifestyle.`,
+      `The efficiency and usefulness of financial planning is solely depending on the level of involvement and commitment in the course and progression.`,
+      `Ready to take control of your financial future? We help you transform dreams into actionable plans to achieve financial independence.`,
+    ],
+    cover:
+      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768586853/9_a7t573.avif',
+    quote: `"Planning is bringing the future into the present so that you can do something about it now" - Alan Lakein`,
   },
 ];
 
@@ -445,6 +460,36 @@ export const calculators = [
     title: 'Vacation Calculator',
     description:
       'Estimate your vacation expenses, budget effectively, and ensure a stress-free getaway with our Vacation Calculator.',
+  },
+  {
+    icon: IconHourglass,
+    title: 'Cost of Delay',
+    description:
+      'See the financial impact of delaying your Systematic Investment Plan and calculate the wealth gap.',
+  },
+  {
+    icon: IconTarget,
+    title: 'Goal Planner',
+    description:
+      'Estimate the monthly SIP required to achieve your financial milestones within your target timeframe.',
+  },
+  {
+    icon: IconTrendingUp,
+    title: 'Inflation Calculator',
+    description:
+      'See how inflation erodes the purchasing power of your money and calculate future inflated costs.',
+  },
+  {
+    icon: IconStairsUp,
+    title: 'SIP Step-Up Calculator',
+    description:
+      'Estimate the growth of a Systematic Investment Plan where your monthly contribution increases annually.',
+  },
+  {
+    icon: IconCash,
+    title: 'SWP Calculator',
+    description:
+      'Plan regular withdrawals from a corpus and estimate how long your retirement funds will last.',
   },
 ] as const;
 

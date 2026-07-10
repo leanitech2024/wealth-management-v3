@@ -4,7 +4,12 @@ declare type Calculators =
   | 'sip-form'
   | 'retirement-form'
   | 'wedding-form'
-  | 'vacation-form';
+  | 'vacation-form'
+  | 'cost-of-delay-form'
+  | 'goal-planner-form'
+  | 'inflation-form'
+  | 'sip-step-up-form'
+  | 'swp-form';
 
 declare type EmailType =
   | `calc-${Calculators}`

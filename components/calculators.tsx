@@ -14,19 +14,25 @@ export default function Calculators() {
   return (
     <section
       id='calculators'
-      className='container max-w-(--breakpoint-xl) mx-auto w-full px-4 py-12 sm:py-16 md:py-20 lg:py-24'>
+      className='container max-w-(--breakpoint-xl) mx-auto w-full px-4 py-10'>
       <div className='space-y-6 lg:space-y-8'>
         <h2
           data-aos='fade-up'
           className='text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-center'>
           Calculators
         </h2>
-        <div className='grid sm:grid-cols-2 lg:grid-cols-3 gap-6'>
+        <p
+          data-aos='fade-up'
+          className='mt-2 text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl text-center max-w-2xl mx-auto'>
+          Elevate your financial journey with our intuitive tools, crafted to
+          empower your decisions and bring your aspirations to life.
+        </p>
+        <div className='flex flex-wrap justify-center gap-6'>
           {calculators.map((calculator) => (
             <Card
               data-aos='zoom-in-up'
               key={calculator.title}
-              className='relative overflow-hidden gap-4'>
+              className='relative overflow-hidden gap-4 w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)]'>
               <ShineBorder shineColor={['#A07CFE', '#FE8FB5', '#FFBE7B']} />
               <CardHeader className={'text-center'}>
                 <div className='mb-4 size-12 mx-auto flex items-center justify-center bg-accent rounded-full'>
