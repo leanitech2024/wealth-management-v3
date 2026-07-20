@@ -52,6 +52,7 @@ export default function ContactForm() {
       firstName: '',
       lastName: '',
       email: '',
+      phone: '',
       message: '',
       acceptTerms: false,
     },
@@ -106,8 +107,8 @@ export default function ContactForm() {
   };
 
   return (
-    <div className='border p-1 bg-muted w-full h-full'>
-      <Card className='relative isolate bg-background/70 shadow-none lg:ms-auto rounded-none p-4 gap-4 h-full flex flex-col justify-start'>
+    <div className='border p-1 bg-muted w-full min-h-full sm:min-h-0 sm:h-fit'>
+      <Card className='relative isolate bg-background/70 shadow-none lg:ms-auto rounded-none p-4 gap-4 min-h-full sm:min-h-0 sm:h-fit flex flex-col justify-start'>
         <CardHeader className={'px-0'}>
           <CardTitle>Contact Us</CardTitle>
 
@@ -178,25 +179,47 @@ export default function ContactForm() {
                   />
                 </div>
 
-                <Controller
-                  name='email'
-                  control={form.control}
-                  render={({ field, fieldState }) => (
-                    <Field
-                      data-invalid={fieldState.invalid}
-                      aria-invalid={fieldState.invalid}>
-                      <FieldLabel htmlFor='email'>Email</FieldLabel>
-                      <Input
-                        type='email'
-                        placeholder='Email'
-                        id='email'
-                        {...field}
-                        aria-invalid={fieldState.invalid}
-                      />
-                      <FieldError role='alert' errors={[fieldState.error]} />
-                    </Field>
-                  )}
-                />
+                <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
+                  <Controller
+                    name='email'
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <Field
+                        data-invalid={fieldState.invalid}
+                        aria-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor='email'>Email</FieldLabel>
+                        <Input
+                          type='email'
+                          placeholder='Email'
+                          id='email'
+                          {...field}
+                          aria-invalid={fieldState.invalid}
+                        />
+                        <FieldError role='alert' errors={[fieldState.error]} />
+                      </Field>
+                    )}
+                  />
+
+                  <Controller
+                    name='phone'
+                    control={form.control}
+                    render={({ field, fieldState }) => (
+                      <Field
+                        data-invalid={fieldState.invalid}
+                        aria-invalid={fieldState.invalid}>
+                        <FieldLabel htmlFor='phone'>Phone Number</FieldLabel>
+                        <Input
+                          type='tel'
+                          placeholder='Phone Number'
+                          id='phone'
+                          {...field}
+                          aria-invalid={fieldState.invalid}
+                        />
+                        <FieldError role='alert' errors={[fieldState.error]} />
+                      </Field>
+                    )}
+                  />
+                </div>
 
                 <Controller
                   name='message'
@@ -204,13 +227,12 @@ export default function ContactForm() {
                   render={({ field, fieldState }) => (
                     <Field
                       data-invalid={fieldState.invalid}
-                      aria-invalid={fieldState.invalid}
-                      className='flex-1 flex flex-col'>
+                      aria-invalid={fieldState.invalid}>
                       <FieldLabel htmlFor='message'>Message</FieldLabel>
-                      <Textarea
+                      <Input
+                        type='text'
                         id='message'
                         placeholder='Message'
-                        className='flex-1 min-h-[120px] resize-none'
                         {...field}
                         aria-invalid={fieldState.invalid}
                       />

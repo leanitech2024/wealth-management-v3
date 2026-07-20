@@ -31,7 +31,7 @@ export function CTABlock() {
                 Ready to Build Your Financial Future?
               </h2>
 
-              <p className='mx-auto mb-8 max-w-2xl text-base lg:text-lg text-muted-foreground'>
+              <p className='mx-auto mb-8 max-w-2xl text-lg lg:text-xl text-muted-foreground'>
                 Whether you’re growing wealth, planning for retirement,
                 protecting your family, or creating a lasting legacy, we’re here
                 to help you make confident financial decisions every step of the
@@ -48,7 +48,7 @@ export function CTABlock() {
                   size='lg'
                   className='group w-full gap-2 sm:w-auto'
                   asChild>
-                  <Link prefetch href={'/?contact=true'}>
+                  <Link prefetch href={'?contact=true'}>
                     Speak with us
                     <MessageSquare className='h-4 w-4 transition-transform group-hover:scale-110' />
                   </Link>
@@ -59,27 +59,14 @@ export function CTABlock() {
                   variant='outline'
                   className='group w-full gap-2 sm:w-auto'
                   asChild>
-                  <Link prefetch href={'/#serivces'}>
-                    Explore Solutions
+                  <Link prefetch href={'/#services'}>
+                    Explore Services
                     <ArrowRight className='h-4 w-4 transition-transform group-hover:translate-x-1' />
                   </Link>
                 </Button>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.6, duration: 0.6 }}
-                className='mt-8 flex flex-col items-center justify-center gap-4 text-sm text-muted-foreground sm:flex-row sm:gap-8'>
-                <div className='flex items-center gap-2'>
-                  <div className='h-2 w-2 animate-pulse rounded-full bg-primary' />
-                  <span>Available for new projects</span>
-                </div>
-                <div>
-                  <span>Response time: &lt;24 hours</span>
-                </div>
-              </motion.div>
+
             </motion.div>
           </div>
         </Card>

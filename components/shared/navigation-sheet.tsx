@@ -19,9 +19,15 @@ import { Separator } from '../ui/separator';
 // import LogoSVG from './logo-svg';
 // import LogoSVG1 from './logo-svg1';
 import Logo from './logo';
+import { buttonVariants } from '@/components/ui/button';
+import { useQueryState, parseAsBoolean } from 'nuqs';
 
 export const NavigationSheet = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [, setIsContactOpen] = useQueryState(
+    'contact',
+    parseAsBoolean.withDefault(false)
+  );
 
   const isMobile = useMediaQuery('(max-width: 1024px)');
 
@@ -55,6 +61,20 @@ export const NavigationSheet = () => {
           className='[&>div]:h-full'
           onOpenChange={isMobile ? setIsOpen : () => {}}
         />
+        <div className="mt-8">
+          <button
+            onClick={() => {
+              setIsOpen(false);
+              setIsContactOpen(true);
+            }}
+            className={buttonVariants({
+              variant: 'default',
+              className: 'rounded-full! cursor-pointer w-full',
+              size: 'sm',
+            })}>
+            Contact Us
+          </button>
+        </div>
       </SheetContent>
     </Sheet>
   );

@@ -8,6 +8,7 @@ import {
   SproutIcon,
 } from 'lucide-react';
 import Image from 'next/image';
+import FinPhil from '@/public/images/fin-phil.jpeg';
 
 // import Banner from '@/components/shared/banner';
 import { CTABlock } from '@/components/shared/cta-block';
@@ -251,16 +252,15 @@ export default function AboutPage() {
           <div className={'col-span-12 lg:col-span-6 w-full h-full'}>
             <GlareEffect
               className={
-                'relative aspect-video w-full h-full rounded-tl-4xl rounded-br-4xl'
+                'relative w-fit h-fit rounded-tl-4xl rounded-br-4xl overflow-hidden flex'
               }>
               <Image
                 // src='https://placehold.co/600x1200/png?text=Founder+Image'
-                src='/assets/6.jpg'
+                src={FinPhil}
                 alt='founder'
-                fill
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 className={
-                  'object-cover rounded-tl-4xl rounded-br-4xl brightness-50 grayscale'
+                  'w-full h-auto object-contain rounded-tl-4xl rounded-br-4xl brightness-50 grayscale'
                 }
               />
             </GlareEffect>

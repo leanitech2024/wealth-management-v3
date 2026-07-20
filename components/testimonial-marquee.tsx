@@ -83,7 +83,7 @@ export default function TestimonialMarquee() {
         <p
           data-aos='fade-up'
           className='text-center text-muted-foreground text-sm sm:text-base md:text-lg lg:text-xl'>
-          Real stories from people who use and love our services every day
+          Real stories from people about our professional financial services
         </p>
 
         <div
@@ -105,7 +105,7 @@ export default function TestimonialMarquee() {
           </span>
         </div>
 
-        <Blockquote>
+        <Blockquote className='mx-auto'>
           Learn from the past, set vivid, detailed goals for the future, and
           live in the only moment of time over which you have any control now
           <BlockquoteAuthor>Denis Waitley</BlockquoteAuthor>

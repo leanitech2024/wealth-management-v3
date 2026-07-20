@@ -79,7 +79,7 @@ export const footerLinks = {
     },
     {
       id: crypto.randomUUID(),
-      label: 'Equity - De-mat Accounts',
+      label: 'GIFT City',
       href: '#',
     },
     {
@@ -249,7 +249,7 @@ export const plannings = [
     details:
       "Ready to take control of your financial future? We help you transform dreams into actionable plans—whether it's buying a home, funding education, or retiring comfortably. Let's design a personalized strategy that works for your life.",
     tutorialLink: '/?contact=true',
-    image: '/assets/2.jpg',
+    image: '/images/ascent.jpeg',
     direction: 'left',
   },
   {
@@ -259,7 +259,7 @@ export const plannings = [
     details:
       "Every rupee you invest should have a purpose. We guide you to set clear financial goals, understand your risk appetite, and choose investments that align with your timeline and needs. Because smart investing starts with knowing what you're working towards.",
     tutorialLink: '/?contact=true',
-    image: '/assets/4.jpg',
+    image: '/images/goal based.jpeg',
     direction: 'right',
     quote:
       "Every pound is a seedling. Invest your seedlings to create a tree. Re-invest your seedlings to grow a forest",
@@ -268,13 +268,13 @@ export const plannings = [
   {
     id: crypto.randomUUID(),
     category: 'Peace of Mind',
-    title: 'Why Risk Profiling Matters for Your Peace of Mind',
+    title: 'Client Risk Profile',
     quote: "Successful investing is about managing risk, not avoiding it",
     quoteAuthor: "Ben Graham",
     details:
       "Feeling uncertain about the right investment moves? Our personalized risk profiling takes the guesswork out of the equation. We help you find that sweet spot between your goals, your comfort level, and what's realistic for your situation. No jargon, just clarity.",
     tutorialLink: '/?contact=true',
-    image: '/assets/8.jpg',
+    image: '/images/investment-sweet-spots.jpeg',
     direction: 'left',
   },
 ];
@@ -282,7 +282,7 @@ export const plannings = [
 export const services = [
   {
     id: crypto.randomUUID(),
-    title: 'Mutual Fund',
+    title: 'Mutual Funds',
     subtitle: 'Salutations from Ascent Wealth!',
     description: [
       `At Ascent Wealth, we are dedicated to providing you with individualized assistance and services support as you navigate the world of mutual funds.`,
@@ -292,11 +292,8 @@ export const services = [
       We provide regular updates on your investments and provide rapid and effective customer support throughout your investing journey with us. As your trusted Mutual Funds Distributor, Ascent Wealth can assist you with our long-term actionable solutions that will help you achieve targeted wealth and financial freedom.
       Mutual funds are the only investment option which provides you with the ability to invest across different asset classes with minimum to moderate to elevated risk depending upon your risk-taking ability.`,
     ],
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/176mfa.jpg',
-    // cover: '/assets/9.avif',
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768586853/9_a7t573.avif',
+      '/images/mutual-funds2.png',
     quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
   },
   {
@@ -315,8 +312,59 @@ export const services = [
       `,
     ],
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/v1771837158/1104819_gfbnfs.jpg',
+      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580708/384eq_xrrg5d.jpg',
     quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'GIFT City: India’s Global Investment Gateway',
+    subtitle: 'Connecting Resident Indians & NRIs to Worldwide Wealth Opportunities',
+    description: [
+      `GIFT City (Gujarat International Finance Tec‑City) is India’s first and only International Financial Services Centre (IFSC) — a globally benchmarked financial zone that operates in foreign currency, enjoys a favorable tax regime, and is regulated by a single unified authority (IFSCA).  It effectively functions as an onshore–offshore bridge, enabling seamless outbound and inbound capital flows.`,
+      `GIFT City in India serves as a modern, globally aligned financial zone enabling both outbound and inbound investment flows.`,
+      `For resident Indians, it opens access to global markets through USD-denominated mutual funds, ETFs, and alternative investments — without the complexity of offshore accounts. For NRIs and foreign investors, it provides a tax-efficient, regulator-friendly gateway to invest in India’s equity, debt, infrastructure, and private markets using familiar international structures. With unified regulation, foreign currency operations, and a favorable tax regime, GIFT City is rapidly becoming India’s premier platform for cross-border wealth creation.`,
+      `🚀 Outbound Investment Opportunities for Resident Indians`,
+      `Outbound investing refers to Indian residents deploying capital into global markets through GIFT City structures`,
+      `Why GIFT City is attractive for outbound flows`,
+      `• Global access without offshore accounts — Residents can invest in US, European, and global equities without opening foreign brokerage accounts`,
+      `• USD‑denominated funds — Investments and returns remain in USD, improving transparency and reducing INR volatility`,
+      `• LRS-enabled — Residents can invest up to USD 250,000/year via the Liberalized Remittance Scheme`,
+      `• Favorable tax treatment — Long-term capital gains taxed at 12.5% after 24 months for many products`,
+      `🌏 Inbound Investment Opportunities for NRIs & Foreign Investors`,
+      `Inbound investing refers to NRIs or foreign investors deploying capital into India through GIFT City vehicles.`,
+      `Why GIFT City is attractive for inbound flows`,
+      `• USD-based investing into India — NRIs can invest in India without converting to INR`,
+      `• Simplified KYC — In many cases, NRIs do not need an Indian PAN`,
+      `• Full repatriation — Investments and returns can be repatriated in foreign currency.`,
+      `• Unified regulation — IFSCA consolidates RBI, SEBI, IRDAI, and PFRDA powers, reducing compliance complexity.`,
+      `• 10-year tax holiday for eligible IFSC entities, plus exemptions from GST, STT, CTT, and stamp duty`,
+      `The Value Proposition`,
+      `GIFT City enables globally diversified investing for Indians and globally simplified India investing for NRIs — all within a modern, tax-efficient, internationally aligned financial ecosystem.`
+    ],
+    cover:
+      '/images/gift-city-landscape.png',
+    quote: `"The fundamental law of investing is the uncertainty of the future" - Peter L. Bernstein`,
+  },
+  {
+    id: crypto.randomUUID(),
+    title: 'Corporate FDs, Bonds, NCDs and LAS(Loan Against Securities)',
+    subtitle: 'An alternative to Traditional Investments!',
+    description: [
+      `We at Ascent Wealth recognize the value of steady and dependable investment options. 
+      To protect your money, we handpick reliable businesses with a proven track record.`,
+      `We suggest clients Debt funds which are schemes with an investment objective that limits the fund house to investments in debt securities like Treasury Bills, Government securities, Bonds and Debentures etc.`,
+      `It comprises of interest income and capital appreciation, due to changes in market dynamics.
+      Debt funds are minimal risk profile funds that seek to generate fixed current income to investors.
+      While we strive to reduce risks for our investors, we also strive to provide diversity, active credit risk management, and liquidity.`,
+      `Loan Against Securities`,
+      `• A Loan Against Securities (LAS) in India is a secured borrowing facility where you pledge your financial assets as collateral to a Bank or Non-Banking Financial Company (NBFC) in exchange for instant liquidity without selling your investments.`,
+      `• Assets that can be pledged: You can leverage listed equity shares, equity or debt mutual funds, insurance policies, and corporate bonds`,
+      `• Loan-to-Value (LTV) Caps: You can generally borrow up to 50% of the value for equity shares and up to 80%–90% for debt instruments or mutual funds`,
+      `• Retained Ownership: You continue to own the assets, meaning you still receive all dividends, bonuses, and compounding growth while the assets are pledged.`,
+    ],
+    cover:
+      'https://res.cloudinary.com/dxgckfhti/image/upload/v1771837158/1104819_gfbnfs.jpg',
+    quote: `"When it's obvious that the goals cannot be reached, don't adjust the goals, adjust the action steps" - Confucius`,
   },
   {
     id: crypto.randomUUID(),
@@ -329,30 +377,9 @@ export const services = [
       `Associated with leading Health Insurance companies and with our customer centric approach for the satisfaction and smiles of our clients we stretch ourselves and go beyond the ordinary whenever they face medical challenges.We assist clients with good health insurance cover that gives peace of mind and the freedom to protect from the ever increasing medical costs.
       Consider Ascent Wealth as your trusted insurance advisor for your Life and Healt Insurance requirements for protection and financial security.`,
     ],
-    // cover: '/images/services/507insurance.jpg',
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/507insurance.jpg',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580705/507insurance_rnbrp4.jpg',
     quote: `"The fundamental law of investing is the uncertainty of the future" - Peter L. Bernstein`,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'Corporate FDs, Bonds and NCDs',
-    subtitle: 'An alternative to Traditional Investments!',
-    description: [
-      `We at Ascent Wealth recognize the value of consistent & dependable investment options. From the traditional fixed income products, we handpick reliable businesses with reliable ratings and suggest to clients.`,
-      `We suggest clients Debt funds which are schemes with an investment objective that limits the fund house to investments in debt securities like Treasury Bills, Government securities, Bonds and Debentures etc.`,
-      `It comprises of interest income and capital appreciation, due to changes in market dynamics. Debt funds are minimal risk profile funds that seek to generate fixed current income to investors.
-      While we strive to reduce risks for our investors, we also strive to provide diversity, active credit risk management, and liquidity.
-      We thank you for your trust in Ascent Wealth for your fixed income requirements.`,
-    ],
-    // cover: '/images/services/301eqa.jpg',
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/301eqa.jpg',
-    cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580705/301eqa_sohyoc.jpg',
-    quote: `"When it's obvious that the goals cannot be reached, don't adjust the goals, adjust the action steps" - Confucius`,
   },
   {
     id: crypto.randomUUID(),
@@ -367,32 +394,9 @@ export const services = [
       `Significant life events may also compel you to make changes to your plan. It’s important to regularly review your plan to ensure it continues to meet your needs and objectives.`,
       `"Ultimately the decisions you make about your estate are yours alone".`,
     ],
-    // cover: '/images/services/729eee.jpg',
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/729eee.jpg',
     cover:
       'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580706/729eee_uddka7.jpg',
     quote: `"It's not how much money you make but how much money you can keep, how hard it works for you and how many generations you keep it for" - Robert Kiyosaki`,
-  },
-  {
-    id: crypto.randomUUID(),
-    title: 'Equity - De-mat Accounts',
-    subtitle: 'Know Your Optimal Level of Investment Risks!',
-    description: [
-      `Without a doubt, equity is the best method for accumulating wealth. Almost every investment portfolio needs stocks.`,
-      `Due to increased demand and advancements in trading technology, it is now extremely simple for anyone to transact.
-      Opening a Demat Account provides numerous advantages, including the elimination of the need to preserve physical documents, the saving of time, and the ability for investors and traders to track their portfolio on a regular basis.`,
-      `During the earlier days shares/stocks were kept in physical form. This made it impossible for investors to preserve the physical documents for an indefinite period of time.`,
-      `The introduction of the DEMAT account made it possible for investors and traders to trade instantaneously and hold shares for as long as they desired.`,
-      `Historically, Investments in equities has offered higher real returns compared to fixed income products. Hence, it is seen as good hedge against inflation.`,
-      `Ascent Wealth assists clients with onboarding into a trading platform, completing KYC requirements, offering trading platform training, and effectively and quickly resolving difficulties that may arise.`,
-    ],
-    // cover: '/images/services/384eq.jpg',
-    // cover:
-    //   'https://www.ascentwealth.in/Content/ascentwealth.in/UploadedImage/RealImage/384eq.jpg',
-    cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580708/384eq_xrrg5d.jpg',
-    quote: `"Don't let the fear of losing be greater than the excitement of winning" - Robert Kiyosaki`,
   },
   {
     id: crypto.randomUUID(),

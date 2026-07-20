@@ -85,11 +85,11 @@ export default function BlogCard(props: BlogCardProps) {
         <div className='flex flex-wrap gap-2 items-center justify-between pt-4 border-t mt-auto'>
           <div className='flex items-center gap-2'>
             <Avatar>
-              <AvatarImage src='https://github.com/shadcn.png' alt='@shadcn' />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarImage src='/icon.png' alt='Ascent Wealth' className='p-1 object-contain bg-white' />
+              <AvatarFallback>AW</AvatarFallback>
             </Avatar>
             <span className='text-muted-foreground text-sm font-medium'>
-              {post.author}
+              Ascent Wealth
             </span>
           </div>
 

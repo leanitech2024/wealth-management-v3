@@ -7,15 +7,7 @@ import Link from 'next/link';
 import { AnimatedThemeToggler } from '../extends/animated-theme-toggler';
 // import LogoSVG1 from './logo-svg1';
 import Logo from './logo';
-import {
-  Sheet,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
-import ContactForm from '@/components/forms/contact-form';
+// import ContactForm from '@/components/forms/contact-form';
 import { useQueryState, parseAsBoolean } from 'nuqs';
 
 export default function Navbar() {
@@ -38,31 +30,17 @@ export default function Navbar() {
           {/* <ThemeModeToggle /> */}
           <AnimatedThemeToggler />
 
-          <Sheet open={isContactOpen} onOpenChange={setIsContactOpen}>
-            <div className={'hidden lg:block'}>
-              <SheetTrigger asChild>
-                <button
-                  className={buttonVariants({
-                    variant: 'default',
-                    className: 'rounded-full! cursor-pointer',
-                    size: 'sm',
-                  })}>
-                  Get a quote
-                </button>
-              </SheetTrigger>
-            </div>
-            <SheetContent side="left" className="w-[450px] sm:max-w-[450px] overflow-y-auto px-6 py-10">
-              <SheetHeader className="sr-only">
-                <SheetTitle>Contact Us</SheetTitle>
-                <SheetDescription>
-                  Send us a message and we'll get back to you shortly.
-                </SheetDescription>
-              </SheetHeader>
-              <div className="h-full pt-4">
-                <ContactForm />
-              </div>
-            </SheetContent>
-          </Sheet>
+          <div className={'hidden lg:block'}>
+            <button
+              onClick={() => setIsContactOpen(true)}
+              className={buttonVariants({
+                variant: 'default',
+                className: 'rounded-full! cursor-pointer',
+                size: 'sm',
+              })}>
+              Contact Us
+            </button>
+          </div>
 
           {/* Mobile Menu */}
           <div className='lg:hidden'>

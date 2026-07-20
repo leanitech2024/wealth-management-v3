@@ -27,6 +27,7 @@ export const contactFormSchema = z.object({
     .min(1, 'Last name is required')
     .max(100, 'Last name is too long'),
   email: z.email('Invalid email address'),
+  phone: z.string().min(10, 'Phone number must be at least 10 digits').optional(),
   message: z
     .string()
     .min(1, 'Message is required')

@@ -1,6 +1,6 @@
 import { ArrowRightIcon } from 'lucide-react';
 import Link from 'next/link';
-import { LazyBlogCarousel, LazyBlogSort } from './lazy-components';
+import { LazyBlogCarousel } from './lazy-components';
 import ResponsiveButton from './shared/responsive-button';
 
 export default function Blogs() {
@@ -8,11 +8,10 @@ export default function Blogs() {
     <section
       id='blogs'
       className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 py-10'>
-      <div className='flex flex-wrap gap-4 items-end justify-between'>
-        <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight md:ml-6'>
-          Blogs
+      <div className='flex items-center justify-center mb-6'>
+        <h2 className='text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold tracking-tight text-center'>
+          Our Blogs
         </h2>
-        <LazyBlogSort />
       </div>
 
       <LazyBlogCarousel />

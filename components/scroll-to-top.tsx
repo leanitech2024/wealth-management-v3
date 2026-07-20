@@ -30,10 +30,10 @@ export default function ScrollToTop() {
 
   return (
     <Button
-      variant="outline"
+      variant="default"
       onClick={scrollToTop}
       className={cn(
-        'fixed z-40 rounded-full shadow-lg transition-all duration-300 ease-in-out bg-background/80 backdrop-blur-xs border-border hover:bg-accent hover:text-accent-foreground',
+        'fixed z-40 rounded-full shadow-lg transition-all duration-300 ease-in-out',
         'w-[60px] h-[60px] p-0! flex items-center justify-center',
         'bottom-[108px] right-[32px]', // 16px above the 60px WhatsApp button (which is at bottom-[32px] right-[32px])
         isVisible

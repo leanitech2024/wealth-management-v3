@@ -94,7 +94,7 @@ export default function ServiceDrawer(props: ServiceDrawerProps) {
                 const text = parts[0]?.replace(/^"+|"+$/g, '') || '';
                 const author = parts[1] || '';
                 return (
-                  <Blockquote variant='3' className='mb-6 text-start py-1 pr-0 text-sm sm:text-base md:text-lg'>
+                  <Blockquote size='sm' className='mb-6 mx-auto'>
                     {text}
                     {author && <BlockquoteAuthor>{author}</BlockquoteAuthor>}
                   </Blockquote>

@@ -1,14 +1,12 @@
 'use client';
 
 import { allPosts } from '@/.content-collections/generated';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { Button } from '@/components/ui/button';
 import { useQueryState } from 'nuqs';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import BlogCard from './blog-card';
 
 const POSTS_PER_PAGE = 9;
-const MOBILE_LOAD_THRESHOLD = 1200;
-const DESKTOP_LOAD_THRESHOLD = 1600;
 const LOAD_MORE_DELAY = 700;
 
 export default function BlogsCard() {
@@ -30,7 +28,6 @@ export default function BlogsCard() {
   const loadingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const visiblePosts = sortedPosts.slice(0, visibleCount);
   const hasMorePosts = visibleCount < sortedPosts.length;
-  const isMobile = useIsMobile();
 
   const triggerLoadMore = useCallback(() => {
     if (isLoadingMore || !hasMorePosts) {
@@ -60,37 +57,7 @@ export default function BlogsCard() {
     };
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (!hasMorePosts || isLoadingMore) {
-        return;
-      }
 
-      const scrollPosition = window.innerHeight + window.scrollY;
-      const loadThreshold = isMobile
-        ? MOBILE_LOAD_THRESHOLD
-        : DESKTOP_LOAD_THRESHOLD;
-      const bottomThreshold =
-        document.documentElement.scrollHeight - loadThreshold;
-
-      if (scrollPosition >= bottomThreshold) {
-        triggerLoadMore();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [
-    hasMorePosts,
-    isLoadingMore,
-    isMobile,
-    sortedPosts.length,
-    triggerLoadMore,
-  ]);
 
   return (
     <>
@@ -102,9 +69,15 @@ export default function BlogsCard() {
         ))}
       </div>
 
-      {isLoadingMore ? (
-        <div className='py-4 text-center text-sm text-muted-foreground'>
-          Loading more posts...
+      {hasMorePosts ? (
+        <div className='py-8 flex justify-center'>
+          <Button
+            variant='outline'
+            className='rounded-full px-8'
+            onClick={triggerLoadMore}
+            disabled={isLoadingMore}>
+            {isLoadingMore ? 'Loading...' : 'Load More'}
+          </Button>
         </div>
       ) : null}
     </>

@@ -54,25 +54,23 @@ export default function PlanningCard({
         'md:even:flex-row-reverse',
       )}>
       <div className='w-full h-full rounded-xl lg:max-w-[320px] xl:max-w-[350px] 2xl:max-w-[380px] mx-auto'>
-        <div className={'aspect-square w-full h-full'}>
+        <div className={'w-full h-fit flex items-center justify-center'}>
           <Image
             src={plan.image}
             alt='default pixel transition content, a cat!'
             width={500}
             height={500}
-            className='w-full h-full object-cover overflowHidden rounded-xl'
+            className='w-full h-auto object-contain overflow-hidden rounded-xl'
           />
         </div>
       </div>
       <div className='basis-1/2 shrink-0 flex flex-col justify-center h-full'>
-        <span className='uppercase font-medium text-xs md:text-sm xl:text-base text-muted-foreground'>
-          {plan.category}
-        </span>
+
         <h3 className='my-3 xl:my-4 2xl:my-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] leading-tight xl:leading-tight 2xl:leading-tight'>
           {plan.title}
         </h3>
         {plan.quote && (
-          <Blockquote variant='3' className='my-6 xl:my-8 2xl:my-10 text-start py-1 pr-0 lg:text-lg xl:text-xl 2xl:text-2xl'>
+          <Blockquote size='sm' className='my-1 xl:my-2 2xl:my-3'>
             {plan.quote}
             {plan.quoteAuthor && (
               <BlockquoteAuthor>{plan.quoteAuthor}</BlockquoteAuthor>
@@ -143,7 +141,7 @@ export function PlanningAnimatedImage({
             alt='default pixel transition content, a cat!'
             width={500}
             height={500}
-            className='w-full h-full object-cover'
+            className='w-full h-full object-contain'
           />
         }
         secondContent={

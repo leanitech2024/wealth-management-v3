@@ -21,7 +21,7 @@ import { InteractiveHoverButton } from './extends/interactive-hover-button';
 import { Skeleton } from './ui/skeleton';
 
 const PDF_URL =
-  'https://res.cloudinary.com/dxgckfhti/image/upload/v1768296504/Ascent_Wealth_Brochure_qphbv7.pdf';
+  '/Ascent Wealth Brochure.pdf';
 
 // const version = pdfjs.version;
 

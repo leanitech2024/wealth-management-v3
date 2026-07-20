@@ -42,3 +42,6 @@ next-env.d.ts
 
 /docs
 .content-collections
+
+# task files
+task*.txt

@@ -21,7 +21,7 @@ export default function LocationDialog() {
   const isMobile = useIsMobile();
   const { isOpen, openDialog, closeDialog } = useAutoOpenDialog(
     'location-dialog',
-    10,
+    60,
   );
 
   return (

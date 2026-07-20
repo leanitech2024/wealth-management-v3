@@ -40,7 +40,7 @@ export async function generateMetadata(
     title: post.metaTitle || post.title,
     description: post.metaDescription || post.summary,
     keywords: post.categories,
-    creator: post.author,
+    creator: 'Ascent Wealth',
     alternates: {
       canonical: `ascentwealth.in`,
       media: {
@@ -109,7 +109,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     description: post.content,
     author: {
       '@type': 'Person',
-      name: post.author,
+      name: 'Ascent Wealth',
       url: 'https://www.ascentwealth.in',
       image: 'https://www.ascentwealth.in/Ascent-Wealth-logo-2.png',
     },
@@ -163,10 +163,10 @@ export default async function BlogPostPage({ params }: PageProps) {
                 <ArrowLeftCircle className={'size-4'} />
               </Link>
               <Avatar>
-                <AvatarImage src='https://github.com/shadcn.png' alt='author' />
-                <AvatarFallback>AU</AvatarFallback>
+                <AvatarImage src='/icon.png' alt='Ascent Wealth' className='p-1 object-contain bg-white' />
+                <AvatarFallback>AW</AvatarFallback>
               </Avatar>
-              <span>{post.author}</span>
+              <span>Ascent Wealth</span>
             </div>
             <time>
               {new Date(post.createdAt).toLocaleDateString('en-US', {

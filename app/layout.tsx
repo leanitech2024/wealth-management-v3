@@ -1,6 +1,7 @@
 import { HoverFooter } from '@/components/hover-footer';
 import { DevtoolsBlocker } from '@/components/shared/devtools-blocker';
 import Navbar from '@/components/shared/navbar';
+import { GlobalContactSheet } from '@/components/shared/global-contact-sheet';
 import { Toaster } from '@/components/ui/sonner';
 import { Suspense } from 'react';
 import { seo } from '@/constants';
@@ -116,6 +117,7 @@ export default function RootLayout({
             <NuqsAdapter>
               <Suspense fallback={null}>
                 <Navbar />
+                <GlobalContactSheet />
               </Suspense>
               {children}
               <HoverFooter />

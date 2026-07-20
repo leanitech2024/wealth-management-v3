@@ -14,7 +14,7 @@ export default function Services() {
           Discover Our Exceptional Services
         </h2>
         <div data-aos='fade-down' data-aos-delay='100' className='flex justify-center'>
-          <Blockquote variant='1' className='w-fit text-center py-4 px-6 lg:px-12 lg:text-lg xl:text-xl 2xl:text-2xl'>
+          <Blockquote size='lg' className='w-fit mx-auto'>
             Wealth is not about having lot of money: Its about having a lot of options.
             <BlockquoteAuthor>Chris Rock</BlockquoteAuthor>
           </Blockquote>

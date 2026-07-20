@@ -50,7 +50,7 @@ const footerLinks = [
       },
       {
         id: crypto.randomUUID(),
-        label: 'Equity - De-mat Accounts',
+        label: 'GIFT City',
         href: '#services',
       },
       {
@@ -266,23 +266,7 @@ export function HoverFooter() {
           </Link>
         </div>
 
-        <Separator />
 
-        <div className='flex h-5 items-center justify-center flex-wrap space-x-2 text-center gap-1'>
-          <span className={'text-sm'}>
-            AMFI Registered Mutual Fund Distributor
-          </span>
-          <Separator orientation='vertical' />
-          <span className={'text-sm'}>ARN-109866</span>
-          <Separator orientation='vertical' />
-          <span className={'text-sm'}>
-            Date of initial registration &mdash; 16-Mar-2016
-          </span>
-          <Separator orientation='vertical' />
-          <span className={'text-sm'}>
-            Current validity of ARN &mdash; 01-Apr-2028
-          </span>
-        </div>
 
         <Separator className='mt-18 sm:mt-14 md:mt-9 lg:mt-0' />
 

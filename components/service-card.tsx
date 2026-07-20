@@ -1,5 +1,5 @@
 import { services } from '@/constants';
-import { getRemoteImage } from '@/lib/plaiceholder';
+import { getRemoteImage, getLocalImage } from '@/lib/plaiceholder';
 import Image from 'next/image';
 import SpotlightCard from './extends/spotlight-card';
 import ServiceDrawer from './service-drawer';
@@ -16,12 +16,14 @@ export default async function ServiceCard(props: (typeof services)[number]) {
   const { title, description, cover } = props;
 
   // const { base64 } = await getLocalImage(cover);
-  const { base64 } = await getRemoteImage(cover);
+  const { base64 } = cover.startsWith('/') 
+    ? await getLocalImage(cover)
+    : await getRemoteImage(cover);
 
   return (
     <SpotlightCard
       key={title}
-      className='p-0! rounded-lg! border-none! bg-transparent!'
+      className='p-0! rounded-lg! border-none! bg-transparent! h-full'
       // spotlightColor='rgba(0, 229, 255, 0.2)'
       spotlightColor='rgba(173, 156, 82, 0.5)'
       // spotlightColor='rgba(83, 68, 5, 1)'
@@ -30,7 +32,7 @@ export default async function ServiceCard(props: (typeof services)[number]) {
         data-aos='flip-up'
         data-aos-duration='200'
         data-aos-anchor-placement='center-bottom'
-        className='flex flex-col border rounded-xl overflow-hidden shadow-none gap-4 pb-0'>
+        className='flex flex-col border rounded-xl overflow-hidden shadow-none gap-4 pb-0 h-full'>
         <CardHeader>
           <CardTitle>
             <h3 className='text-base md:text-lg xl:text-xl font-semibold tracking-tight'>
@@ -55,7 +57,7 @@ export default async function ServiceCard(props: (typeof services)[number]) {
               alt={title}
               fill
               sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-              className='h-full w-full object-cover rounded-tl-xl hover:scale-105 transition-transform duration-300'
+              className='h-full w-full object-cover object-center rounded-tl-xl hover:scale-105 transition-transform duration-300'
               placeholder='blur'
               blurDataURL={base64}
             />
