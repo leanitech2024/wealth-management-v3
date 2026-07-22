@@ -22,7 +22,7 @@ export default function Hero() {
         <h1 className='text-4xl sm:text-5xl md:text-6xl lg:text-7xl md:leading-[1.2] font-semibold tracking-tighter'>
           <span data-aos='flip-up'>
             <AuroraText
-              colors={['#7c6707', '#c5b984', '#968021', '#dcd5b5']}
+              colors={['#5A2328', '#BA3B4B', '#2C1113', '#E84A5F']}
               speed={2}>
               Ascent Wealth
             </AuroraText>

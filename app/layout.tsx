@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 import { seo } from '@/constants';
 import { ThemeProvider } from '@/providers/theme-provider';
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Cormorant_Garamond } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
 import './globals.css';
@@ -20,16 +20,17 @@ import ScrollToTop from '@/components/scroll-to-top';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const fontSans = Inter({
+  variable: '--font-sans',
   subsets: ['latin'],
   display: 'swap',
   adjustFontFallback: false,
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const fontHeading = Cormorant_Garamond({
+  variable: '--font-heading',
   subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
   adjustFontFallback: false,
 });
@@ -106,7 +107,7 @@ export default function RootLayout({
   return (
     <html lang='en' data-scroll-behavior='smooth' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        className={`${fontSans.variable} ${fontHeading.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute='class'
           defaultTheme='system'
