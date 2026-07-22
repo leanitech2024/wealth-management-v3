@@ -62,18 +62,18 @@ export const NavigationSheet = () => {
           onOpenChange={isMobile ? setIsOpen : () => {}}
         />
         <div className="mt-8">
-          <button
-            onClick={() => {
-              setIsOpen(false);
-              setIsContactOpen(true);
-            }}
+          <Link
+            href="https://m.assetplus.in/#!/signup"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setIsOpen(false)}
             className={buttonVariants({
               variant: 'default',
               className: 'rounded-full! cursor-pointer w-full',
               size: 'sm',
             })}>
-            Contact Us
-          </button>
+            Sign Up
+          </Link>
         </div>
       </SheetContent>
     </Sheet>

@@ -31,15 +31,17 @@ export default function Navbar() {
           <AnimatedThemeToggler />
 
           <div className={'hidden lg:block'}>
-            <button
-              onClick={() => setIsContactOpen(true)}
+            <Link
+              href="https://m.assetplus.in/#!/signup"
+              target="_blank"
+              rel="noopener noreferrer"
               className={buttonVariants({
                 variant: 'default',
                 className: 'rounded-full! cursor-pointer',
                 size: 'sm',
               })}>
-              Contact Us
-            </button>
+              Sign Up
+            </Link>
           </div>
 
           {/* Mobile Menu */}

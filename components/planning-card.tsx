@@ -69,14 +69,7 @@ export default function PlanningCard({
         <h3 className='my-3 xl:my-4 2xl:my-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] leading-tight xl:leading-tight 2xl:leading-tight'>
           {plan.title}
         </h3>
-        {plan.quote && (
-          <Blockquote size='sm' className='my-1 xl:my-2 2xl:my-3'>
-            {plan.quote}
-            {plan.quoteAuthor && (
-              <BlockquoteAuthor>{plan.quoteAuthor}</BlockquoteAuthor>
-            )}
-          </Blockquote>
-        )}
+
         <p className='text-muted-foreground text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed lg:leading-loose xl:leading-loose 2xl:leading-loose'>
           {plan.details}
         </p>
@@ -85,7 +78,7 @@ export default function PlanningCard({
             <ServiceDrawer
               {...goalPlanningService}
               triggerVariant='default'
-              triggerClassName='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
+              triggerClassName='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
               triggerText='Know more'
               showIcon={true}
             />
@@ -93,7 +86,7 @@ export default function PlanningCard({
             <ServiceDrawer
               {...ascentPlanningService}
               triggerVariant='default'
-              triggerClassName='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
+              triggerClassName='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
               triggerText='Know more'
               showIcon={true}
             />
@@ -101,7 +94,7 @@ export default function PlanningCard({
             <ResponsiveButton
               data-aos='fade-right'
               asChild
-              className='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
+              className='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
               <Link scroll={true} href={plan.tutorialLink} aria-label={`Learn more about ${plan.title}`}>
                 Learn More <ArrowRightIcon />
               </Link>

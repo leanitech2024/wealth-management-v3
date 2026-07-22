@@ -15,8 +15,8 @@ export default function Services() {
         </h2>
         <div data-aos='fade-down' data-aos-delay='100' className='flex justify-center'>
           <Blockquote size='lg' className='w-fit mx-auto'>
-            Wealth is not about having lot of money: Its about having a lot of options.
-            <BlockquoteAuthor>Chris Rock</BlockquoteAuthor>
+            Every pound is a seedling. Invest your seedlings to create a tree. Re-invest your seedlings to grow a forest
+            <BlockquoteAuthor>George Choy</BlockquoteAuthor>
           </Blockquote>
         </div>
 

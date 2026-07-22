@@ -133,7 +133,7 @@ export default function RiskProfileDialog() {
       <DialogTrigger asChild>
         <ResponsiveButton
           data-aos='fade-left'
-          className='mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
+          className='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
           Assess Your Risk Profile <ArrowRightIcon />
         </ResponsiveButton>
       </DialogTrigger>
