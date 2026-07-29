@@ -98,10 +98,9 @@ export default function EducationForm(props: EducationFormProps) {
 
   const onSubmit: SubmitHandler<EducationCalculatorValues> = () => {
     // console.log('Form data:', values);
-    // toast.success(<pre>{`${JSON.stringify(values, null, 2)}`}</pre>, {
-    //   description: 'Education calculation submitted successfully!',
-    //   position: 'bottom-right',
-    // });
+    toast.success('Education calculation submitted successfully!', {
+      position: 'bottom-right',
+    });
     onOpenEmail(true); // open next dialog
     onParentClose(false); // close the calculator modal
     onUpdateSessionKey('education-form');

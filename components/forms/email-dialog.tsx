@@ -46,6 +46,7 @@ export default function EmailDialog(props: EmailDialogProps) {
     resolver: zodResolver(emailFormSchema),
     defaultValues: {
       email: '',
+      phone: '',
     },
     mode: 'onChange',
   });
@@ -64,10 +65,6 @@ export default function EmailDialog(props: EmailDialogProps) {
 
   const onSubmit: SubmitHandler<EmailFormValues> = (values) => {
     // console.log('Form data:', values);
-    // toast.success(<pre>{`${JSON.stringify(values, null, 2)}`}</pre>, {
-    //   description: 'Email submitted successfully!',
-    //   position: 'bottom-right',
-    // });
 
     if (!storedValues || !sessionStorageKey) {
       toast.error('No calculation data found to send.', {
@@ -82,6 +79,7 @@ export default function EmailDialog(props: EmailDialogProps) {
       const result = await sendEmail({
         type: sessionStorageKey,
         to: values.email,
+        phone: values.phone,
         data: storedValues,
       });
 
@@ -108,10 +106,10 @@ export default function EmailDialog(props: EmailDialogProps) {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Provide your email to get the calculation
+            Provide your details to receive the calculation
           </AlertDialogTitle>
           <AlertDialogDescription>
-            We will send the detailed calculation to your email address.
+            We will send the detailed calculation report to your email address.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <form
@@ -130,9 +128,10 @@ export default function EmailDialog(props: EmailDialogProps) {
                 <Field
                   data-invalid={fieldState.invalid}
                   aria-invalid={fieldState.invalid}>
-                  <FieldLabel htmlFor='email'>Email</FieldLabel>
+                  <FieldLabel htmlFor='email'>Email Address</FieldLabel>
                   <Input
                     id='email'
+                    type='email'
                     placeholder='someone@example.com'
                     {...field}
                     aria-invalid={fieldState.invalid}
@@ -140,24 +139,50 @@ export default function EmailDialog(props: EmailDialogProps) {
                   {fieldState?.error ? (
                     <FieldError role='alert' errors={[fieldState.error]} />
                   ) : (
-                    <FieldDescription>Enter your email</FieldDescription>
+                    <FieldDescription>Enter your email address</FieldDescription>
+                  )}
+                </Field>
+              )}
+            />
+            <Controller
+              name='phone'
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field
+                  data-invalid={fieldState.invalid}
+                  aria-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor='phone'>Phone Number</FieldLabel>
+                  <Input
+                    id='phone'
+                    type='tel'
+                    placeholder='+91 98765 43210'
+                    {...field}
+                    aria-invalid={fieldState.invalid}
+                  />
+                  {fieldState?.error ? (
+                    <FieldError role='alert' errors={[fieldState.error]} />
+                  ) : (
+                    <FieldDescription>Enter your phone number</FieldDescription>
                   )}
                 </Field>
               )}
             />
           </div>
-          <AlertDialogFooter>
+          <AlertDialogFooter className='flex flex-row items-center justify-end gap-3'>
             <AlertDialogCancel asChild>
               <Button
                 variant={'outline'}
-                size={'sm'}
                 type='button'
+                className='h-9 px-4 py-2 text-sm font-medium rounded-lg'
                 disabled={isPending}>
                 Cancel
               </Button>
             </AlertDialogCancel>
 
-            <Button type='submit'>
+            <Button
+              type='submit'
+              className='h-9 px-4 py-2 text-sm font-medium rounded-lg'
+              disabled={isPending}>
               {isPending ? (
                 <span className={'inline-flex items-center gap-2'}>
                   Submitting... <Spinner />

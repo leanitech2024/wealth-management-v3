@@ -88,8 +88,7 @@ export default function SIPForm(props: SIPFormProps) {
 
   const onSubmit: SubmitHandler<SIPCalculatorValues> = (data) => {
     // console.log('Form data:', data);
-    toast.success(<pre>{`${JSON.stringify(data, null, 2)}`}</pre>, {
-      description: 'SIP Calculation submitted successfully!',
+    toast.success('SIP Calculation submitted successfully!', {
       position: 'bottom-right',
     });
     onOpenEmail(true); // open next dialog

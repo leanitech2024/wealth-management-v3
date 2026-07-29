@@ -99,8 +99,7 @@ export default function RetirementForm(props: RetirementFormProps) {
 
   const onSubmit: SubmitHandler<RetirementCalculatorValues> = (data) => {
     // console.log('Form data:', data);
-    toast.success(<pre>{`${JSON.stringify(data, null, 2)}`}</pre>, {
-      description: 'Retirement calculation submitted successfully!',
+    toast.success('Retirement calculation submitted successfully!', {
       position: 'bottom-right',
     });
     onOpenEmail(true); // open next dialog

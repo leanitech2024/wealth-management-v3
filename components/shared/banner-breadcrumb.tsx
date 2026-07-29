@@ -19,20 +19,20 @@ export default function BannerBreadcrumb() {
 
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className='text-[#C9B169] text-secondary-foreground'>
         <BreadcrumbItem>
           <BreadcrumbLink
-            className={'md:text-xl md:font-semibold lg:text-2xl lg:font-bold'}
+            className={'text-[#C9B169] hover:text-[#C9B169]/80 md:text-xl md:font-semibold lg:text-2xl lg:font-bold'}
             href='/'>
             Home
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator
-          className={'md:[&>svg]:size-5 lg:[&>svg]:size-6'}
+          className={'text-[#C9B169] md:[&>svg]:size-5 lg:[&>svg]:size-6'}
         />
         <BreadcrumbItem>
           <BreadcrumbLink
-            className={'md:text-xl md:font-semibold lg:text-2xl lg:font-bold'}
+            className={'text-[#C9B169] hover:text-[#C9B169]/80 md:text-xl md:font-semibold lg:text-2xl lg:font-bold'}
             href={pathname}>
             {formattedPathname}
           </BreadcrumbLink>

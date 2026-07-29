@@ -20,7 +20,7 @@ export default function Banner() {
 
       <div
         className={
-          'absolute top-0 left-0 w-full h-full flex items-center justify-center p-12 bg-white/10 backdrop-blur-xs z-20'
+          'absolute top-0 left-0 w-full h-full flex items-center justify-center p-12 bg-black/30 backdrop-blur-xs z-20 text-[#C9B169]'
         }>
         <BannerBreadcrumb />
       </div>

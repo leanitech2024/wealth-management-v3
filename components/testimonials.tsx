@@ -130,7 +130,7 @@ const TestimonialList = () =>
           </a>
         </Button>
       </div>
-      <p className='mt-5 text-[17px]'>{testimonial.testimonial}</p>
+      <p className='mt-5 text-[17px] text-black dark:text-white'>{testimonial.testimonial}</p>
     </div>
   ));
 

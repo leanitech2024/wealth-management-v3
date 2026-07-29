@@ -1,7 +1,5 @@
 import {
-  IconBeach,
   IconChartInfographic,
-  IconConfetti,
   IconMathSymbols,
   IconTimeDuration45,
   IconTimeline,
@@ -249,7 +247,7 @@ export const plannings = [
     details:
       "Ready to take control of your financial future? We help you transform dreams into actionable plans—whether it's buying a home, funding education, or retiring comfortably. Let's design a personalized strategy that works for your life.",
     tutorialLink: '/?contact=true',
-    image: '/images/ascent.jpeg',
+    image: '/images/ascent2.jpeg',
     direction: 'left',
   },
   {
@@ -259,7 +257,7 @@ export const plannings = [
     details:
       "Every rupee you invest should have a purpose. We guide you to set clear financial goals, understand your risk appetite, and choose investments that align with your timeline and needs. Because smart investing starts with knowing what you're working towards.",
     tutorialLink: '/?contact=true',
-    image: '/images/goal based.jpeg',
+    image: '/images/goal-based.jpeg',
     direction: 'right',
     quote:
       "Every pound is a seedling. Invest your seedlings to create a tree. Re-invest your seedlings to grow a forest",
@@ -274,11 +272,10 @@ export const plannings = [
     details:
       "Feeling uncertain about the right investment moves? Our personalized risk profiling takes the guesswork out of the equation. We help you find that sweet spot between your goals, your comfort level, and what's realistic for your situation. No jargon, just clarity.",
     tutorialLink: '/?contact=true',
-    image: '/images/investment-sweet-spots.jpeg',
+    image: '/images/risk-profiling.jpeg',
     direction: 'left',
   },
 ];
-
 export const services = [
   {
     id: crypto.randomUUID(),
@@ -293,7 +290,7 @@ export const services = [
       Mutual funds are the only investment option which provides you with the ability to invest across different asset classes with minimum to moderate to elevated risk depending upon your risk-taking ability.`,
     ],
     cover:
-      '/images/mutual-funds2.png',
+      '/images/services/mutual-funds.jpeg',
     quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
   },
   {
@@ -312,7 +309,7 @@ export const services = [
       `,
     ],
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580708/384eq_xrrg5d.jpg',
+      '/images/services/sif.jpeg',
     quote: `"The big money is not in buying and selling, but in the waiting" - Charlie Munger`,
   },
   {
@@ -342,7 +339,7 @@ export const services = [
       `GIFT City enables globally diversified investing for Indians and globally simplified India investing for NRIs — all within a modern, tax-efficient, internationally aligned financial ecosystem.`
     ],
     cover:
-      '/images/gift-city-landscape.png',
+      '/images/services/gift-city.jpeg',
     quote: `"The fundamental law of investing is the uncertainty of the future" - Peter L. Bernstein`,
   },
   {
@@ -363,7 +360,7 @@ export const services = [
       `• Retained Ownership: You continue to own the assets, meaning you still receive all dividends, bonuses, and compounding growth while the assets are pledged.`,
     ],
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/v1771837158/1104819_gfbnfs.jpg',
+      '/images/services/corporate.jpeg',
     quote: `"When it's obvious that the goals cannot be reached, don't adjust the goals, adjust the action steps" - Confucius`,
   },
   {
@@ -378,7 +375,7 @@ export const services = [
       Consider Ascent Wealth as your trusted insurance advisor for your Life and Healt Insurance requirements for protection and financial security.`,
     ],
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580705/507insurance_rnbrp4.jpg',
+      '/images/services/insurance.jpeg',
     quote: `"The fundamental law of investing is the uncertainty of the future" - Peter L. Bernstein`,
   },
   {
@@ -395,7 +392,7 @@ export const services = [
       `"Ultimately the decisions you make about your estate are yours alone".`,
     ],
     cover:
-      'https://res.cloudinary.com/dxgckfhti/image/upload/w_600/v1768580706/729eee_uddka7.jpg',
+      '/images/services/estate.jpeg',
     quote: `"It's not how much money you make but how much money you can keep, how hard it works for you and how many generations you keep it for" - Robert Kiyosaki`,
   },
   {
@@ -452,18 +449,6 @@ export const calculators = [
     title: 'Retirement Planning',
     description:
       'Plan your retirement with our comprehensive tools, ensuring you have the resources needed for a fulfilling future.',
-  },
-  {
-    icon: IconConfetti,
-    title: 'Wedding Calculator',
-    description:
-      'Plan your wedding budget effectively, manage expenses, and ensure a memorable celebration without financial stress.',
-  },
-  {
-    icon: IconBeach,
-    title: 'Vacation Calculator',
-    description:
-      'Estimate your vacation expenses, budget effectively, and ensure a stress-free getaway with our Vacation Calculator.',
   },
   {
     icon: IconHourglass,

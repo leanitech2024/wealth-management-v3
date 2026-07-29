@@ -1,6 +1,5 @@
 'use client';
 
-import { buttonVariants } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -9,34 +8,36 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ShadCNShinyButton } from './extends/shadcn-shiny-btn';
-
-import { useAutoOpenDialog } from '@/hooks/use-auto-open-dialog';
-import { useIsMobile } from '@/hooks/use-mobile';
+import ResponsiveButton from './shared/responsive-button';
 import { Star } from 'lucide-react';
 import Image from 'next/image';
 import { Separator } from './ui/separator';
+import { useState } from 'react';
 
-export default function LocationDialog() {
-  const isMobile = useIsMobile();
-  const { isOpen, openDialog, closeDialog } = useAutoOpenDialog(
-    'location-dialog',
-    60,
-  );
+type LocationDialogProps = {
+  triggerText?: string;
+  triggerClassName?: string;
+};
+
+export default function LocationDialog({
+  triggerText = 'Write a Review',
+  triggerClassName,
+}: LocationDialogProps = {}) {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
-    <Dialog
-      open={isOpen}
-      onOpenChange={(open) => (open ? openDialog() : closeDialog())}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <ShadCNShinyButton
-          icon={<Star className='h-5! w-5! fill-yellow-400 stroke-yellow-400' />}
-          className={buttonVariants({
-            size: isMobile ? 'sm' : 'lg',
-            className: 'rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!',
-          })}>
-          Google Review
-        </ShadCNShinyButton>
+        <ResponsiveButton
+          type='button'
+          onClick={() => setIsOpen(true)}
+          className={
+            triggerClassName ||
+            'rounded-full h-10! md:h-11! cursor-pointer flex! items-center! justify-center! py-0! gap-2 z-20'
+          }>
+          <Star className='h-5! w-5! fill-yellow-400 stroke-yellow-400' />
+          {triggerText}
+        </ResponsiveButton>
       </DialogTrigger>
       <DialogContent className='data-[state=open]:zoom-in-0! data-[state=open]:duration-600 sm:max-w-lg w-full gap-2'>
         <DialogHeader>
@@ -64,13 +65,6 @@ export default function LocationDialog() {
             blurDataURL='https://res.cloudinary.com/dxgckfhti/image/upload/v1768549237/business-location_x7pl9i.avif'
           />
         </div>
-        {/* <DialogFooter>
-          <DialogClose asChild>
-            <Button variant='outline' size={'sm'}>
-              Close
-            </Button>
-          </DialogClose>
-        </DialogFooter> */}
       </DialogContent>
     </Dialog>
   );

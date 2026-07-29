@@ -35,7 +35,7 @@ const footerLinks = [
       },
       {
         id: crypto.randomUUID(),
-        label: 'Life and Health Insurance',
+        label: 'GIFT City',
         href: '#services',
       },
       {
@@ -45,18 +45,18 @@ const footerLinks = [
       },
       {
         id: crypto.randomUUID(),
+        label: 'Life and Health Insurance',
+        href: '#services',
+      },
+      {
+        id: crypto.randomUUID(),
         label: 'Estate Planning',
         href: '#services',
       },
       {
         id: crypto.randomUUID(),
-        label: 'GIFT City',
-        href: '#services',
-      },
-      {
-        id: crypto.randomUUID(),
         label: 'Goal Based Financial Planning',
-        href: '#services',
+        href: '#planning',
       },
     ],
   },
@@ -67,7 +67,7 @@ const footerLinks = [
       {
         id: crypto.randomUUID(),
         label: 'Support',
-        href: '/?contact=true',
+        href: '?contact=true',
       },
       {
         id: crypto.randomUUID(),

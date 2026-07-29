@@ -3,8 +3,6 @@ declare type Calculators =
   | 'lumpsum-form'
   | 'sip-form'
   | 'retirement-form'
-  | 'wedding-form'
-  | 'vacation-form'
   | 'cost-of-delay-form'
   | 'goal-planner-form'
   | 'inflation-form'

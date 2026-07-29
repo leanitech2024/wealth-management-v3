@@ -53,24 +53,24 @@ export default function PlanningCard({
         //   : 'md:odd:flex-row-reverse',
         'md:even:flex-row-reverse',
       )}>
-      <div className='w-full h-full rounded-xl lg:max-w-[320px] xl:max-w-[350px] 2xl:max-w-[380px] mx-auto'>
+      <div className='w-full md:flex-1 h-full flex items-center justify-center'>
         <div className={'w-full h-fit flex items-center justify-center'}>
           <Image
             src={plan.image}
             alt='default pixel transition content, a cat!'
-            width={500}
-            height={500}
-            className='w-full h-auto object-contain overflow-hidden rounded-xl'
+            width={800}
+            height={533}
+            className='w-full h-auto object-cover overflow-hidden rounded-xl'
           />
         </div>
       </div>
-      <div className='basis-1/2 shrink-0 flex flex-col justify-center h-full'>
+      <div className='w-full md:flex-1 flex flex-col justify-center h-full'>
 
-        <h3 className='my-3 xl:my-4 2xl:my-6 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-2xl 2xl:text-3xl font-semibold tracking-[-0.02em] leading-tight xl:leading-tight 2xl:leading-tight'>
+        <h3 className='my-2 sm:my-3 xl:my-4 text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl 2xl:text-5xl font-bold tracking-tight leading-tight'>
           {plan.title}
         </h3>
 
-        <p className='text-muted-foreground text-sm md:text-base lg:text-lg xl:text-xl 2xl:text-2xl leading-relaxed lg:leading-loose xl:leading-loose 2xl:leading-loose'>
+        <p className='text-muted-foreground text-xs sm:text-sm md:text-base lg:text-base xl:text-lg leading-normal sm:leading-relaxed'>
           {plan.details}
         </p>
         {!isLast ? (
@@ -78,7 +78,7 @@ export default function PlanningCard({
             <ServiceDrawer
               {...goalPlanningService}
               triggerVariant='default'
-              triggerClassName='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
+              triggerClassName='w-fit mt-4 xl:mt-6 2xl:mt-8 rounded-full gap-3 xl:text-base xl:py-5 xl:px-7 xl:h-11 2xl:text-lg 2xl:py-6 2xl:px-8 2xl:h-12'
               triggerText='Know more'
               showIcon={true}
             />
@@ -86,7 +86,7 @@ export default function PlanningCard({
             <ServiceDrawer
               {...ascentPlanningService}
               triggerVariant='default'
-              triggerClassName='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'
+              triggerClassName='w-fit mt-4 xl:mt-6 2xl:mt-8 rounded-full gap-3 xl:text-base xl:py-5 xl:px-7 xl:h-11 2xl:text-lg 2xl:py-6 2xl:px-8 2xl:h-12'
               triggerText='Know more'
               showIcon={true}
             />
@@ -94,7 +94,7 @@ export default function PlanningCard({
             <ResponsiveButton
               data-aos='fade-right'
               asChild
-              className='w-fit mt-6 xl:mt-8 2xl:mt-10 rounded-full gap-3 xl:text-lg xl:py-6 xl:px-8 xl:h-12 2xl:text-xl 2xl:py-7 2xl:px-10 2xl:h-14'>
+              className='w-fit mt-4 xl:mt-6 2xl:mt-8 rounded-full gap-3 xl:text-base xl:py-5 xl:px-7 xl:h-11 2xl:text-lg 2xl:py-6 2xl:px-8 2xl:h-12'>
               <Link scroll={true} href={plan.tutorialLink} aria-label={`Learn more about ${plan.title}`}>
                 Learn More <ArrowRightIcon />
               </Link>

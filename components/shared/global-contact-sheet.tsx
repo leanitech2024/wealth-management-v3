@@ -20,12 +20,18 @@ export function GlobalContactSheet() {
     <>
       <button
         onClick={() => setIsContactOpen(true)}
-        className="fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-primary hover:bg-primary/90 text-primary-foreground py-4 px-2 rounded-r-xl shadow-lg border border-l-0 border-primary/20 transition-colors cursor-pointer"
+        className="fixed left-0 top-1/2 -translate-y-1/2 z-50 bg-primary hover:bg-primary/90 text-primary-foreground py-2 px-2 rounded-r-lg shadow-lg border border-l-0 border-primary/20 transition-all duration-200 cursor-pointer select-none flex items-center justify-center [writing-mode:vertical-rl] [-webkit-writing-mode:vertical-rl]"
+        style={{
+          writingMode: 'vertical-rl',
+          WebkitWritingMode: 'vertical-rl',
+          WebkitBorderTopRightRadius: '0.5rem',
+          WebkitBorderBottomRightRadius: '0.5rem',
+        }}
         aria-label="Open Contact Form"
       >
         <span 
-          className="block font-semibold tracking-widest text-sm uppercase" 
-          style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          className="inline-block font-medium tracking-wider text-sm uppercase whitespace-nowrap rotate-180" 
+          style={{ transform: 'rotate(0deg)', WebkitTransform: 'rotate(0deg)' }}
         >
           Contact Us
         </span>
@@ -36,7 +42,7 @@ export function GlobalContactSheet() {
           <SheetHeader className="sr-only">
             <SheetTitle>Contact Us</SheetTitle>
             <SheetDescription>
-              Send us a message and we'll get back to you shortly.
+              Send us a message and we&apos;ll get back to you shortly.
             </SheetDescription>
           </SheetHeader>
           <div className="pt-4">

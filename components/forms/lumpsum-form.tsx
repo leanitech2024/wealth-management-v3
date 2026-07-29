@@ -88,8 +88,7 @@ export default function LumpsumForm(props: LumpsumFormProps) {
 
   const onSubmit: SubmitHandler<LumpSumCalculatorValues> = (data) => {
     // console.log('Form data:', data);
-    toast.success(<pre>{`${JSON.stringify(data, null, 2)}`}</pre>, {
-      description: 'Lump sum calculation submitted successfully!',
+    toast.success('Lump sum calculation submitted successfully!', {
       position: 'bottom-right',
     });
     onOpenEmail(true); // open next dialog

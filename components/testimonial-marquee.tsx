@@ -5,6 +5,7 @@ import { IconStar, IconStarHalf } from '@tabler/icons-react';
 import Image from 'next/image';
 import { Blockquote, BlockquoteAuthor } from './extends/blockquote';
 import { Marquee } from './marque';
+import LocationDialog from './location-dialog';
 
 type Testimonial = {
   id: string;
@@ -51,10 +52,10 @@ export function TestimonialCard({
             </div>
           </div>
         </figure>
-        <blockquote className='text-sm text-secondary-foreground space-y-1'>
+        <blockquote className='text-sm text-black dark:text-white space-y-1'>
           <p>&ldquo;{message}&rdquo;</p>
           <footer>
-            — <cite className={'font-medium'}>{designation}</cite>
+            — <cite className={'font-medium text-muted-foreground dark:text-gray-300'}>{designation}</cite>
           </footer>
         </blockquote>
       </CardContent>
@@ -66,7 +67,6 @@ export default function TestimonialMarquee() {
   const filteredGoogleReviews = googleReviews.filter(
     (review) => review.message && review.name,
   );
-
   const reviewCount = googleReviews.length + testimonials.length;
 
   return (
@@ -74,6 +74,10 @@ export default function TestimonialMarquee() {
       id='testimonials'
       className='w-full max-w-(--breakpoint-xl) mx-auto text-center pt-10'>
       <div className={'relative space-y-4 px-4 lg:px-0'}>
+        <div className='mx-auto mb-2 lg:mb-0 lg:absolute lg:top-0 lg:left-2 flex justify-center items-center z-20'>
+          <LocationDialog triggerText='Write a Review' />
+        </div>
+
         <h2
           data-aos='fade-down'
           className='text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-[1.15]! font-semibold tracking-[-0.035em]'>

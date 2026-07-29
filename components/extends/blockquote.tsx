@@ -50,7 +50,7 @@ const Blockquote = ({ children, className, size = "lg" }: BlockquoteProps) => {
   const containerSizes = {
     sm: "py-3 px-5 sm:px-8 text-xs sm:text-sm md:text-base",
     md: "py-4 px-6 sm:px-10 text-sm sm:text-base md:text-lg",
-    lg: "py-6 px-8 sm:px-12 md:px-16 text-base sm:text-lg md:text-xl lg:text-2xl",
+    lg: "py-6 px-8 sm:px-12 md:px-16 text-base sm:text-lg md:text-lg lg:text-xl",
   };
 
   const quoteSizes = {

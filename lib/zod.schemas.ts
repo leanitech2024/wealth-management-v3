@@ -177,7 +177,11 @@ export const vacationSchema = commonCalculatorSchema
   });
 
 export const emailFormSchema = z.object({
-  email: z.email('Invalid email address'),
+  email: z.string().email('Invalid email address'),
+  phone: z
+    .string()
+    .min(1, 'Phone number is required')
+    .min(10, 'Phone number must be at least 10 digits'),
 });
 
 export const riskProfileSchema = contactFormSchema

@@ -28,29 +28,43 @@ export default function NavMenu(props: NavMenuProps) {
       const onHashChange = () => setActiveHash(window.location.hash);
       
       const handleScroll = () => {
+        if (window.scrollY < 80) {
+          setActiveHash('');
+          return;
+        }
+
         const sections = navlinks
-          .map(link => link.href.split('#')[1])
+          .map((link) => link.href.split('#')[1])
           .filter(Boolean);
-          
-        for (const section of sections.reverse()) {
+
+        const HEADER_OFFSET = 140;
+
+        // Check if scrolled near bottom of page
+        if (
+          window.innerHeight + window.scrollY >=
+          document.body.offsetHeight - 50
+        ) {
+          const lastSection = sections[sections.length - 1];
+          if (lastSection) {
+            setActiveHash(`#${lastSection}`);
+            return;
+          }
+        }
+
+        for (const section of sections) {
           const element = document.getElementById(section);
           if (element) {
             const rect = element.getBoundingClientRect();
-            if (rect.top <= 200) {
+            if (rect.top <= HEADER_OFFSET && rect.bottom > HEADER_OFFSET) {
               setActiveHash(`#${section}`);
               return;
             }
           }
         }
-        
-        if (window.scrollY < 100) {
-          setActiveHash('');
-        }
       };
 
       window.addEventListener('hashchange', onHashChange);
-      window.addEventListener('scroll', handleScroll);
-      // Run once to set initial state based on current scroll position
+      window.addEventListener('scroll', handleScroll, { passive: true });
       setTimeout(handleScroll, 100);
 
       return () => {
@@ -78,41 +92,30 @@ export default function NavMenu(props: NavMenuProps) {
           }
 
           return (
-          <NavigationMenuItem key={link.id}>
-            <NavigationMenuLink
-              asChild
-              className={cn(
-                isActive &&
-                  'border-primary! text-foreground!',
-
-                // active styles
-                'data-[active=true]:focus:bg-transparent data-[active=true]:hover:bg-transparent data-[active=true]:bg-transparent data-[active=true]:text-foreground',
-
-                // hover styles
-                'hover:bg-transparent hover:text-foreground border-b-2 border-transparent hover:border-b-2 hover:border-primary',
-
-                // focus styles
-                'focus:text-foreground focus-visible:ring-ring/50 focus:bg-transparent focus:hover:bg-transparent focus:border-primary',
-
-                // inactive styles
-                "[&_svg:not([class*='text-'])]:text-muted-foreground",
-
-                // common styles
-                "flex flex-col gap-4 px-0 py-1 text-sm transition-all outline-none focus-visible:ring-[3px] focus-visible:outline-1 [&_svg:not([class*='size-'])]:size-4 font-semibold rounded-none",
-
-                // animation styles
-                'data-[active=true]:transition-all data-[active=true]:duration-300 data-[active=true]:ease-in-out focus:data-[active=true]:transition-all focus:data-[active=true]:duration-300 focus:data-[active=true]:ease-in-out',
-              )}>
-              <Link
-                scroll={true}
-                // href={isBlogPage ? '/' : link.href}
-                href={link.href}
-                // prefetch={isBlogPage ? true : false}
-              >
-                {link.label}
-              </Link>
-            </NavigationMenuLink>
-          </NavigationMenuItem>
+            <NavigationMenuItem key={link.id}>
+              <NavigationMenuLink
+                asChild
+                className={cn(
+                  'flex flex-col gap-1 px-0 py-1 text-sm font-semibold rounded-none outline-none focus:outline-none focus:bg-transparent focus-visible:ring-0 focus-visible:outline-none focus:hover:bg-transparent shadow-none border-b-2 transition-colors duration-200',
+                  isActive
+                    ? 'border-primary text-foreground'
+                    : 'border-transparent text-muted-foreground hover:text-foreground hover:border-primary/50',
+                )}>
+                <Link
+                  scroll={true}
+                  href={link.href}
+                  onClick={() => {
+                    if (isHashLink) {
+                      setActiveHash(hashValue);
+                    }
+                    if (onOpenChange) {
+                      onOpenChange(false);
+                    }
+                  }}>
+                  {link.label}
+                </Link>
+              </NavigationMenuLink>
+            </NavigationMenuItem>
           );
         })}
       </NavigationMenuList>

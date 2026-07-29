@@ -95,31 +95,18 @@ export const ConsultationEmail = (props: ConsultationFormValues) => {
 
               <Hr className='border-accent my-8' />
 
-              <Text className='text-muted-foreground text-sm leading-6'>
-                In the meantime, if you have any urgent questions, feel free to
-                visit our{' '}
-                <Link className='text-[#556cd6]' href='https://ascentwealth.in'>
-                  Knowledge Center
-                </Link>{' '}
-                or reply directly to this email.
+              <Text className='text-muted-foreground text-xs leading-5 italic mt-6'>
+                This illustration and returns assumed are on the basis of the request made by you. These are neither indicative nor guaranteed returns. Mutual fund investments are subject to market risks. Do read all scheme-related documents carefully.
               </Text>
 
-              <Text className='text-background font-semibold text-base mt-8'>
-                Best regards,
-                <br />
-                The Ascent Wealth Team
+              <Text className='text-muted-foreground text-xs font-medium mt-2'>
+                Report Date : {new Date().toLocaleDateString('en-GB')}
               </Text>
             </Section>
 
             <Section className='bg-muted px-8 py-6 border-t border-solid border-primary'>
-              <Text className='text-muted-foreground text-[12px] leading-5 m-0'>
-                <strong>Our Office:</strong> Appasamy City Square, Rajiv Gandhi
-                Salai, OMR Service Rd, Kandhanchavadi, Chennai, Tamil Nadu
-                600097
-              </Text>
-              <Text className='text-muted-foreground text-[11px] mt-2'>
-                You received this email because you requested a consultation on
-                our website.
+              <Text className='text-muted-foreground text-[11px] leading-5 m-0'>
+                The chart is for illustration purposes only. Figures are approximate and may not be linear as shown in the chart. The returns assumed above are as per your request. These are neither indicative nor guaranteed returns.
               </Text>
             </Section>
           </Container>

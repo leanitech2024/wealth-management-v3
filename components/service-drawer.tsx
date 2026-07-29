@@ -113,7 +113,9 @@ export default function ServiceDrawer(props: ServiceDrawerProps) {
           <div className='mx-auto w-full max-w-(--breakpoint-sm) px-4 mt-auto p-2'>
             <DrawerFooter className='p-0'>
               <DrawerClose asChild>
-                <ResponsiveButton variant='outline'>Close</ResponsiveButton>
+                <ResponsiveButton className='bg-[#5A2328] hover:bg-[#451a1e] text-white hover:text-white! border-none'>
+                  Close
+                </ResponsiveButton>
               </DrawerClose>
             </DrawerFooter>
           </div>

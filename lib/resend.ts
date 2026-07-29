@@ -9,8 +9,6 @@ import LumpSumCalculationEmail from '@/emails/lumpsum-calculation-email';
 import RetirementCalculationEmail from '@/emails/retirement-calculation-email';
 import RiskProfileAnalysisEmail from '@/emails/risk-profile-analysis-email';
 import SIPCalculationEmail from '@/emails/sip-calculation-email';
-import VacationCalculationEmail from '@/emails/vacation-calculation-email';
-import WeddingCalculationEmail from '@/emails/wedding-calculation-email';
 import CostOfDelayCalculationEmail from '@/emails/cost-of-delay-calculation-email';
 import GoalPlannerCalculationEmail from '@/emails/goal-planner-calculation-email';
 import InflationCalculationEmail from '@/emails/inflation-calculation-email';
@@ -24,8 +22,6 @@ import {
   RetirementCalculatorValues,
   RiskProfileFormValues,
   SIPCalculatorValues,
-  VacationCalculatorValues,
-  WeddingCalculatorValues,
   CostOfDelayCalculatorValues,
   GoalPlannerCalculatorValues,
   InflationCalculatorValues,
@@ -34,19 +30,21 @@ import {
 } from './zod.schemas';
 
 const resendApiKey = process.env.RESEND_API_KEY;
-if (!resendApiKey) {
-  throw new Error('RESEND_API_KEY is not defined in environment variables');
-}
-
-const resend = new Resend(resendApiKey);
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 type SendEmailProps = {
   type: SessionKey;
   to: string;
+  phone?: string;
   data: EmailData;
 };
 
 export async function sendEmail(props: SendEmailProps) {
+  if (!resend) {
+    console.error('RESEND_API_KEY is not defined in environment variables');
+    return null;
+  }
+
   try {
     switch (props.type) {
       case 'consultation-form': {
@@ -108,6 +106,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           EducationCalculationEmail({
             ...(props.data as EducationCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -120,6 +119,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: EducationCalculationEmail({
             ...(props.data as EducationCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -136,6 +136,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           LumpSumCalculationEmail({
             ...(props.data as LumpSumCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -148,6 +149,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: LumpSumCalculationEmail({
             ...(props.data as LumpSumCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -164,6 +166,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           SIPCalculationEmail({
             ...(props.data as SIPCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -175,6 +178,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: SIPCalculationEmail({
             ...(props.data as SIPCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -191,6 +195,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           RetirementCalculationEmail({
             ...(props.data as RetirementCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -203,6 +208,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: RetirementCalculationEmail({
             ...(props.data as RetirementCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -215,65 +221,11 @@ export async function sendEmail(props: SendEmailProps) {
         return data;
       }
 
-      case 'wedding-form': {
-        const html = await render(
-          WeddingCalculationEmail({
-            ...(props.data as WeddingCalculatorValues),
-          }),
-        );
-        const text = toPlainText(html);
-        const { data, error } = await resend.emails.send({
-          from: 'Ascent Wealth <info@ascentwealth.in>',
-          to: [props.to],
-          subject: 'Plan Your Perfect Wedding - Financial Roadmap Ready! 💍',
-          html,
-          text,
-          react: WeddingCalculationEmail({
-            ...(props.data as WeddingCalculatorValues),
-          }),
-        });
-
-        if (error) {
-          throw new Error(
-            `Failed to send wedding calculation email: ${error.message}`,
-          );
-        }
-
-        return data;
-      }
-
-      case 'vacation-form': {
-        const html = await render(
-          VacationCalculationEmail({
-            ...(props.data as VacationCalculatorValues),
-          }),
-        );
-        const text = toPlainText(html);
-        const { data, error } = await resend.emails.send({
-          from: 'Ascent Wealth <info@ascentwealth.in>',
-          to: [props.to],
-          subject:
-            "Your Dream Vacation is Within Reach - Let's Make it Happen! ✈️",
-          html,
-          text,
-          react: VacationCalculationEmail({
-            ...(props.data as VacationCalculatorValues),
-          }),
-        });
-
-        if (error) {
-          throw new Error(
-            `Failed to send vacation calculation email: ${error.message}`,
-          );
-        }
-
-        return data;
-      }
-
       case 'cost-of-delay-form': {
         const html = await render(
           CostOfDelayCalculationEmail({
             ...(props.data as CostOfDelayCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -285,6 +237,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: CostOfDelayCalculationEmail({
             ...(props.data as CostOfDelayCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -301,6 +254,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           GoalPlannerCalculationEmail({
             ...(props.data as GoalPlannerCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -312,6 +266,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: GoalPlannerCalculationEmail({
             ...(props.data as GoalPlannerCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -328,6 +283,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           InflationCalculationEmail({
             ...(props.data as InflationCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -339,6 +295,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: InflationCalculationEmail({
             ...(props.data as InflationCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -355,6 +312,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           SIPStepUpCalculationEmail({
             ...(props.data as SIPStepUpCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -366,6 +324,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: SIPStepUpCalculationEmail({
             ...(props.data as SIPStepUpCalculatorValues),
+            phone: props.phone,
           }),
         });
 
@@ -382,6 +341,7 @@ export async function sendEmail(props: SendEmailProps) {
         const html = await render(
           SWPCalculationEmail({
             ...(props.data as SWPCalculatorValues),
+            phone: props.phone,
           }),
         );
         const text = toPlainText(html);
@@ -393,6 +353,7 @@ export async function sendEmail(props: SendEmailProps) {
           text,
           react: SWPCalculationEmail({
             ...(props.data as SWPCalculatorValues),
+            phone: props.phone,
           }),
         });
 

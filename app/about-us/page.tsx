@@ -8,7 +8,7 @@ import {
   SproutIcon,
 } from 'lucide-react';
 import Image from 'next/image';
-import FinPhil from '@/public/images/fin-phil.jpeg';
+import AboutUsImg from '@/public/images/about-us.jpeg';
 
 // import Banner from '@/components/shared/banner';
 import { CTABlock } from '@/components/shared/cta-block';
@@ -255,12 +255,11 @@ export default function AboutPage() {
                 'relative w-fit h-fit rounded-tl-4xl rounded-br-4xl overflow-hidden flex'
               }>
               <Image
-                // src='https://placehold.co/600x1200/png?text=Founder+Image'
-                src={FinPhil}
-                alt='founder'
+                src={AboutUsImg}
+                alt='about us'
                 sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
                 className={
-                  'w-full h-auto object-contain rounded-tl-4xl rounded-br-4xl brightness-50 grayscale'
+                  'w-full h-auto object-contain rounded-tl-4xl rounded-br-4xl'
                 }
               />
             </GlareEffect>
@@ -442,7 +441,7 @@ export default function AboutPage() {
           </div>
 
           <Button asChild>
-            <Link prefetch href={'/?contact=true'}>
+            <Link prefetch href={'?contact=true'}>
               Let&apos;s Connect
             </Link>
           </Button>

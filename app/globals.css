@@ -145,6 +145,7 @@
   }
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
   body {
     @apply bg-background text-foreground;
@@ -207,4 +208,24 @@
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--muted-foreground) transparent;
+}
+
+/* Smooth GPU-accelerated breathing scale & golden glow animation for hero title */
+@keyframes hero-breathe {
+  0%, 100% {
+    transform: scale3d(1, 1, 1);
+    filter: drop-shadow(0 0 0px rgba(197, 185, 132, 0));
+  }
+  50% {
+    transform: scale3d(1.07, 1.07, 1);
+    filter: drop-shadow(0 0 20px rgba(197, 185, 132, 0.6));
+  }
+}
+
+.animate-hero-breathe {
+  display: inline-block;
+  transform-origin: center center;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  animation: hero-breathe 4.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }

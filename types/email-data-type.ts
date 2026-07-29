@@ -5,8 +5,6 @@ import {
   RetirementCalculatorValues,
   RiskProfileFormValues,
   SIPCalculatorValues,
-  VacationCalculatorValues,
-  WeddingCalculatorValues,
   CostOfDelayCalculatorValues,
   GoalPlannerCalculatorValues,
   InflationCalculatorValues,
@@ -20,8 +18,6 @@ export type EmailData =
   | LumpSumCalculatorValues
   | SIPCalculatorValues
   | RetirementCalculatorValues
-  | WeddingCalculatorValues
-  | VacationCalculatorValues
   | CostOfDelayCalculatorValues
   | GoalPlannerCalculatorValues
   | InflationCalculatorValues

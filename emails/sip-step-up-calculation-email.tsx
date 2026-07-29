@@ -16,8 +16,10 @@ import {
   Text,
 } from '@react-email/components';
 
-export const SIPStepUpCalculationEmail = (props: SIPStepUpCalculatorValues) => {
-  const { name, initialMonthlySip, annualStepUp, expectedReturn, timePeriod } = props;
+export const SIPStepUpCalculationEmail = (
+  props: SIPStepUpCalculatorValues & { phone?: string },
+) => {
+  const { name, initialMonthlySip, annualStepUp, expectedReturn, timePeriod, phone } = props;
 
   const P = Number(initialMonthlySip);
   const s = Number(annualStepUp);
@@ -75,6 +77,12 @@ export const SIPStepUpCalculationEmail = (props: SIPStepUpCalculatorValues) => {
                   Your Investment Snapshot
                 </Text>
                 <div>
+                  {phone && (
+                    <Text className='mb-px text-muted-background text-sm'>
+                      • Phone Number:{' '}
+                      <strong className='text-background'>{phone}</strong>
+                    </Text>
+                  )}
                   <Text className='mb-px text-muted-background text-sm'>
                     • Initial Monthly SIP:{' '}
                     <strong className='text-background'>
@@ -140,30 +148,18 @@ export const SIPStepUpCalculationEmail = (props: SIPStepUpCalculatorValues) => {
 
               <Hr className='border-accent my-8' />
 
-              <Text className='text-muted-foreground text-sm leading-6'>
-                Ready to take action? Reply to this email or visit{' '}
-                <Link className='text-[#556cd6]' href='https://ascentwealth.in'>
-                  Ascent Wealth
-                </Link>{' '}
-                to get started.
+              <Text className='text-muted-foreground text-xs leading-5 italic mt-6'>
+                This illustration and returns assumed are on the basis of the request made by you. These are neither indicative nor guaranteed returns. Mutual fund investments are subject to market risks. Do read all scheme-related documents carefully.
               </Text>
 
-              <Text className='text-background font-semibold text-base mt-8'>
-                To your future prosperity,
-                <br />
-                The Ascent Wealth Team
+              <Text className='text-muted-foreground text-xs font-medium mt-2'>
+                Report Date : {new Date().toLocaleDateString('en-GB')}
               </Text>
             </Section>
 
             <Section className='bg-muted px-8 py-6 border-t border-solid border-primary'>
-              <Text className='text-muted-foreground text-[12px] leading-5 m-0'>
-                <strong>Our Office:</strong> Appasamy City Square, Rajiv Gandhi
-                Salai, OMR Service Rd, Kandhanchavadi, Chennai, Tamil Nadu
-                600097
-              </Text>
-              <Text className='text-muted-foreground text-[11px] mt-2'>
-                This email was sent following your request on the Ascent Wealth
-                SIP Step-Up Calculator.
+              <Text className='text-muted-foreground text-[11px] leading-5 m-0'>
+                The chart is for illustration purposes only. Figures are approximate and may not be linear as shown in the chart. The returns assumed above are as per your request. These are neither indicative nor guaranteed returns.
               </Text>
             </Section>
           </Container>

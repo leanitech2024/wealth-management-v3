@@ -17,7 +17,7 @@ import {
 } from '@react-email/components';
 
 export const RetirementCalculationEmail = (
-  props: RetirementCalculatorValues,
+  props: RetirementCalculatorValues & { phone?: string },
 ) => {
   const {
     name,
@@ -27,6 +27,7 @@ export const RetirementCalculationEmail = (
     currentAge,
     retirementAge,
     lifeExpectancy,
+    phone,
     // postRetirementInflationRate,
     // postRetirementRiskFreeRate,
     // returnOnExistingInvestment,
@@ -75,6 +76,12 @@ export const RetirementCalculationEmail = (
                   Quick Retirement Snapshot
                 </Text>
                 <div className=''>
+                  {phone && (
+                    <Text className='mb-px text-muted-background text-sm'>
+                      • Phone Number:{' '}
+                      <strong className={'text-background'}>{phone}</strong>
+                    </Text>
+                  )}
                   <Text className='mb-px text-muted-background text-sm'>
                     • Years remaining to build your corpus:{' '}
                     <strong className={'text-background'}>
@@ -119,31 +126,18 @@ export const RetirementCalculationEmail = (
 
               <Hr className='border-accent my-8' />
 
-              <Text className='text-muted-foreground text-sm leading-6'>
-                Did you know? Even a 1% difference in inflation can
-                significantly impact your retirement corpus. Explore our{' '}
-                <Link className='text-[#556cd6]' href='https://ascentwealth.in'>
-                  Retirement Planning Guide
-                </Link>{' '}
-                to learn more.
+              <Text className='text-muted-foreground text-xs leading-5 italic mt-6'>
+                This illustration and returns assumed are on the basis of the request made by you. These are neither indicative nor guaranteed returns. Mutual fund investments are subject to market risks. Do read all scheme-related documents carefully.
               </Text>
 
-              <Text className='text-background font-semibold text-base mt-8'>
-                To your peaceful retirement,
-                <br />
-                The Ascent Wealth Team
+              <Text className='text-muted-foreground text-xs font-medium mt-2'>
+                Report Date : {new Date().toLocaleDateString('en-GB')}
               </Text>
             </Section>
 
             <Section className='bg-muted px-8 py-6 border-t border-solid border-primary'>
-              <Text className='text-muted-foreground text-[12px] leading-5 m-0'>
-                <strong>Our Office:</strong> Appasamy City Square, Rajiv Gandhi
-                Salai, OMR Service Rd, Kandhanchavadi, Chennai, Tamil Nadu
-                600097
-              </Text>
-              <Text className='text-muted-foreground text-[11px] mt-2'>
-                This email was generated based on your inputs to the Ascent
-                Wealth Retirement Calculator.
+              <Text className='text-muted-foreground text-[11px] leading-5 m-0'>
+                The chart is for illustration purposes only. Figures are approximate and may not be linear as shown in the chart. The returns assumed above are as per your request. These are neither indicative nor guaranteed returns.
               </Text>
             </Section>
           </Container>

@@ -27,8 +27,6 @@ import EmailDialog from './email-dialog';
 import LumpsumForm from './lumpsum-form';
 import RetirementForm from './retirement-form';
 import SIPForm from './sip-form';
-import VacationForm from './vacation-form';
-import WeddingForm from './wedding-form';
 import CostOfDelayForm from './cost-of-delay-form';
 import GoalPlannerForm from './goal-planner-form';
 import InflationForm from './inflation-form';
@@ -102,22 +100,6 @@ export default function CaclculatorDrawerDialog(
             )}
             {title === 'Retirement Planning' && (
               <RetirementForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Wedding Calculator' && (
-              <WeddingForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Vacation Calculator' && (
-              <VacationForm
                 onParentClose={setOpen}
                 onOpenEmail={setIsEmailDialogOpen}
                 onUpdateSessionKey={setSessionStorageKey}
@@ -217,22 +199,6 @@ export default function CaclculatorDrawerDialog(
           )}
           {title === 'Retirement Planning' && (
             <RetirementForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Wedding Calculator' && (
-            <WeddingForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Vacation Calculator' && (
-            <VacationForm
               onParentClose={setOpen}
               onOpenEmail={setIsEmailDialogOpen}
               onUpdateSessionKey={setSessionStorageKey}
