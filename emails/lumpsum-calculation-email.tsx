@@ -21,6 +21,13 @@ export const LumpSumCalculationEmail = (
 ) => {
   const { name, investmentAmount, noOfYears, expectedReturn, phone } = props;
 
+  const P = Number(investmentAmount);
+  const Y = Number(noOfYears);
+  const r = Number(expectedReturn);
+
+  const futureValue = P * Math.pow(1 + r / 100, Y);
+  const estimatedReturns = futureValue - P;
+
   return (
     <Html>
       <Head />
@@ -50,13 +57,12 @@ export const LumpSumCalculationEmail = (
                 <strong className={'text-primary'}>
                   Ascent Wealth Lumpsum Calculator
                 </strong>
-                . We&apos;ve received your investment parameters and our team is
-                ready to help you optimize your wealth growth.
+                . We&apos;ve received your investment parameters and generated your personalized wealth growth projection:
               </Text>
 
               <Section className='bg-accent p-6 mb-8 border border-solid border-accent-foreground/50'>
                 <Text className='m-0 text-primary font-semibold mb-2 text-sm uppercase tracking-wide'>
-                  Calculation Input Summary
+                  Calculation & Projection Summary
                 </Text>
                 <div className=''>
                   {phone && (
@@ -68,19 +74,32 @@ export const LumpSumCalculationEmail = (
                   <Text className='mb-px text-muted-background text-sm'>
                     • Principal Amount:{' '}
                     <strong className={'text-background'}>
-                      ₹{Number(investmentAmount).toLocaleString('en-IN')}
+                      ₹{P.toLocaleString('en-IN')}
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
                     • Duration:{' '}
                     <strong className={'text-background'}>
-                      {noOfYears} Years
+                      {Y} Years
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
                     • Expected Return:{' '}
                     <strong className={'text-background'}>
-                      {expectedReturn}% p.a.
+                      {r}% p.a.
+                    </strong>
+                  </Text>
+                  <Hr className='border-accent-foreground/20 my-3' />
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Estimated Wealth Gain:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(estimatedReturns).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mt-2 text-primary font-bold text-base'>
+                    • Projected Maturity Value:{' '}
+                    <strong className={'text-primary text-lg'}>
+                      ₹{Math.round(futureValue).toLocaleString('en-IN')}
                     </strong>
                   </Text>
                 </div>

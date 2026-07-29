@@ -21,22 +21,54 @@ export const RetirementCalculationEmail = (
 ) => {
   const {
     name,
-    // inflationRate,
+    inflationRate,
     currentMonthlyExpenses,
-    // existingInvestment,
+    existingInvestment,
     currentAge,
     retirementAge,
     lifeExpectancy,
     phone,
-    // postRetirementInflationRate,
-    // postRetirementRiskFreeRate,
-    // returnOnExistingInvestment,
-    // returnOnNewInvestment,
+    postRetirementInflationRate,
+    postRetirementRiskFreeRate,
+    returnOnExistingInvestment,
+    returnOnNewInvestment,
   } = props;
 
-  // Simple calculations to delight the user
-  const yearsToRetirement = retirementAge - currentAge;
-  const retirementDuration = lifeExpectancy - retirementAge;
+  const yearsToRetirement = Math.max(1, retirementAge - currentAge);
+  const retirementDuration = Math.max(1, lifeExpectancy - retirementAge);
+
+  const E0 = Number(currentMonthlyExpenses);
+  const I0 = Number(existingInvestment);
+  const infPre = Number(inflationRate) / 100;
+  const infPost = Number(postRetirementInflationRate) / 100;
+  const rPost = Number(postRetirementRiskFreeRate) / 100;
+  const rExist = Number(returnOnExistingInvestment) / 100;
+  const rNew = Number(returnOnNewInvestment) / 100;
+
+  // Monthly & Annual Expense at Retirement
+  const monthlyExpenseAtRetirement = E0 * Math.pow(1 + infPre, yearsToRetirement);
+  const annualExpenseAtRetirement = monthlyExpenseAtRetirement * 12;
+
+  // Real Rate of Return Post Retirement
+  const rReal = (1 + rPost) / (1 + infPost) - 1;
+
+  // Target Corpus Needed at Retirement
+  const targetCorpus = rReal === 0
+    ? annualExpenseAtRetirement * retirementDuration
+    : annualExpenseAtRetirement * ((1 - Math.pow(1 + rReal, -retirementDuration)) / rReal);
+
+  // Future Value of Existing Investment at Retirement
+  const futureExistingValue = I0 * Math.pow(1 + rExist, yearsToRetirement);
+
+  // Net Corpus Shortfall Needed
+  const shortfall = Math.max(0, targetCorpus - futureExistingValue);
+
+  // Required Monthly SIP to bridge shortfall
+  const iNew = rNew / 12;
+  const nMonths = yearsToRetirement * 12;
+  const requiredMonthlySip = iNew === 0 
+    ? shortfall / nMonths 
+    : shortfall / (((Math.pow(1 + iNew, nMonths) - 1) / iNew) * (1 + iNew));
 
   return (
     <Html>
@@ -68,14 +100,14 @@ export const RetirementCalculationEmail = (
                   Ascent Wealth Retirement Calculator
                 </strong>
                 . Planning for your golden years is the most significant
-                financial gift you can give your future self.
+                financial gift you can give your future self. Here is your personalized retirement analysis:
               </Text>
 
               <Section className='bg-accent p-6 mb-8 border border-solid border-accent-foreground/50'>
                 <Text className='m-0 text-primary font-semibold mb-3 text-sm uppercase tracking-wide'>
-                  Quick Retirement Snapshot
+                  Retirement Roadmap Snapshot
                 </Text>
-                <div className=''>
+                <div>
                   {phone && (
                     <Text className='mb-px text-muted-background text-sm'>
                       • Phone Number:{' '}
@@ -83,21 +115,46 @@ export const RetirementCalculationEmail = (
                     </Text>
                   )}
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Years remaining to build your corpus:{' '}
+                    • Timeline & Horizon:{' '}
                     <strong className={'text-background'}>
-                      {yearsToRetirement} years
+                      Age {currentAge} → {retirementAge} ({yearsToRetirement} years to save, {retirementDuration} years in retirement)
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Planned retirement duration:{' '}
+                    • Current Monthly Expenses:{' '}
                     <strong className={'text-background'}>
-                      {retirementDuration} years
+                      ₹{E0.toLocaleString('en-IN')}
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Current monthly lifestyle cost:{' '}
+                    • Estimated Monthly Expenses at Retirement:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(monthlyExpenseAtRetirement).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Hr className='border-accent-foreground/20 my-3' />
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Total Target Retirement Corpus Needed:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(targetCorpus).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Projected Value of Existing Savings ({returnOnExistingInvestment}% p.a.):{' '}
                     <strong className={'text-background'}>
-                      ₹{Number(currentMonthlyExpenses).toLocaleString('en-IN')}
+                      ₹{Math.round(futureExistingValue).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Net Corpus Shortfall Needed:{' '}
+                    <strong className={'text-background'}>
+                      ₹{Math.round(shortfall).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mt-2 text-primary font-bold text-base'>
+                    • Required Monthly SIP ({returnOnNewInvestment}% return):{' '}
+                    <strong className={'text-primary text-lg'}>
+                      ₹{Math.round(requiredMonthlySip).toLocaleString('en-IN')}
                     </strong>
                   </Text>
                 </div>

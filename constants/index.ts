@@ -38,11 +38,6 @@ export const navlinks = [
   },
   {
     id: crypto.randomUUID(),
-    label: 'Free Consultation',
-    href: '/#free-consultation',
-  },
-  {
-    id: crypto.randomUUID(),
     label: 'Blogs',
     href: '/blogs',
   },

@@ -21,6 +21,17 @@ export const SIPCalculationEmail = (
 ) => {
   const { name, noOfYears, expectedReturn, sipAmount, phone } = props;
 
+  const P = Number(sipAmount);
+  const Y = Number(noOfYears);
+  const r = Number(expectedReturn);
+
+  const i = r / 100 / 12;
+  const n = Y * 12;
+
+  const futureValue = i === 0 ? P * n : P * (((Math.pow(1 + i, n) - 1) / i) * (1 + i));
+  const totalInvested = P * n;
+  const estimatedReturns = futureValue - totalInvested;
+
   return (
     <Html>
       <Head />
@@ -51,7 +62,7 @@ export const SIPCalculationEmail = (
                   Ascent Wealth SIP Calculator
                 </strong>
                 . Taking the first step toward disciplined investing is the best
-                way to secure your financial future.
+                way to secure your financial future. Here is your personalized SIP projection:
               </Text>
 
               <Section className='bg-accent p-6 mb-8 border border-solid border-accent-foreground/50'>
@@ -68,19 +79,38 @@ export const SIPCalculationEmail = (
                   <Text className='mb-px text-muted-background text-sm'>
                     • Monthly SIP:{' '}
                     <strong className={'text-background'}>
-                      ₹{Number(sipAmount).toLocaleString('en-IN')}
+                      ₹{P.toLocaleString('en-IN')}
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
                     • Investment Period:{' '}
                     <strong className={'text-background'}>
-                      {noOfYears} Years
+                      {Y} Years ({n} months)
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
                     • Targeted Return:{' '}
                     <strong className={'text-background'}>
-                      {expectedReturn}% p.a.
+                      {r}% p.a.
+                    </strong>
+                  </Text>
+                  <Hr className='border-accent-foreground/20 my-3' />
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Total Capital Invested:{' '}
+                    <strong className={'text-background'}>
+                      ₹{Math.round(totalInvested).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Estimated Wealth Gain:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(estimatedReturns).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mt-2 text-primary font-bold text-base'>
+                    • Projected Maturity Value:{' '}
+                    <strong className={'text-primary text-lg'}>
+                      ₹{Math.round(futureValue).toLocaleString('en-IN')}
                     </strong>
                   </Text>
                 </div>

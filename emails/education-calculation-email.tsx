@@ -24,15 +24,33 @@ export const EducationCalculationEmail = (
     childName,
     childAge,
     phone,
-    // inflationRate,
-    // existingInvestmentRate,
-    // newInvestmentRate,
-    // currentCost,
-    // currentInvestment,
+    inflationRate,
+    existingInvestmentRate,
+    newInvestmentRate,
+    currentCost,
+    currentInvestment,
     higherEducationAge,
   } = props;
 
   const yearsToSave = higherEducationAge - childAge;
+  const C0 = Number(currentCost);
+  const I0 = Number(currentInvestment);
+  const inf = Number(inflationRate) / 100;
+  const rExist = Number(existingInvestmentRate) / 100;
+  const rNew = Number(newInvestmentRate) / 100;
+
+  // Future Inflated Education Cost
+  const futureCost = C0 * Math.pow(1 + inf, yearsToSave);
+  // Future Value of Existing Investments
+  const futureExistingVal = I0 * Math.pow(1 + rExist, yearsToSave);
+  // Net Shortfall needed
+  const shortfall = Math.max(0, futureCost - futureExistingVal);
+  // Required Monthly SIP for new investment
+  const iNew = rNew / 12;
+  const nMonths = yearsToSave * 12;
+  const requiredSip = iNew === 0 
+    ? shortfall / nMonths 
+    : shortfall / (((Math.pow(1 + iNew, nMonths) - 1) / iNew) * (1 + iNew));
 
   return (
     <Html>
@@ -66,27 +84,64 @@ export const EducationCalculationEmail = (
                 . Planning for{' '}
                 <strong className={'text-primary'}>{childName}&apos;s</strong>{' '}
                 higher education is one of the most important financial
-                milestones you will achieve.
+                milestones you will achieve. Here is your personalized education planning analysis:
               </Text>
 
               <Section className='bg-accent p-6 mb-8 border border-solid border-accent-foreground/50'>
-                <Text className='m-0 text-primary font-semibold mb-2'>
-                  Planning Summary
+                <Text className='m-0 text-primary font-semibold mb-3 text-sm uppercase tracking-wide'>
+                  Education Goal Snapshot
                 </Text>
-                {phone && (
-                  <Text className='m-0 text-muted-foreground text-sm leading-6 mb-1'>
-                    • Phone Number: <strong className={'text-primary'}>{phone}</strong>
+                <div>
+                  {phone && (
+                    <Text className='mb-px text-muted-background text-sm'>
+                      • Phone Number:{' '}
+                      <strong className={'text-background'}>{phone}</strong>
+                    </Text>
+                  )}
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Child Name & Timeframe:{' '}
+                    <strong className={'text-background'}>
+                      {childName} (Age {childAge} → {higherEducationAge}, {yearsToSave} years to save)
+                    </strong>
                   </Text>
-                )}
-                <Text className='m-0 text-muted-foreground text-sm leading-6'>
-                  Based on your inputs, you have{' '}
-                  <strong className={'text-primary'}>
-                    {yearsToSave} years
-                  </strong>{' '}
-                  to build the ideal corpus before {childName} reaches age{' '}
-                  {higherEducationAge}. Our team is now generating a detailed
-                  inflation-adjusted report for you.
-                </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Current Education Cost:{' '}
+                    <strong className={'text-background'}>
+                      ₹{C0.toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Assumed Inflation Rate:{' '}
+                    <strong className={'text-background'}>
+                      {inflationRate}% p.a.
+                    </strong>
+                  </Text>
+                  <Hr className='border-accent-foreground/20 my-3' />
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Future Inflated Education Cost:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(futureCost).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Growth of Existing Investment ({existingInvestmentRate}% p.a.):{' '}
+                    <strong className={'text-background'}>
+                      ₹{Math.round(futureExistingVal).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mb-px text-muted-background text-sm'>
+                    • Net Corpus Shortfall Needed:{' '}
+                    <strong className={'text-background'}>
+                      ₹{Math.round(shortfall).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                  <Text className='mt-2 text-primary font-bold text-base'>
+                    • Required Monthly SIP ({newInvestmentRate}% return):{' '}
+                    <strong className={'text-primary text-lg'}>
+                      ₹{Math.round(requiredSip).toLocaleString('en-IN')}
+                    </strong>
+                  </Text>
+                </div>
               </Section>
 
               <Text className='text-muted-foreground text-base leading-7 mb-6'>
