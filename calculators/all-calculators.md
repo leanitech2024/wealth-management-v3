@@ -85,7 +85,7 @@ The total value is the sum of all these individually grown installments. With st
 
 ## 3. Goal Setting Calculator
 
-**What it does:** Tells you how much you need to invest (monthly SIP or one-time lumpsum) to reach a financial goal, adjusted for inflation.
+**What it does:** Tells you how much you need to invest as a one-time lumpsum to reach a financial goal, adjusted for inflation.
 
 ### What you enter
 
@@ -95,7 +95,6 @@ The total value is the sum of all these individually grown installments. With st
 | Target Time Horizon           | Years from now to reach the goal                           | 1 – 35 years           |
 | Expected Return Rate          | Yearly growth rate on investments                          | 1% – 30%               |
 | Expected Inflation Rate       | How much prices rise each year                             | 0% – 15%               |
-| Mode                          | Choose between **SIP** (monthly) or **Lumpsum** (one-time) | SIP / Lumpsum          |
 
 ### How it works
 
@@ -105,13 +104,7 @@ The total value is the sum of all these individually grown installments. With st
 >
 > This tells you what the goal will actually cost in the future.
 
-**Step 2a — If SIP mode:**
-
-> The calculator works backwards to find the monthly SIP amount needed to accumulate the inflated goal at the expected return rate.
->
-> It divides the inflated target by the sum of each month's growth factor.
-
-**Step 2b — If Lumpsum mode:**
+**Step 2 — Calculate Lumpsum:**
 
 > **Lumpsum Needed = Inflated Goal ÷ (1 + Return Rate / 100) ^ Years**
 >
@@ -120,15 +113,14 @@ The total value is the sum of all these individually grown installments. With st
 **Example:** Goal of ₹10,00,000 today, 5 years away, 12% returns, 6% inflation:
 
 - Inflated Goal: ₹13,38,226
-- Required Monthly SIP: ≈ ₹16,300/month
-- OR Lumpsum: ≈ ₹7,59,400
+- Required Lumpsum: ≈ ₹7,59,400
 
 ### What you get back
 
 | Output                          | Meaning                                          |
 | ------------------------------- | ------------------------------------------------ |
 | Inflated Target Goal            | What the goal will actually cost after inflation |
-| Required Monthly SIP or Lumpsum | How much you need to invest                      |
+| Required Lumpsum                | How much you need to invest                      |
 | Estimated Gains                 | Returns earned on your investment                |
 | Year-by-year chart              | Growth trajectory towards the goal               |
 
@@ -140,53 +132,60 @@ The total value is the sum of all these individually grown installments. With st
 
 ### What you enter
 
-| Input                       | Description                            | Range               |
-| --------------------------- | -------------------------------------- | ------------------- |
-| Current Age                 | Your age today                         | 18 – 65 years       |
-| Retire Age                  | When you want to retire                | 40 – 75 years       |
-| Current Monthly Expenses    | What you spend per month today         | ₹10,000 – ₹5,00,000 |
-| Existing Retirement Savings | What you've already saved              | ₹0 – ₹2,00,00,000   |
-| Inflation Rate              | Yearly rise in living costs            | 1% – 15%            |
-| Return Rate                 | Expected yearly returns on investments | 1% – 25%            |
+| Input | Description | Range | Default |
+| --- | --- | --- | --- |
+| Current Monthly Expenses | What you spend per month today | ₹100 – ₹1,00,00,000 | ₹50,000 |
+| Current Age | Your age today | 18 – 60 years | 25 |
+| Expected Retirement Age | When you want to retire | 40 – 80 years | 60 |
+| Life Expectancy | Estimated life span | 80 – 120 years | 100 |
+| Current Savings | What you've already saved for retirement | ₹0 – ₹1,00,00,00,000 | ₹5,00,000 |
+| Inflation Rate | Expected yearly rise in living costs | 0% – 20% | 6% |
+| Expected Return Rate | Expected yearly returns on investments | 1% – 30% | 12% |
 
 ### How it works
 
-**Step 1 — Future monthly expense:**
+**Step 1 — Investment Horizon (Years to Retirement):**
 
-> **Monthly Expense at Retirement = Today's Expense × (1 + Inflation / 100) ^ Years to Retire**
+> **Years to Retire = Expected Retirement Age − Current Age**
 
-**Step 2 — Total corpus required:**
+**Step 2 — Future monthly expense at Retirement:**
 
-> **Corpus = Monthly Expense at Retirement × 12 × Years in Retirement**
+> **Monthly Expense at Retirement = Current Monthly Expenses × (1 + Inflation Rate / 100) ^ Years to Retire**
+
+**Step 3 — Total corpus required:**
+
+> **Corpus = Monthly Expense at Retirement × 12 × (Life Expectancy - Expected Retirement Age)**
+
+**Step 4 — Account for existing savings:**
+
+> **Future Value of Savings = Current Savings × (1 + Expected Return Rate / 100) ^ Years to Retire**
 >
-> (Years in Retirement is calculated assuming life expectancy of 85 years)
+> **Additional Savings Required = Total Corpus − Future Value of Savings**
+> *(If Future Value of Savings is greater than Total Corpus, Additional Savings Required is 0)*
 
-**Step 3 — Account for existing savings:**
+**Step 5 — Required monthly SIP:**
 
-> **Future Value of Savings = Current Savings × (1 + Return Rate / 100) ^ Years to Retire**
->
-> **Additional Corpus Needed = Total Corpus − Future Value of Savings**
+> The calculator finds the monthly SIP needed to build the Additional Savings Required.
+> Formula used: **Monthly SIP = ⌈ Additional Savings / Annuity Factor ⌉**
+> Where Annuity Factor is the sum of `(1 + Expected Return Rate / 1200) ^ (Total Months - Month Number + 1)` for each month until retirement.
 
-**Step 4 — Required monthly SIP:**
+**Example (based on default inputs):** Current Age 25, Retire at 60, Life Expectancy 100, ₹50,000/month expenses, ₹5,00,000 savings, 6% inflation, 12% returns:
 
-> The calculator finds the monthly SIP needed to build the additional corpus.
-
-**Example:** Age 30, retire at 60, ₹50,000/month expenses, ₹5,00,000 savings, 6% inflation, 12% returns:
-
-- Monthly expense at 60: ≈ ₹2,87,000
-- Total corpus needed: ≈ ₹8,62,00,000
-- Your ₹5L savings grow to: ≈ ₹1,49,80,000
-- Additional needed: ≈ ₹7,12,20,000
-- Monthly SIP required: ≈ ₹20,200/month
+- Years to Retire: 35 years
+- Monthly expense at 60: ≈ ₹3,84,304
+- Total corpus needed: ≈ ₹18.45 Cr (₹18,44,66,083)
+- Your ₹5L savings grow to: ≈ ₹2.64 Cr (₹2,63,99,810)
+- Additional needed: ≈ ₹15.81 Cr (₹15,80,66,273)
+- Monthly SIP required: ₹24,336 (≈ ₹24.34K/month)
 
 ### What you get back
 
-| Output                    | Meaning                                         |
-| ------------------------- | ----------------------------------------------- |
-| Expense at Retirement Age | What your monthly costs will be when you retire |
-| Target Corpus             | Total retirement fund needed                    |
-| Required SIP              | Monthly investment needed to build the corpus   |
-| Year-by-year chart        | Accumulation progress from now until retirement |
+| Output | Meaning |
+| --- | --- |
+| Retirement amount required as per current expenses | Total retirement fund needed based on inflated expenses |
+| Additional Saving Required | Gap to fill after accounting for current savings growth |
+| Achievable by a monthly SIP of | Monthly investment needed to build the additional savings |
+| Donut Chart | Visual breakdown of "Current Savings Value on Retirement" vs "Additional Savings Required" |
 
 ---
 

@@ -32,7 +32,7 @@ export default function Navbar() {
 
           <div className={'hidden lg:block'}>
             <Link
-              href="https://m.assetplus.in/#!/signup"
+              href="https://www.assetplus.in/mfd/ascentwealth"
               target="_blank"
               rel="noopener noreferrer"
               className={buttonVariants({

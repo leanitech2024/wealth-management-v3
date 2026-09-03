@@ -1,4 +1,4 @@
-import { SWPCalculatorValues } from '@/lib/zod.schemas';
+import { EmiCalculatorValues } from '@/lib/zod.schemas';
 import tailwindConfig from '@/tailwind.config';
 import {
   Body,
@@ -16,35 +16,38 @@ import {
   Text,
 } from '@react-email/components';
 
-export const SWPCalculationEmail = (
-  props: SWPCalculatorValues & { phone?: string },
+export const EmiCalculationEmail = (
+  props: (EmiCalculatorValues | Record<string, any>) & { phone?: string },
 ) => {
-  const { name, totalCorpus, monthlyWithdrawal, expectedReturn, projectionPeriod, phone } = props;
+  const {
+    name,
+    loanAmount,
+    interestRate,
+    tenureYears,
+    monthlyEmi,
+    totalInterest,
+    totalPayable,
+    phone,
+  } = props as any;
 
-  const B0 = Number(totalCorpus);
-  const W = Number(monthlyWithdrawal);
-  const r = Number(expectedReturn);
-  const Y = Number(projectionPeriod);
+  const P = Number(loanAmount) || 0;
+  const r = Number(interestRate) || 0;
+  const Y = Number(tenureYears) || 0;
 
-  const i = r / 100 / 12;
-  let bal = B0;
-  let monthsCount = 0;
+  // Calculate if not passed directly
+  const monthlyRate = r / 1200;
   const totalMonths = Y * 12;
+  const emiCalc =
+    monthlyEmi ||
+    (monthlyRate > 0 && totalMonths > 0
+      ? Math.round(
+          (P * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
+            (Math.pow(1 + monthlyRate, totalMonths) - 1),
+        )
+      : 0);
 
-  while (bal > 0 && monthsCount < totalMonths) {
-    bal = bal * (1 + i) - W;
-    monthsCount++;
-  }
-
-  const finalBalance = Math.max(0, bal);
-  const totalWithdrawn = W * monthsCount;
-  
-  const interestEarnedFirstMonth = B0 * i;
-  const neverDepletes = interestEarnedFirstMonth >= W;
-
-  const lastsText = neverDepletes 
-    ? "Never depletes (growing corpus)" 
-    : `${Math.floor(monthsCount / 12)} years and ${monthsCount % 12} months`;
+  const totalPayableCalc = totalPayable || emiCalc * totalMonths;
+  const totalInterestCalc = totalInterest || Math.max(0, totalPayableCalc - P);
 
   return (
     <Html>
@@ -52,11 +55,11 @@ export const SWPCalculationEmail = (
       <Tailwind config={tailwindConfig}>
         <Body className='bg-foreground font-sans py-10'>
           <Preview>
-            Your SWP Cash Flow Analysis from Ascent Wealth is ready.
+            Your Loan EMI & Repayment Schedule from Ascent Wealth is ready.
           </Preview>
           <Container className='bg-white mx-auto border border-solid border-accent-foreground/50'>
             <Section className='px-8 py-10'>
-              <div className='w-48 mx-auto text-center'>
+              <div className={'w-48 mx-auto text-center'}>
                 <Img
                   src={`https://res.cloudinary.com/dxgckfhti/image/upload/w_100/v1769003149/Logo-dark_uuxzvx.svg`}
                   width='100%'
@@ -67,76 +70,70 @@ export const SWPCalculationEmail = (
               </div>
 
               <Heading className='text-2xl font-bold text-backgroud leading-tight mb-4'>
-                Hello {name},
+                Hello {name || 'Investor'},
               </Heading>
 
               <Text className='text-muted-foreground text-base leading-7 mb-6'>
                 Thank you for using the{' '}
-                <strong className='text-primary'>
-                  Ascent Wealth SWP Calculator
+                <strong className={'text-primary'}>
+                  Ascent Wealth EMI Calculator
                 </strong>
-                . Systematic Withdrawal Plans are an excellent way to generate regular retirement income from your accumulated wealth. Here is your projection:
+                . We&apos;ve received your loan parameters and generated your personalized EMI & interest analysis:
               </Text>
 
               <Section className='bg-accent p-6 mb-8 border border-solid border-accent-foreground/50'>
-                <Text className='m-0 text-primary font-semibold mb-3 text-sm uppercase tracking-wide'>
-                  Your SWP Projection Snapshot
+                <Text className='m-0 text-primary font-semibold mb-2 text-sm uppercase tracking-wide'>
+                  Loan & EMI Summary
                 </Text>
                 <div>
                   {phone && (
                     <Text className='mb-px text-muted-background text-sm'>
                       • Phone Number:{' '}
-                      <strong className='text-background'>{phone}</strong>
+                      <strong className={'text-background'}>{phone}</strong>
                     </Text>
                   )}
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Initial Corpus:{ ' '}
-                    <strong className='text-background text-base'>
-                      ₹{B0.toLocaleString('en-IN')}
+                    • Principal Loan Amount:{' '}
+                    <strong className={'text-background'}>
+                      ₹{P.toLocaleString('en-IN')}
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Monthly Withdrawal:{' '}
-                    <strong className='text-background'>
-                      ₹{W.toLocaleString('en-IN')}
-                    </strong>
-                  </Text>
-                  <Text className='mb-px text-muted-background text-sm'>
-                    • Expected Return Rate:{' '}
-                    <strong className='text-background'>
+                    • Interest Rate:{' '}
+                    <strong className={'text-background'}>
                       {r}% p.a.
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Projection Period:{' '}
-                    <strong className='text-background'>
-                      {Y} Years
+                    • Loan Tenure:{' '}
+                    <strong className={'text-background'}>
+                      {Y} Years ({totalMonths} Months)
                     </strong>
                   </Text>
                   <Hr className='border-accent-foreground/20 my-3' />
                   <Text className='mb-px text-muted-background text-sm'>
-                    • How long corpus lasts:{' '}
-                    <strong className='text-primary text-base'>
-                      {lastsText}
+                    • Monthly EMI:{' '}
+                    <strong className={'text-primary text-base'}>
+                      ₹{Math.round(emiCalc).toLocaleString('en-IN')} / month
                     </strong>
                   </Text>
                   <Text className='mb-px text-muted-background text-sm'>
-                    • Total Amount Withdrawn:{' '}
-                    <strong className='text-background'>
-                      ₹{Math.round(totalWithdrawn).toLocaleString('en-IN')}
+                    • Total Interest Payable:{' '}
+                    <strong className={'text-background text-base'}>
+                      ₹{Math.round(totalInterestCalc).toLocaleString('en-IN')}
                     </strong>
                   </Text>
-                  <Text className='mb-px text-muted-background text-sm'>
-                    • Remaining Corpus Balance:{' '}
-                    <strong className='text-background'>
-                      ₹{Math.round(finalBalance).toLocaleString('en-IN')}
+                  <Text className='mt-2 text-primary font-bold text-base'>
+                    • Total Amount Payable (Principal + Interest):{' '}
+                    <strong className={'text-primary text-lg'}>
+                      ₹{Math.round(totalPayableCalc).toLocaleString('en-IN')}
                     </strong>
                   </Text>
                 </div>
               </Section>
 
               <Text className='text-muted-foreground text-base leading-7 mb-8'>
-                By withdrawing ₹{W.toLocaleString('en-IN')} monthly, your corpus will last {lastsText}. One of our retirement planning advisors will contact you within 24-48 business hours to help you implement a tax-efficient SWP portfolio that maximizes your monthly payouts.
+                Proper debt management and structured prepayment strategies can significantly reduce your interest burden. One of our senior wealth managers will reach out within 24 hours to discuss smart financial planning.
               </Text>
 
               <Section className='text-center mb-8'>
@@ -155,7 +152,7 @@ export const SWPCalculationEmail = (
               <Hr className='border-accent my-8' />
 
               <Text className='text-muted-foreground text-xs leading-5 italic mt-6'>
-                This illustration and returns assumed are on the basis of the request made by you. These are neither indicative nor guaranteed returns. Mutual fund investments are subject to market risks. Do read all scheme-related documents carefully.
+                This illustration is based on standard reducing balance loan calculation methods. Actual loan terms, interest rates, and processing fees may vary based on lender policies.
               </Text>
 
               <Text className='text-muted-foreground text-xs font-medium mt-2'>
@@ -165,7 +162,7 @@ export const SWPCalculationEmail = (
 
             <Section className='bg-muted px-8 py-6 border-t border-solid border-primary'>
               <Text className='text-muted-foreground text-[11px] leading-5 m-0'>
-                The chart is for illustration purposes only. Figures are approximate and may not be linear as shown in the chart. The returns assumed above are as per your request. These are neither indicative nor guaranteed returns.
+                The figures and amortization breakdown provided are for planning purposes only. Mutual fund investments and financial products are subject to market risks. Do read all scheme-related documents carefully.
               </Text>
             </Section>
           </Container>
@@ -175,12 +172,14 @@ export const SWPCalculationEmail = (
   );
 };
 
-SWPCalculationEmail.PreviewProps = {
+EmiCalculationEmail.PreviewProps = {
   name: 'John Doe',
-  totalCorpus: '5000000',
-  monthlyWithdrawal: '30000',
-  expectedReturn: 8,
-  projectionPeriod: 20,
-} as SWPCalculatorValues;
+  loanAmount: '2500000',
+  interestRate: 8.5,
+  tenureYears: 20,
+  monthlyEmi: 21696,
+  totalInterest: 2707040,
+  totalPayable: 5207040,
+};
 
-export default SWPCalculationEmail;
+export default EmiCalculationEmail;

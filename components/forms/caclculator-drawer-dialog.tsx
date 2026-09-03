@@ -5,7 +5,6 @@ import { cn } from '@/lib/utils';
 import { SparklesIcon } from 'lucide-react';
 import { useState } from 'react';
 import { InteractiveHoverButton } from '../extends/interactive-hover-button';
-import { Button } from '../ui/button';
 import {
   Dialog,
   DialogContent,
@@ -22,16 +21,17 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '../ui/drawer';
-import EducationForm from './education-form';
+
+import { LumpsumCalculator } from '@/components/calculators/lumpsum-calculator';
+import { SipReturnsCalculator } from '@/components/calculators/sip-returns-calculator';
+import { GoalSettingCalculator } from '@/components/calculators/goal-setting-calculator';
+import { RetirementFundCalculator } from '@/components/calculators/retirement-fund-calculator';
+import { EducationCalculator } from '@/components/calculators/education-calculator';
+import { EmiCalculator } from '@/components/calculators/emi-calculator';
+import { CompoundInterestCalculator } from '@/components/calculators/compound-interest-calculator';
+import { InflationCalculator } from '@/components/calculators/inflation-calculator';
+
 import EmailDialog from './email-dialog';
-import LumpsumForm from './lumpsum-form';
-import RetirementForm from './retirement-form';
-import SIPForm from './sip-form';
-import CostOfDelayForm from './cost-of-delay-form';
-import GoalPlannerForm from './goal-planner-form';
-import InflationForm from './inflation-form';
-import SIPStepUpForm from './sip-step-up-form';
-import SWPForm from './swp-form';
 
 type CaclculatorDrawerDialogProps = {
   title: string;
@@ -44,6 +44,13 @@ export default function CaclculatorDrawerDialog(
   const { title, desc } = props;
   const [open, setOpen] = useState(false);
   const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+    if (isOpen && typeof document !== 'undefined' && document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+  };
   const [sessionStorageKey, setSessionStorageKey] = useState<SessionKey>();
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
@@ -57,10 +64,81 @@ export default function CaclculatorDrawerDialog(
     zoom: 'data-[state=open]:zoom-in-0! data-[state=open]:duration-600',
   };
 
+  const renderCalculator = () => {
+    switch (title) {
+      case 'Lumpsum Calculator':
+        return (
+          <LumpsumCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'SIP Returns Calculator':
+      case 'SIP Calculator':
+        return (
+          <SipReturnsCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Goal Setting Calculator':
+      case 'Goal Planner':
+        return (
+          <GoalSettingCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Retirement Fund Calculator':
+      case 'Retirement Planning':
+        return (
+          <RetirementFundCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Education Calculator':
+        return (
+          <EducationCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'EMI Calculator':
+        return (
+          <EmiCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Compound Interest Calculator':
+        return (
+          <CompoundInterestCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Inflation Calculator':
+        return (
+          <InflationCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      default:
+        return (
+          <LumpsumCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+    }
+  };
+
   if (isDesktop) {
     return (
       <>
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={open} onOpenChange={handleOpenChange}>
           <DialogTrigger asChild>
             <InteractiveHoverButton
               className='w-full rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!'
@@ -68,84 +146,13 @@ export default function CaclculatorDrawerDialog(
               Get free calculation
             </InteractiveHoverButton>
           </DialogTrigger>
-          <DialogContent className={cn('sm:max-w-5xl', animation.zoom)}>
+          <DialogContent className={cn('sm:max-w-5xl max-h-[90vh] overflow-y-auto p-6', animation.zoom)}>
             <DialogHeader className={'sr-only'}>
               <DialogTitle>{title}</DialogTitle>
               <DialogDescription>{desc}</DialogDescription>
             </DialogHeader>
 
-            {title === 'Education Calculator' && (
-              <EducationForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Lumpsum Calculator' && (
-              <LumpsumForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'SIP Calculator' && (
-              <SIPForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Retirement Planning' && (
-              <RetirementForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Cost of Delay' && (
-              <CostOfDelayForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Goal Planner' && (
-              <GoalPlannerForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'Inflation Calculator' && (
-              <InflationForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'SIP Step-Up Calculator' && (
-              <SIPStepUpForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
-            {title === 'SWP Calculator' && (
-              <SWPForm
-                onParentClose={setOpen}
-                onOpenEmail={setIsEmailDialogOpen}
-                onUpdateSessionKey={setSessionStorageKey}
-                {...props}
-              />
-            )}
+            {renderCalculator()}
           </DialogContent>
         </Dialog>
         <EmailDialog
@@ -159,7 +166,7 @@ export default function CaclculatorDrawerDialog(
 
   return (
     <>
-      <Drawer open={open} onOpenChange={setOpen}>
+      <Drawer open={open} onOpenChange={handleOpenChange}>
         <DrawerTrigger asChild>
           <InteractiveHoverButton
             className='w-full rounded-full h-11! md:h-12! cursor-pointer flex! items-center! justify-center! py-0!'
@@ -167,84 +174,15 @@ export default function CaclculatorDrawerDialog(
             Get free calculation
           </InteractiveHoverButton>
         </DrawerTrigger>
-        <DrawerContent className='p-6 min-h-fit'>
-          <DrawerHeader>
+        <DrawerContent className='p-4 max-h-[90vh] flex flex-col'>
+          <DrawerHeader className='text-left pb-2 shrink-0'>
             <DrawerTitle>{title}</DrawerTitle>
             <DrawerDescription>{desc}</DrawerDescription>
           </DrawerHeader>
 
-          {title === 'Education Calculator' && (
-            <EducationForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Lumpsum Calculator' && (
-            <LumpsumForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'SIP Calculator' && (
-            <SIPForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Retirement Planning' && (
-            <RetirementForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Cost of Delay' && (
-            <CostOfDelayForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Goal Planner' && (
-            <GoalPlannerForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'Inflation Calculator' && (
-            <InflationForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'SIP Step-Up Calculator' && (
-            <SIPStepUpForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
-          {title === 'SWP Calculator' && (
-            <SWPForm
-              onParentClose={setOpen}
-              onOpenEmail={setIsEmailDialogOpen}
-              onUpdateSessionKey={setSessionStorageKey}
-              {...props}
-            />
-          )}
+          <div className='flex-1 overflow-y-auto p-1' data-vaul-no-drag>
+            {renderCalculator()}
+          </div>
         </DrawerContent>
       </Drawer>
       <EmailDialog

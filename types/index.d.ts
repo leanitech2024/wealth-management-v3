@@ -3,11 +3,10 @@ declare type Calculators =
   | 'lumpsum-form'
   | 'sip-form'
   | 'retirement-form'
-  | 'cost-of-delay-form'
   | 'goal-planner-form'
   | 'inflation-form'
-  | 'sip-step-up-form'
-  | 'swp-form';
+  | 'emi-form'
+  | 'compound-interest-form';
 
 declare type EmailType =
   | `calc-${Calculators}`

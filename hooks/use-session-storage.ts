@@ -51,9 +51,9 @@ export function useGetSessionStorage<T extends EmailData = EmailData>(
     return null;
   }
 
-  const storageKey = `react-hook-form-persist:${key}`;
-
-  const storedValue = sessionStorage.getItem(storageKey);
+  const storedValue =
+    sessionStorage.getItem(key) ||
+    sessionStorage.getItem(`react-hook-form-persist:${key}`);
   if (!storedValue) {
     return null;
   }

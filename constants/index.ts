@@ -8,6 +8,8 @@ import {
   IconTrendingUp,
   IconStairsUp,
   IconCash,
+  IconBuildingBank,
+  IconPercentage,
 } from '@tabler/icons-react';
 
 export const navlinks = [
@@ -422,62 +424,57 @@ export const services = [
 
 export const calculators = [
   {
-    icon: IconMathSymbols,
-    title: 'Education Calculator',
-    description:
-      'Calculate education costs, plan for future learning expenses, and compare financial aid options with ease.',
-  },
-  {
     icon: IconChartInfographic,
     title: 'Lumpsum Calculator',
     description:
-      'Calculate your total investment returns, assess risks, and optimize your portfolio for maximum gains.',
+      'Calculate returns on your one-time mutual fund / wealth investment with year-by-year projections.',
   },
   {
     icon: IconTimeline,
-    title: 'SIP Calculator',
+    title: 'SIP Returns Calculator',
     description:
-      'Plan your investments with our SIP Calculator, allowing you to estimate future returns and make informed financial decisions effortlessly.',
-  },
-  {
-    icon: IconTimeDuration45,
-    title: 'Retirement Planning',
-    description:
-      'Plan your retirement with our comprehensive tools, ensuring you have the resources needed for a fulfilling future.',
-  },
-  {
-    icon: IconHourglass,
-    title: 'Cost of Delay',
-    description:
-      'See the financial impact of delaying your Systematic Investment Plan and calculate the wealth gap.',
+      'Plan disciplined monthly investments with compounding growth and annual step-up increments.',
   },
   {
     icon: IconTarget,
-    title: 'Goal Planner',
+    title: 'Goal Setting Calculator',
     description:
-      'Estimate the monthly SIP required to achieve your financial milestones within your target timeframe.',
+      'Estimate the lumpsum needed to achieve your financial milestones with inflation adjustment.',
+  },
+  {
+    icon: IconTimeDuration45,
+    title: 'Retirement Fund Calculator',
+    description:
+      'Calculate your target retirement corpus, future living expenses, and required monthly accumulation.',
+  },
+  {
+    icon: IconMathSymbols,
+    title: 'Education Calculator',
+    description:
+      'Plan for higher education costs, account for college inflation, and fund your child’s future.',
+  },
+  {
+    icon: IconBuildingBank,
+    title: 'EMI Calculator',
+    description:
+      'Calculate monthly loan EMIs, total interest burden, and loan amortization schedules effortlessly.',
+  },
+  {
+    icon: IconPercentage,
+    title: 'Compound Interest Calculator',
+    description:
+      'Visualize exponential wealth growth across annual, semi-annual, quarterly, and monthly compounding.',
   },
   {
     icon: IconTrendingUp,
     title: 'Inflation Calculator',
     description:
-      'See how inflation erodes the purchasing power of your money and calculate future inflated costs.',
-  },
-  {
-    icon: IconStairsUp,
-    title: 'SIP Step-Up Calculator',
-    description:
-      'Estimate the growth of a Systematic Investment Plan where your monthly contribution increases annually.',
-  },
-  {
-    icon: IconCash,
-    title: 'SWP Calculator',
-    description:
-      'Plan regular withdrawals from a corpus and estimate how long your retirement funds will last.',
+      'See how inflation erodes purchasing power and calculate the future cost of living expenses.',
   },
 ] as const;
 
 export type Calculator = (typeof calculators)[number];
+
 
 export const consultationTypes = [
   'retirement-planning',

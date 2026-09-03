@@ -63,7 +63,7 @@ export const NavigationSheet = () => {
         />
         <div className="mt-8">
           <Link
-            href="https://m.assetplus.in/#!/signup"
+            href="https://www.assetplus.in/mfd/ascentwealth"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setIsOpen(false)}

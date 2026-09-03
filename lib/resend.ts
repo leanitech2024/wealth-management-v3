@@ -9,11 +9,10 @@ import LumpSumCalculationEmail from '@/emails/lumpsum-calculation-email';
 import RetirementCalculationEmail from '@/emails/retirement-calculation-email';
 import RiskProfileAnalysisEmail from '@/emails/risk-profile-analysis-email';
 import SIPCalculationEmail from '@/emails/sip-calculation-email';
-import CostOfDelayCalculationEmail from '@/emails/cost-of-delay-calculation-email';
 import GoalPlannerCalculationEmail from '@/emails/goal-planner-calculation-email';
 import InflationCalculationEmail from '@/emails/inflation-calculation-email';
-import SIPStepUpCalculationEmail from '@/emails/sip-step-up-calculation-email';
-import SWPCalculationEmail from '@/emails/swp-calculation-email';
+import EmiCalculationEmail from '@/emails/emi-calculation-email';
+import CompoundInterestCalculationEmail from '@/emails/compound-interest-calculation-email';
 import { EmailData } from '@/types/email-data-type';
 import {
   ConsultationFormValues,
@@ -22,11 +21,10 @@ import {
   RetirementCalculatorValues,
   RiskProfileFormValues,
   SIPCalculatorValues,
-  CostOfDelayCalculatorValues,
   GoalPlannerCalculatorValues,
   InflationCalculatorValues,
-  SIPStepUpCalculatorValues,
-  SWPCalculatorValues,
+  EmiCalculatorValues,
+  CompoundInterestCalculatorValues,
 } from './zod.schemas';
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -221,34 +219,6 @@ export async function sendEmail(props: SendEmailProps) {
         return data;
       }
 
-      case 'cost-of-delay-form': {
-        const html = await render(
-          CostOfDelayCalculationEmail({
-            ...(props.data as CostOfDelayCalculatorValues),
-            phone: props.phone,
-          }),
-        );
-        const text = toPlainText(html);
-        const { data, error } = await resend.emails.send({
-          from: 'Ascent Wealth <info@ascentwealth.in>',
-          to: [props.to],
-          subject: 'Your Cost of Delay Analysis - Start Early, Build Wealth! ⏳',
-          html,
-          text,
-          react: CostOfDelayCalculationEmail({
-            ...(props.data as CostOfDelayCalculatorValues),
-            phone: props.phone,
-          }),
-        });
-
-        if (error) {
-          throw new Error(
-            `Failed to send cost of delay calculation email: ${error.message}`,
-          );
-        }
-
-        return data;
-      }
 
       case 'goal-planner-form': {
         const html = await render(
@@ -308,10 +278,11 @@ export async function sendEmail(props: SendEmailProps) {
         return data;
       }
 
-      case 'sip-step-up-form': {
+
+      case 'emi-form': {
         const html = await render(
-          SIPStepUpCalculationEmail({
-            ...(props.data as SIPStepUpCalculatorValues),
+          EmiCalculationEmail({
+            ...(props.data as EmiCalculatorValues),
             phone: props.phone,
           }),
         );
@@ -319,28 +290,28 @@ export async function sendEmail(props: SendEmailProps) {
         const { data, error } = await resend.emails.send({
           from: 'Ascent Wealth <info@ascentwealth.in>',
           to: [props.to],
-          subject: 'Your SIP Step-Up Growth Model - Accelerate Wealth! 🚀',
+          subject: 'Your Loan EMI & Repayment Analysis - Ascent Wealth 💳',
           html,
           text,
-          react: SIPStepUpCalculationEmail({
-            ...(props.data as SIPStepUpCalculatorValues),
+          react: EmiCalculationEmail({
+            ...(props.data as EmiCalculatorValues),
             phone: props.phone,
           }),
         });
 
         if (error) {
           throw new Error(
-            `Failed to send SIP step-up calculation email: ${error.message}`,
+            `Failed to send EMI calculation email: ${error.message}`,
           );
         }
 
         return data;
       }
 
-      case 'swp-form': {
+      case 'compound-interest-form': {
         const html = await render(
-          SWPCalculationEmail({
-            ...(props.data as SWPCalculatorValues),
+          CompoundInterestCalculationEmail({
+            ...(props.data as CompoundInterestCalculatorValues),
             phone: props.phone,
           }),
         );
@@ -348,18 +319,19 @@ export async function sendEmail(props: SendEmailProps) {
         const { data, error } = await resend.emails.send({
           from: 'Ascent Wealth <info@ascentwealth.in>',
           to: [props.to],
-          subject: 'Your Systematic Withdrawal Cash Flow Roadmap - Secure Income! 💰',
+          subject:
+            'Your Exponential Wealth Compounding Analysis - Ascent Wealth 📈',
           html,
           text,
-          react: SWPCalculationEmail({
-            ...(props.data as SWPCalculatorValues),
+          react: CompoundInterestCalculationEmail({
+            ...(props.data as CompoundInterestCalculatorValues),
             phone: props.phone,
           }),
         });
 
         if (error) {
           throw new Error(
-            `Failed to send SWP calculation email: ${error.message}`,
+            `Failed to send compound interest calculation email: ${error.message}`,
           );
         }
 
@@ -369,6 +341,7 @@ export async function sendEmail(props: SendEmailProps) {
       default:
         throw new Error('Invalid email type');
     }
+
   } catch (error) {
     console.log('❌❌❌ Internal Server Error: Failed to send email', error);
     // throw new Error('❌❌❌ Internal Server Error: Failed to send email');

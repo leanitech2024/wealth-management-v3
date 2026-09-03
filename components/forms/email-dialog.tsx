@@ -64,9 +64,27 @@ export default function EmailDialog(props: EmailDialogProps) {
   };
 
   const onSubmit: SubmitHandler<EmailFormValues> = (values) => {
-    // console.log('Form data:', values);
+    let dataToSend = storedValues;
+    if (!dataToSend && sessionStorageKey && typeof window !== 'undefined') {
+      const raw =
+        sessionStorage.getItem(sessionStorageKey) ||
+        sessionStorage.getItem(`react-hook-form-persist:${sessionStorageKey}`);
+      if (raw) {
+        try {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object' && '_savedAt' in parsed) {
+            const { _savedAt, ...rest } = parsed;
+            dataToSend = rest as any;
+          } else {
+            dataToSend = parsed;
+          }
+        } catch (e) {
+          console.error(e);
+        }
+      }
+    }
 
-    if (!storedValues || !sessionStorageKey) {
+    if (!dataToSend || !sessionStorageKey) {
       toast.error('No calculation data found to send.', {
         description: 'Please complete the calculation form first.',
       });
@@ -74,13 +92,11 @@ export default function EmailDialog(props: EmailDialogProps) {
     }
 
     startTransition(async () => {
-      // await new Promise((resolve) => setTimeout(resolve, 2000)); // Simulate async operation
-
       const result = await sendEmail({
         type: sessionStorageKey,
         to: values.email,
         phone: values.phone,
-        data: storedValues,
+        data: dataToSend,
       });
 
       if (!result) {
