@@ -12,7 +12,7 @@ export default function Logo({ className }: LogoProps) {
   return (
     <>
       <Image
-        src="/Ascent Wealth Logo.svg"
+        src="/Ascent_Wealth_Light_Version_Logo.webp"
         alt="Ascent Wealth"
         className={`${logoClass} dark:hidden`}
         width={1920}
@@ -20,7 +20,7 @@ export default function Logo({ className }: LogoProps) {
         priority
       />
       <Image
-        src="/Ascent Wealth Dark Version Logo.svg"
+        src="/Ascent_Wealth_Dark_Version_Logo.webp"
         alt="Ascent Wealth"
         className={`${logoClass} hidden dark:block`}
         width={1920}

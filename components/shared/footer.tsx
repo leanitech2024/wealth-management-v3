@@ -8,7 +8,7 @@ import {
   TwitterIcon,
 } from 'lucide-react';
 // import LogoSVG from './logo-svg';
-import LogoSVG1 from './logo-svg1';
+import Logo from './logo';
 // import a from "next/link";
 
 const footerLinks = [
@@ -63,7 +63,7 @@ export default function Footer() {
                 />
               </svg> */}
               {/* <LogoSVG /> */}
-              <LogoSVG1 />
+              <Logo className="w-auto h-[60px]" />
 
               <ul className='mt-6 flex items-center gap-4 flex-wrap'>
                 {footerLinks.map(({ title, href }) => (
