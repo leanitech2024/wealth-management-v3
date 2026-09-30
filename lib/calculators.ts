@@ -378,72 +378,163 @@ export function calculateEducation(
 }
 
 // -------------------------------------------------------------
-// 6. EMI CALCULATOR
+// 6. SWP CALCULATOR
 // -------------------------------------------------------------
-export type EmiResult = {
-  loanAmount: number;
-  monthlyEmi: number;
-  totalInterest: number;
-  totalPayable: number;
+export type SwpResult = {
+  totalInvested: number;
+  totalWithdrawal: number;
+  finalPortfolioBalance: number;
+  isDepleted: boolean;
   yearlyData: {
     year: number;
     label: string;
-    principalRepaid: number;
-    interestPaid: number;
-    balanceRemaining: number;
+    portfolioBalance: number;
   }[];
 };
 
-export function calculateEmi(
-  loanAmount: number,
-  annualInterestRate: number,
-  tenureYears: number,
-): EmiResult {
-  const principal = Math.max(0, loanAmount);
-  const rate = Math.max(0.1, annualInterestRate);
-  const years = Math.max(1, Math.min(40, tenureYears));
-
-  const monthlyRate = rate / 1200;
-  const totalMonths = years * 12;
-
-  const emiNumerator = principal * monthlyRate * Math.pow(1 + monthlyRate, totalMonths);
-  const emiDenominator = Math.pow(1 + monthlyRate, totalMonths) - 1;
-  const monthlyEmi = emiDenominator > 0 ? Math.round(emiNumerator / emiDenominator) : 0;
-
-  const totalPayable = monthlyEmi * totalMonths;
-  const totalInterest = Math.max(0, totalPayable - principal);
-
-  // Amortization schedule by year
-  let balance = principal;
-  let cumPrincipal = 0;
-  let cumInterest = 0;
+export function calculateSWP(
+  totalInvestment: number,
+  withdrawalPerMonth: number,
+  expectedReturns: number,
+  withdrawalPeriod: number,
+  waitingPeriodBeforeWithdrawal: number,
+  withdrawalIncreaseRate: number,
+): SwpResult {
+  let corpus = totalInvestment;
+  for (let y = 1; y <= waitingPeriodBeforeWithdrawal; y++) {
+    corpus = corpus * (1 + expectedReturns / 100);
+  }
+  
+  const initialCorpusAfterWaiting = corpus;
   const yearlyData = [];
-
-  for (let y = 1; y <= years; y++) {
-    for (let m = 1; m <= 12; m++) {
-      const interestForMonth = balance * monthlyRate;
-      const principalForMonth = Math.min(balance, monthlyEmi - interestForMonth);
-      balance = Math.max(0, balance - principalForMonth);
-      cumPrincipal += principalForMonth;
-      cumInterest += interestForMonth;
-    }
+  if (waitingPeriodBeforeWithdrawal > 0) {
     yearlyData.push({
-      year: y,
-      label: `Year ${y}`,
-      principalRepaid: Math.round(cumPrincipal),
-      interestPaid: Math.round(cumInterest),
-      balanceRemaining: Math.round(balance),
+      year: 0,
+      label: 'Year 0',
+      portfolioBalance: Math.round(initialCorpusAfterWaiting)
     });
   }
 
+  const rMonthly = expectedReturns / 1200;
+  let currentWithdrawal = withdrawalPerMonth;
+  let totalWithdrawal = 0;
+  let u = 0;
+  let isDepleted = false;
+
+  for (let m = 1; m <= withdrawalPeriod * 12; m++) {
+    const corpusMinusWithdrawal = corpus - currentWithdrawal;
+    const corpusWithReturn = (m === 1 ? corpusMinusWithdrawal : u) * (1 + rMonthly);
+    
+    totalWithdrawal += currentWithdrawal;
+    
+    if (m % 12 === 0 && withdrawalIncreaseRate > 0) {
+      currentWithdrawal += currentWithdrawal * (withdrawalIncreaseRate / 100);
+    }
+    
+    u = corpusWithReturn - currentWithdrawal;
+    
+    if (corpusWithReturn < 0 && !isDepleted) {
+      isDepleted = true;
+    }
+
+    if (m % 12 === 0 || m === withdrawalPeriod * 12) {
+      yearlyData.push({
+        year: m / 12,
+        label: `Year ${m / 12}`,
+        portfolioBalance: Math.max(0, Math.round(corpusWithReturn))
+      });
+    }
+  }
+
+  let finalPortfolioBalance = yearlyData.length > 0 ? yearlyData[yearlyData.length - 1].portfolioBalance : 0;
+  if (isDepleted) {
+    finalPortfolioBalance = 0;
+  }
+
   return {
-    loanAmount: principal,
-    monthlyEmi,
-    totalInterest,
-    totalPayable,
-    yearlyData,
+    totalInvested: totalInvestment,
+    totalWithdrawal: Math.round(totalWithdrawal),
+    finalPortfolioBalance,
+    isDepleted,
+    yearlyData
   };
 }
+
+// -------------------------------------------------------------
+// 7. REGULAR INCOME CALCULATOR
+// -------------------------------------------------------------
+export type RegularIncomeResult = {
+  portfolioValueAtEnd: number;
+  portfolioBeforeWithdrawal: number;
+  monthlyWithdrawal: number;
+  durationText: string;
+};
+
+export function calculateRegularIncome(
+  sipAmount: number,
+  lumpsumAmount: number,
+  investmentPeriod: number,
+  expectedReturnRate: number,
+  waitingPeriodBeforeWithdrawal: number,
+  expectedReturnInWithdrawalPeriod: number,
+  mode: 'NO_OF_YEARS' | 'MONTHLY_SWP',
+  withdrawalYears: number = 20,
+  monthlyWithdrawalRequirement: number = 25000
+): RegularIncomeResult {
+  const rInvestMonthly = expectedReturnRate / 1200;
+  const nInvestMonths = investmentPeriod * 12;
+
+  let sipFV = 0;
+  if (rInvestMonthly > 0) {
+    sipFV = sipAmount * ((Math.pow(1 + rInvestMonthly, nInvestMonths) - 1) / rInvestMonthly) * (1 + rInvestMonthly);
+  } else {
+    sipFV = sipAmount * nInvestMonths;
+  }
+
+  const lumpsumFV = lumpsumAmount * Math.pow(1 + expectedReturnRate / 100, investmentPeriod);
+  
+  const portfolioValueAtEnd = sipFV + lumpsumFV;
+  const portfolioBeforeWithdrawal = portfolioValueAtEnd * Math.pow(1 + expectedReturnRate / 100, waitingPeriodBeforeWithdrawal);
+
+  let monthlyWithdrawal = 0;
+  let durationText = '';
+  
+  if (mode === 'NO_OF_YEARS') {
+    const rWithdrawMonthly = expectedReturnInWithdrawalPeriod / 1200;
+    if (rWithdrawMonthly > 0) {
+      const temp = Math.pow(1 + rWithdrawMonthly, withdrawalYears * 12);
+      monthlyWithdrawal = (portfolioBeforeWithdrawal * temp * rWithdrawMonthly) / (temp - 1);
+    } else {
+      monthlyWithdrawal = portfolioBeforeWithdrawal / (withdrawalYears * 12);
+    }
+  } else {
+    let corpus = portfolioBeforeWithdrawal;
+    let months = 0;
+    const maxMonths = 1200;
+    while (corpus > 0 && months < maxMonths) {
+      let nextCorpus = (corpus - monthlyWithdrawalRequirement) * (1 + expectedReturnInWithdrawalPeriod / 1200);
+      if (nextCorpus >= corpus) {
+        durationText = 'For Life';
+        break;
+      }
+      corpus = nextCorpus;
+      months++;
+    }
+    if (!durationText) {
+      const y = Math.floor(months / 12);
+      const m = months % 12;
+      durationText = `${y} Years ${m} Months`;
+    }
+  }
+
+  return {
+    portfolioValueAtEnd: Math.round(portfolioValueAtEnd),
+    portfolioBeforeWithdrawal: Math.round(portfolioBeforeWithdrawal),
+    monthlyWithdrawal: Math.round(monthlyWithdrawal),
+    durationText
+  };
+}
+
 
 // -------------------------------------------------------------
 // 7. COMPOUND INTEREST CALCULATOR

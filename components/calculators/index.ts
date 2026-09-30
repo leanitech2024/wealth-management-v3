@@ -4,6 +4,7 @@ export * from './sip-returns-calculator';
 export * from './goal-setting-calculator';
 export * from './retirement-fund-calculator';
 export * from './education-calculator';
-export * from './emi-calculator';
 export * from './compound-interest-calculator';
 export * from './inflation-calculator';
+export * from './swp-calculator';
+export * from './regular-income-calculator';

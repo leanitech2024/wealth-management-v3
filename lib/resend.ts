@@ -11,8 +11,9 @@ import RiskProfileAnalysisEmail from '@/emails/risk-profile-analysis-email';
 import SIPCalculationEmail from '@/emails/sip-calculation-email';
 import GoalPlannerCalculationEmail from '@/emails/goal-planner-calculation-email';
 import InflationCalculationEmail from '@/emails/inflation-calculation-email';
-import EmiCalculationEmail from '@/emails/emi-calculation-email';
 import CompoundInterestCalculationEmail from '@/emails/compound-interest-calculation-email';
+import SwpCalculationEmail from '@/emails/swp-calculation-email';
+import RegularIncomeCalculationEmail from '@/emails/regular-income-calculation-email';
 import { EmailData } from '@/types/email-data-type';
 import {
   ConsultationFormValues,
@@ -23,8 +24,9 @@ import {
   SIPCalculatorValues,
   GoalPlannerCalculatorValues,
   InflationCalculatorValues,
-  EmiCalculatorValues,
   CompoundInterestCalculatorValues,
+  SwpCalculatorValues,
+  RegularIncomeCalculatorValues,
 } from './zod.schemas';
 
 const resendApiKey = process.env.RESEND_API_KEY;
@@ -278,11 +280,10 @@ export async function sendEmail(props: SendEmailProps) {
         return data;
       }
 
-
-      case 'emi-form': {
+      case 'swp-form': {
         const html = await render(
-          EmiCalculationEmail({
-            ...(props.data as EmiCalculatorValues),
+          SwpCalculationEmail({
+            ...(props.data as SwpCalculatorValues),
             phone: props.phone,
           }),
         );
@@ -290,23 +291,55 @@ export async function sendEmail(props: SendEmailProps) {
         const { data, error } = await resend.emails.send({
           from: 'Ascent Wealth <info@ascentwealth.in>',
           to: [props.to],
-          subject: 'Your Loan EMI & Repayment Analysis - Ascent Wealth 💳',
+          subject: 'Your Systematic Withdrawal Plan (SWP) Projection 💸',
           html,
           text,
-          react: EmiCalculationEmail({
-            ...(props.data as EmiCalculatorValues),
+          react: SwpCalculationEmail({
+            ...(props.data as SwpCalculatorValues),
             phone: props.phone,
           }),
         });
 
         if (error) {
           throw new Error(
-            `Failed to send EMI calculation email: ${error.message}`,
+            `Failed to send swp calculation email: ${error.message}`,
           );
         }
 
         return data;
       }
+
+      case 'regular-income-form': {
+        const html = await render(
+          RegularIncomeCalculationEmail({
+            ...(props.data as RegularIncomeCalculatorValues),
+            phone: props.phone,
+          }),
+        );
+        const text = toPlainText(html);
+        const { data, error } = await resend.emails.send({
+          from: 'Ascent Wealth <info@ascentwealth.in>',
+          to: [props.to],
+          subject: 'Your Regular Income Plan - Passive Income Strategy 🏦',
+          html,
+          text,
+          react: RegularIncomeCalculationEmail({
+            ...(props.data as RegularIncomeCalculatorValues),
+            phone: props.phone,
+          }),
+        });
+
+        if (error) {
+          throw new Error(
+            `Failed to send regular income calculation email: ${error.message}`,
+          );
+        }
+
+        return data;
+      }
+
+
+
 
       case 'compound-interest-form': {
         const html = await render(

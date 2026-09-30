@@ -27,9 +27,10 @@ import { SipReturnsCalculator } from '@/components/calculators/sip-returns-calcu
 import { GoalSettingCalculator } from '@/components/calculators/goal-setting-calculator';
 import { RetirementFundCalculator } from '@/components/calculators/retirement-fund-calculator';
 import { EducationCalculator } from '@/components/calculators/education-calculator';
-import { EmiCalculator } from '@/components/calculators/emi-calculator';
 import { CompoundInterestCalculator } from '@/components/calculators/compound-interest-calculator';
 import { InflationCalculator } from '@/components/calculators/inflation-calculator';
+import { SwpCalculator } from '@/components/calculators/swp-calculator';
+import { RegularIncomeCalculator } from '@/components/calculators/regular-income-calculator';
 
 import EmailDialog from './email-dialog';
 
@@ -104,9 +105,16 @@ export default function CaclculatorDrawerDialog(
             onUpdateSessionKey={setSessionStorageKey}
           />
         );
-      case 'EMI Calculator':
+      case 'SWP Calculator':
         return (
-          <EmiCalculator
+          <SwpCalculator
+            onOpenEmail={setIsEmailDialogOpen}
+            onUpdateSessionKey={setSessionStorageKey}
+          />
+        );
+      case 'Regular Income Calculator':
+        return (
+          <RegularIncomeCalculator
             onOpenEmail={setIsEmailDialogOpen}
             onUpdateSessionKey={setSessionStorageKey}
           />

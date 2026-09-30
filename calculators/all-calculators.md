@@ -240,50 +240,93 @@ The total value is the sum of all these individually grown installments. With st
 
 ---
 
-## 6. EMI Calculator
+## 6. SWP Calculator (Systematic Withdrawal Plan)
 
-**What it does:** Calculates the monthly instalment (EMI) for a loan, along with total interest and a repayment schedule.
+**What it does:** Shows how your investment corpus grows and depletes over time when you make regular monthly withdrawals, with options for a waiting period and annual step-up in withdrawal amounts.
 
 ### What you enter
 
-| Input                | Description                           | Range                  |
-| -------------------- | ------------------------------------- | ---------------------- |
-| Loan Amount          | The total loan you're taking          | ₹50,000 – ₹5,00,00,000 |
-| Interest Rate (p.a.) | Annual interest charged by the lender | 1% – 25%               |
-| Loan Tenure          | How many years to repay               | 1 – 35 years           |
+| Input | Description | Range | Default |
+| --- | --- | --- | --- |
+| Total Investment | The initial lump sum amount invested | ₹10,000 – ₹20,00,00,000 | ₹50,00,000 |
+| Withdrawal Per Month | The amount you want to withdraw every month | ₹1,000 – ₹10,00,000 | ₹25,000 |
+| Expected Rate of Returns | Yearly growth rate you expect on the corpus | 1% – 30% | 12% |
+| How Long You Want To Withdraw | Total years you plan to make withdrawals | 1 – 50 years | 10 years |
+| Waiting Period Before Withdrawal | Years you let the corpus grow before withdrawing | 0 – 30 years | 1 year |
+| Increase Rate of Withdrawal Amount | Annual percentage step-up in withdrawal amount | 0% – 30% | 5% |
 
 ### How it works
 
-**EMI Calculation (Standard Reducing Balance Method):**
+**Step 1 — Waiting Period Growth:**
+Before any withdrawals begin, the initial investment grows for the duration of the waiting period.
+> **Starting Corpus = Total Investment × (1 + Expected Returns / 100) ^ Waiting Period**
 
-> **EMI = P × r × (1 + r)^n ÷ [(1 + r)^n − 1]**
->
-> Where:
->
-> - P = Loan Amount
-> - r = Monthly Interest Rate (Annual Rate ÷ 1200)
-> - n = Total number of months (Years × 12)
+**Step 2 — Monthly SWP Simulation:**
+Every month, the withdrawal amount is deducted from the corpus, and the remaining balance grows by the monthly return rate `(Expected Returns / 12)`.
+> **Monthly Return Rate = Expected Returns / 1200**
+> **End of Month Balance = (Previous Balance − Monthly Withdrawal) × (1 + Monthly Return Rate)**
 
-**Total payable** = EMI × Total Months
+If an annual increase rate (step-up) is specified, the monthly withdrawal amount increases by that percentage every 12 months.
+> **Year 2 Monthly Withdrawal = Year 1 Withdrawal × (1 + Increase Rate / 100)**
 
-**Total interest** = Total Payable − Loan Amount
-
-The calculator also generates a **year-by-year amortization schedule** showing how much of each year's payments go towards the loan principal vs interest.
-
-**Example:** Loan of ₹25,00,000 at 8.5% for 20 years:
-
-- Monthly EMI: ≈ ₹21,700
-- Total Interest: ≈ ₹27,08,000
-- Total Amount Paid: ≈ ₹52,08,000
+**Depletion Warning:**
+If the corpus runs out before the desired withdrawal period ends, the calculator warns you and performs a binary search to find the **Sustainable Monthly Withdrawal** — the exact amount you can safely withdraw so the corpus lasts exactly the requested number of years.
 
 ### What you get back
 
-| Output             | Meaning                                                        |
-| ------------------ | -------------------------------------------------------------- |
-| Monthly EMI        | The fixed amount you pay every month                           |
-| Total Interest     | Total extra money paid as interest over the loan               |
-| Total Amount       | EMI × Total Months (Principal + Interest)                      |
-| Year-by-year chart | Bar chart showing cumulative principal repaid vs interest paid |
+| Output | Meaning |
+| --- | --- |
+| Total Invested | The amount you put in initially |
+| Total Withdrawal | Sum of all money withdrawn (prepended with `~` if corpus depletes early) |
+| Final Portfolio Balance | Remaining corpus value at the end of the period (₹0 if depleted) |
+| Year-by-year chart | Bar chart showing the remaining portfolio balance each year |
+
+---
+
+## 7. Regular Income Calculator
+
+**What it does:** Calculates either how much monthly income you can generate for a set number of years, or how long your money will last given a specific monthly withdrawal requirement, based on a combination of SIP and lumpsum investments.
+
+### What you enter
+
+| Input | Description | Range | Default |
+| --- | --- | --- | --- |
+| SIP | Monthly investment during accumulation phase | ₹10,000 – ₹2,00,000 | ₹10,000 |
+| Lumpsum | One-time investment during accumulation phase | ₹10,000 – ₹2,00,00,000 | ₹25,00,000 |
+| Investment Period | Years you will invest before the waiting period | 1 – 30 years | 20 years |
+| Expected Returns | Yearly return rate during investment and waiting | 1% – 30% | 12% |
+| Waiting Period Before Withdrawal | Years corpus grows after investing stops | 0 – 30 years | 10 years |
+| Exp Returns In Withdrawal Period | Yearly return rate during the withdrawal phase | 1% – 30% | 5% |
+
+**Depending on the mode selected:**
+- **Mode 1 (No. of Years):** You enter `How Long You Want To Withdraw` (1 – 30 years, Default: 20 years)
+- **Mode 2 (Monthly SWP):** You enter `Monthly Withdrawal` (₹1,000 – ₹10,00,000, Default: ₹25,000)
+
+### How it works
+
+**Step 1 — Accumulation Phase:**
+Both the SIP and lumpsum grow during the Investment Period.
+> **Corpus at End of Investment = Future Value of SIP + Future Value of Lumpsum**
+
+**Step 2 — Waiting Phase:**
+The accumulated corpus grows for the waiting period before withdrawals start.
+> **Portfolio Before Withdrawal = Corpus × (1 + Expected Returns / 100) ^ Waiting Period**
+
+**Step 3 — Mode 1: No. of Years (Calculate Monthly Withdrawal):**
+Using the Present Value of Annuity formula, it calculates the fixed monthly withdrawal possible over the requested years so the corpus reaches exactly zero at the end.
+
+**Step 3 — Mode 2: Monthly SWP (Calculate Duration):**
+It simulates month-by-month withdrawals. If the monthly return earned by the corpus exceeds the withdrawal amount, it outputs **"For Life"**. Otherwise, it counts the months until the corpus hits zero.
+
+### What you get back
+
+| Output | Meaning |
+| --- | --- |
+| Portfolio Value at end of Investment | Accumulated value after your SIPs and Lumpsum |
+| Portfolio Value before withdrawal | Value after the waiting period finishes |
+| Monthly Withdrawal (Mode 1) | The monthly income you can take for the chosen years |
+| Duration (Mode 2) | How long your money will last ("For Life" or X years Y months) |
+| Year-by-year chart | Chart showing accumulation, waiting, and depletion phases |
 
 ---
 

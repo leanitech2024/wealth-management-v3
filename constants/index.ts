@@ -455,9 +455,15 @@ export const calculators = [
   },
   {
     icon: IconBuildingBank,
-    title: 'EMI Calculator',
+    title: 'SWP Calculator',
     description:
-      'Calculate monthly loan EMIs, total interest burden, and loan amortization schedules effortlessly.',
+      'Plan your systematic withdrawals, visualize corpus depletion, and ensure your money lasts.',
+  },
+  {
+    icon: IconPercentage,
+    title: 'Regular Income Calculator',
+    description:
+      'Determine how much monthly income you can generate or how long your corpus will last.',
   },
   {
     icon: IconPercentage,
@@ -490,11 +496,11 @@ export type ConsultationType = (typeof consultationTypes)[number];
 
 export const seo = {
   title:
-    'Best Financial Advisor in Chennai | Ascent Wealth',
+    'Best Mutual Funds & SIF Distributor in Chennai | Ascent Wealth',
   description:
-    'Looking for the best financial advisor in Chennai? Expert financial consultant services for investment planning, wealth management, and retirement planning.',
+    'Looking for the Best Mutual Funds & SIF Distributor in Chennai? Expert financial consultant services for investment planning, wealth management, and retirement planning.',
   keywords: [
-    'Best Financial Advisor in Chennai',
+    'Best Mutual Funds & SIF Distributor in Chennai',
     'Financial Advisor in Chennai',
     'Financial Consultant in Chennai ',
     'Retirement planning advisor',

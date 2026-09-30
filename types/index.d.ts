@@ -5,7 +5,8 @@ declare type Calculators =
   | 'retirement-form'
   | 'goal-planner-form'
   | 'inflation-form'
-  | 'emi-form'
+  | 'swp-form'
+  | 'regular-income-form'
   | 'compound-interest-form';
 
 declare type EmailType =

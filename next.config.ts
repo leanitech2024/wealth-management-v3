@@ -13,6 +13,7 @@ const nextConfig: NextConfig = {
     // turbopackFileSystemCacheForDev: isDev,
     webVitalsAttribution: ['CLS', 'LCP'],
   },
+  outputFileTracingRoot: process.cwd(),
   turbopack: {
     root: process.cwd(),
   },

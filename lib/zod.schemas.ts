@@ -245,11 +245,27 @@ export const inflationSchema = z.object({
 });
 
 
-export const emiSchema = z.object({
+export const swpSchema = z.object({
   name: z.string().optional(),
-  loanAmount: z.string().min(1, 'Loan amount is required'),
-  interestRate: z.number().min(0.1, 'Interest rate must be at least 0.1%').max(30, 'Interest rate must be at most 30%'),
-  tenureYears: z.number().min(1, 'Tenure must be at least 1 year').max(40, 'Tenure must be at most 40 years'),
+  totalInvestment: z.string().min(1, 'Total investment is required'),
+  withdrawalPerMonth: z.string().min(1, 'Withdrawal per month is required'),
+  expectedReturns: z.number().min(1).max(30),
+  withdrawalPeriod: z.number().min(1).max(50),
+  waitingPeriod: z.number().min(0).max(30),
+  increaseRate: z.number().min(0).max(30),
+});
+
+export const regularIncomeSchema = z.object({
+  name: z.string().optional(),
+  sipAmount: z.string().min(1, 'SIP amount is required'),
+  lumpsumAmount: z.string().min(1, 'Lumpsum amount is required'),
+  investmentPeriod: z.number().min(1).max(30),
+  expectedReturnRate: z.number().min(1).max(30),
+  waitingPeriod: z.number().min(0).max(30),
+  expectedReturnInWithdrawal: z.number().min(1).max(30),
+  withdrawalYears: z.number().min(1).max(30),
+  monthlyWithdrawal: z.string().min(1, 'Monthly withdrawal is required'),
+  mode: z.enum(['NO_OF_YEARS', 'MONTHLY_SWP']),
 });
 
 export const compoundInterestSchema = z.object({
@@ -272,7 +288,8 @@ export type WeddingCalculatorValues = z.infer<typeof weddingSchema>;
 export type VacationCalculatorValues = z.infer<typeof vacationSchema>;
 export type GoalPlannerCalculatorValues = z.infer<typeof goalPlannerSchema>;
 export type InflationCalculatorValues = z.infer<typeof inflationSchema>;
-export type EmiCalculatorValues = z.infer<typeof emiSchema>;
+export type SwpCalculatorValues = z.infer<typeof swpSchema>;
+export type RegularIncomeCalculatorValues = z.infer<typeof regularIncomeSchema>;
 export type CompoundInterestCalculatorValues = z.infer<typeof compoundInterestSchema>;
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;

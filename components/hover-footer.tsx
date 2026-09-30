@@ -21,7 +21,7 @@ import { Separator } from './ui/separator';
 // Footer link data
 const footerLinks = [
   {
-    title: 'Products',
+    title: 'Services',
     links: [
       {
         id: crypto.randomUUID(),
@@ -319,9 +319,9 @@ export function HoverFooter() {
       </div>
 
       {/* Text hover effect */}
-      <div className=''>
+      {/* <div className=''>
         <LazyTextHoverEffect text='Ascent Wealth' className='z-50' />
-      </div>
+      </div> */}
 
       <FooterBackgroundGradient />
     </footer>
