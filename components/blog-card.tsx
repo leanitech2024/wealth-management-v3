@@ -1,6 +1,6 @@
 'use client';
 import { PostValues } from '@/content-collections';
-// import Image from 'next/image';
+import Image from 'next/image';
 import Link from 'next/link';
 // import Image from './blur-image';
 import CloudinaryImage from './shared/cloudinary-loader';
@@ -16,11 +16,17 @@ type BlogCardProps = {
 export default function BlogCard(props: BlogCardProps) {
   const { post } = props;
 
+  const isCloudinary =
+    typeof post.image === 'string' &&
+    post.image.includes('res.cloudinary.com') &&
+    post.image.includes('/v');
+
   function splitUrl(url: string) {
     // https://res.cloudinary.com/dxgckfhti/image/upload/v1768552174/blog_cover_54_xp6ma0.jpg
 
     // cut the url from here /v1768552174
     // take only blog_cover_54_xp6ma0.jpg
+    if (!url.includes('/v')) return url;
     const parts = url.split('/v')[1].split('/');
     return parts.slice(1).join('/');
   }
@@ -28,27 +34,24 @@ export default function BlogCard(props: BlogCardProps) {
   return (
     <Card className='shadow-none py-0 gap-3 h-full w-full flex flex-col'>
       <CardHeader className='p-2 pb-0'>
-        <div className='aspect-video w-full h-full bg-muted rounded-lg overflow-hidden'>
-          {/* <Image
-            src={post.image}
-            alt={post.title}
-            className='object-cover w-full h-full rounded-lg'
-            width={500}
-            height={500}
-            // priority={i < 3}
-          /> */}
-          <CloudinaryImage
-            src={splitUrl(post.image)}
-            width={500}
-            quality={50}
-            className='object-contain w-full h-full rounded-lg'
-            // priority={i < 3}
-          />
-          {/* <Image
-            src={post.image}
-            alt={post.title}
-            className='object-cover w-full h-full rounded-lg'
-          /> */}
+        <div className='aspect-video w-full h-full bg-muted rounded-lg overflow-hidden relative'>
+          {isCloudinary ? (
+            <CloudinaryImage
+              src={splitUrl(post.image)}
+              width={500}
+              quality={50}
+              className='object-contain w-full h-full rounded-lg'
+              // priority={i < 3}
+            />
+          ) : (
+            <Image
+              src={post.image}
+              alt={post.title}
+              width={500}
+              height={280}
+              className='object-cover w-full h-full rounded-lg'
+            />
+          )}
         </div>
       </CardHeader>
       <CardContent className='pt-0 pb-5 px-3 lg:px-5 flex-1 flex flex-col justify-between gap-4'>

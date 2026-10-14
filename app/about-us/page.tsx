@@ -22,6 +22,8 @@ import {
 } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { Accordion02 } from '@/components/extends/accordion-02';
+import { aboutFaqs } from '@/constants';
 
 const aboutListItems = [
   {
@@ -484,6 +486,8 @@ export default function AboutPage() {
           </div>
         </div> */}
       </section>
+
+      <Accordion02 items={aboutFaqs} />
 
       <CTABlock />
     </main>

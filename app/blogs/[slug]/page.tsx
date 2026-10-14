@@ -53,7 +53,7 @@ export async function generateMetadata(
       description: post.metaDescription || post.summary,
       images: [
         {
-          url: `${post.image}`,
+          url: post.image,
           width: 1200,
           height: 630,
           alt: 'Ascent Wealth',

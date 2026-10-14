@@ -19,7 +19,19 @@ import {
 } from '../ui/collapsible';
 import { Blockquote, BlockquoteAuthor } from './blockquote';
 
-export function Accordion02() {
+type Accordion02Props = {
+  items?: { id: string; question: string; answer: string }[];
+  title?: string;
+  id?: string;
+  className?: string;
+};
+
+export function Accordion02({
+  items = faqs,
+  title = 'Frequently Asked Questions',
+  id = 'faqs',
+  className,
+}: Accordion02Props = {}) {
   const [value, setValue] = useState<string>();
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
 
@@ -27,18 +39,21 @@ export function Accordion02() {
 
   const faqToShow =
     (!isShowMore && !isMobile) || (isMobile && !isShowMore)
-      ? faqs.slice(0, 4)
-      : faqs;
+      ? items.slice(0, 4)
+      : items;
 
   return (
     <section
-      id='faqs'
-      className='max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 lg:space-y-8 py-10'>
+      id={id}
+      className={cn(
+        'max-w-(--breakpoint-xl) mx-auto w-full px-6 xl:px-0 space-y-6 lg:space-y-8 py-10',
+        className,
+      )}>
       <div className='text-center w-full'>
         <h2
           data-aos='fade-down'
           className='text-xl sm:text-2xl md:text-3xl lg:text-4xl leading-[1.15]! font-semibold tracking-[-0.035em]'>
-          Frequently Asked Questions
+          {title}
         </h2>
       </div>
 
@@ -143,7 +158,7 @@ export function Accordion02() {
               className='w-full border rounded-md'
               value={value}
               onValueChange={setValue}>
-              {faqs.map((item) => (
+              {items.map((item) => (
                 <AccordionItem value={item.id} key={item.id}>
                   <AccordionTrigger className='text-left data-[state=open]:[&_svg]:rotate-180 data-[state=open]:[&_svg]:[#plus]:opacity-0 [&_svg]:[#plus]:[data-state=open]:opacity-0 duration-500 hover:no-underline cursor-pointer [data-slot=accordion-trigger] [&>svg]:hidden'>
                     <div className='flex flex-1 items-center gap-2 lg:gap-4'>

@@ -21,42 +21,47 @@ import { Separator } from './ui/separator';
 // Footer link data
 const footerLinks = [
   {
-    title: 'Services',
+    title: 'Our Services',
     links: [
       {
         id: crypto.randomUUID(),
-        label: 'Mutual Funds',
-        href: '#services',
+        label: 'Best Mutual Funds & SIF Distributor in Chennai',
+        href: '/?service=mutual-funds',
       },
       {
         id: crypto.randomUUID(),
-        label: 'SIF, AIF, PMS',
-        href: '#services',
+        label: 'Best Portfolio Management Services Best PMS Distributor in Chennai',
+        href: '/?service=sif-aif-pms',
       },
       {
         id: crypto.randomUUID(),
-        label: 'GIFT City',
-        href: '#services',
+        label: 'Best Alternative Investment Fund (AIF) in Chennai',
+        href: '/?service=sif-aif-pms',
       },
       {
         id: crypto.randomUUID(),
-        label: 'Corporate FDs, Bonds and NCDs',
-        href: '#services',
+        label: 'Best Gift City Global Investments in Chennai',
+        href: '/?service=gift-city',
       },
       {
         id: crypto.randomUUID(),
-        label: 'Life and Health Insurance',
-        href: '#services',
+        label: 'Best Wealth Management Company in Chennai',
+        href: '/?service=sif-aif-pms',
       },
       {
         id: crypto.randomUUID(),
-        label: 'Estate Planning',
-        href: '#services',
+        label: 'Best Insurance Agency in Chennai',
+        href: '/?service=insurance',
       },
       {
         id: crypto.randomUUID(),
-        label: 'Goal Based Financial Planning',
-        href: '#planning',
+        label: 'Best Estate Planning Advisor in Chennai',
+        href: '/?service=estate-planning',
+      },
+      {
+        id: crypto.randomUUID(),
+        label: 'Best Retirement Financial Planning Services in Chennai',
+        href: '/?service=mutual-funds',
       },
     ],
   },
@@ -179,6 +184,9 @@ export function HoverFooter() {
                 <div className='text-muted-foreground text-xs sm:text-sm'>
                   Current validity of ARN:{' '}
                   <span className='font-bold text-foreground'>01-Apr-2028</span>
+                </div>
+                <div className='text-muted-foreground text-xs sm:text-sm'>
+                  APRN - <span className='font-bold text-foreground'>09935</span>
                 </div>
               </div>
             </div>

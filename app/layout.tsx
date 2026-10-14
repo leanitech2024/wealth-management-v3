@@ -2,6 +2,7 @@ import { HoverFooter } from '@/components/hover-footer';
 import { DevtoolsBlocker } from '@/components/shared/devtools-blocker';
 import Navbar from '@/components/shared/navbar';
 import { GlobalContactSheet } from '@/components/shared/global-contact-sheet';
+import { GlobalServiceDrawer } from '@/components/shared/global-service-drawer';
 import { Toaster } from '@/components/ui/sonner';
 import { Suspense } from 'react';
 import { seo } from '@/constants';
@@ -10,9 +11,8 @@ import type { Metadata } from 'next';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
 
+import Script from 'next/script';
 import './globals.css';
-
-import { LazyAnalytics } from '@/components/analytics';
 import { LazyWhatsappWidget } from '@/components/lazy-components';
 import VercelProducts from '@/components/vercel-products';
 import AOSProvider from '@/providers/aos-provider';
@@ -106,6 +106,23 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en' data-scroll-behavior='smooth' suppressHydrationWarning>
+      <head>
+        <Script
+          strategy='beforeInteractive'
+          src='https://www.googletagmanager.com/gtag/js?id=G-897659Y63B'
+        />
+        <Script id='google-analytics' strategy='beforeInteractive'>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            if (!window.__ga_initialized) {
+              window.__ga_initialized = true;
+              gtag('js', new Date());
+              gtag('config', 'G-897659Y63B');
+            }
+          `}
+        </Script>
+      </head>
       <body
         className={`${fontSans.variable} ${fontHeading.variable} font-sans antialiased`}>
         <ThemeProvider
@@ -119,6 +136,7 @@ export default function RootLayout({
               <Suspense fallback={null}>
                 <Navbar />
                 <GlobalContactSheet />
+                <GlobalServiceDrawer />
               </Suspense>
               {children}
               <HoverFooter />
@@ -129,7 +147,6 @@ export default function RootLayout({
           <ScrollToTop />
         </ThemeProvider>
         <VercelProducts />
-        <LazyAnalytics />
       </body>
     </html>
   );

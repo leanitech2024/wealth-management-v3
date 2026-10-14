@@ -535,7 +535,131 @@ export const seo = {
   ],
 };
 
-export const faqs = [
+export const homeFaqs = [
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Mutual Fund?',
+    answer: `A mutual fund is a financial instrument that collects money from several investors like you, and invests it in various investment options like shares, bonds, etc. This fund is managed by experts.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Who can invest in Mutual Fund?',
+    answer: `Anybody with an investible surplus of as little as a few hundred rupees can invest in mutual funds. The investors buy units of a fund that best suit their investment objectives and future needs.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Systematic Investment Plan - SIP?',
+    answer: `A Systematic Investment Plan (SIP) is a convenient method of investing in mutual funds. Under this plan, an investor contributes a fixed amount towards the mutual fund scheme at regular intervals, and gets units at the prevailing NAV.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is NAV(Net Asset Value)?',
+    answer: `Net Asset Value (NAV) refers to the price of one unit of a mutual fund scheme.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'How is NAV calculated?',
+    answer: `(Assets of the fund Liabilities of the fund) / Number of units outstanding for that fund. i.e., Net Assets / Outstanding Units`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question:
+      'If an investor has different schemes in a folio, will all units of all schemes be transferred to the nominee?',
+    answer: `A nomination is at folio level and all units in the folio will be transferred to the nominee(s). If an investor makes a further investment in the same folio, the nomination is applicable to the new units also.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is a Nomination?',
+    answer: `An investor can nominate person(s) called nominee(s) to whom his/her Mutual Fund Units willbe transferred on his/ her demise. The units will get transferred to the nominee in case of Single holding or Joint holding in the following manner: -
+    
+    Single holding of units in the folio: The Mutual Funds units will get transferred in the name of the registered nominee on the demise of the Single (primary) holder.
+    
+    Joint Holding or more than one-unit holder in a folio: The Mutual Funds units will get transferred in the name of the registered nominee on the demise of both the joint holder(s)`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Can I nominate a minor as my nominee?',
+    answer: `Yes. You are permitted to nominate a minor. However, if you nominate a minor, you must provide the name and address of the minor’s guardian in the nomination request.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Can I nominate more that 1 person in my mutual fund folios?',
+    answer: `Yes, an investor has an option to register up to three nominees in a folio and specify the percentage of the amounts that will go to each nominee. However, If the percentage is not specified, equal shares will go to each of the nominee.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Can I nominate a Non-Resident Indian as my nominee?',
+    answer: `Yes. A non-resident Indian can be a nominee subject to the exchange controls in force, from time to time.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Can I cancel / change a nomination made by me?',
+    answer: `Yes. You can cancel / change your existing nomination at any time before you redeem your mutual fund units.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'Who can make a nomination?',
+    answer: `Investors in the Category of “Individuals” are permitted to make a nomination for their mutual fund units. Non-individuals including society, trust, body corporate, partnership firm, Karta of Hindu Undivided Family and a holder of Power of Attorney are not allowed to nominate.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is the effect of nomination?',
+    answer: `Nomination causes all rights and/or amount(s) payable in respect of your Mutual Fund Holdings to vest in and be transferred to your nominee upon your death. If your legal heir is different from your nominee, your legal heir cannot dispute this action as transfer by the respective AMC(s) in favor of a Nominee acts as valid discharge by the AMC(s) against the legal heir of the deceased holder.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Exit Load?',
+    answer: `The non-refundable fee paid to the Asset Management Company at the time of redemption/ transfer of units between schemes of mutual funds is termed as exit load. It is deducted from the NAV(selling price) at the time of such redemption/ transfer.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Systematic Withdrawal Plan - SWP?',
+    answer: `Under a Systematic Withdrawal Plan (SWP), an investor redeems a fixed number of mutual fund units at regular intervals.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Systematic Transfer Plan - STP?',
+    answer: `An investor transfers a fixed amount regularly on a monthly/quarterly/annually basis from one scheme (preferably debt fund) and invest in another (which is predominantly an equity-oriented) scheme of a fund house. This helps in re-balancing the portfolio of investments.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Rupee-Cost-Averaging?',
+    answer: `Rupee cost averaging is one method to save regularly and minimize the effect of market volatility on investments. By investing through methods like SIP, you invest a fixed amount in mutual funds at regular intervals. So, you get more units when the NAV is low and fewer units when it is high. Eventually, your average cost per unit is brought down.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What are ELSS Funds?',
+    answer: `Equity Linked Saving Schemes (ELSS) are tax saving mutual fund schemes that enable you to get tax benefits under Section 80C of the Income Tax Act. Investment in these funds have a lock-in-period of three years.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is Key Information Memorandum - KIM?',
+    answer: `KIM or Key Information Memorandum provides detailed performance related information on the several schemes of a mutual fund company. So before you invest in any scheme you can have a look at the various scheme performances and take an informed decision. But always remember that a fund’s past performance is no guarantee of its future success.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What is an Offer Document?',
+    answer: `An offer document provides details about a new mutual fund scheme entering the market. It provides information on the features of the scheme, risk factors, loads – entry or exit load, the track record of the mutual fund company among others.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'How risky is Mutual Funds investing?',
+    answer: `Mutual funds invest in a variety of financial instruments such as equities, debt, government securities to name a few. Note that the value of these investments could fluctuate, thereby influencing your mutual fund NAV. But since the risk is spread among a large pool of individuals you individually take on low risk through diversification and rake in high returns.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question: 'What are the benefits of investing in Mutual Funds?',
+    answer: `Some of the major benefits on investing in a mutual fund are: – Diversification – Professional management – Small investments - Convenience – Liquidity – Variety of schemes and types – Tax benefits – Regulations.`,
+  },
+  {
+    id: crypto.randomUUID(),
+    question:
+      'What are the factors that influence the performance of Mutual Funds?',
+    answer: `The performances of Mutual funds are influenced by the performance of the stock market as well as the economy. Equity Funds are influenced to a considerable extent by the stock market. The stock market in turn is influenced by the performance of the companies as well as the economy. The performance of the sector funds depends to a significant extent on the companies within that sector. Bond-funds are influenced by interest rates and credit quality. As interest rates rise, bond prices fall, and vice versa. Similarly, bond funds with higher credit ratings are less influenced by changes in the economy.`,
+  },
+];
+
+export const aboutFaqs = [
   {
     id: crypto.randomUUID(),
     question: 'Who is the best Portfolio Management Services (PMS) consultant in Chennai?',
@@ -597,6 +721,8 @@ export const faqs = [
     answer: `Yes. Ascent Wealth will give advice on how to invest your money according to your financial situation and the goals you have set. It is important to evaluate the suitability of the advice before investing.`,
   },
 ];
+
+export const faqs = homeFaqs;
 
 export const companyLogos = [
   {
