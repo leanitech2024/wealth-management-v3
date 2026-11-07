@@ -8,8 +8,8 @@ import { ArrowLeftCircle } from 'lucide-react';
 import { Metadata, ResolvingMetadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getBlogJsonLd } from '@/constants/blog-schemas';
 import { notFound } from 'next/navigation';
-import { BlogPosting, WithContext } from 'schema-dts';
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -101,26 +101,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   const { base64 } = await getRemoteImage(post.image);
 
-  const jsonLd: WithContext<BlogPosting> = {
-    '@context': 'https://schema.org',
-    '@type': 'BlogPosting',
-    name: post.title,
-    image: post.image,
-    description: post.content,
-    author: {
-      '@type': 'Person',
-      name: 'Ascent Wealth',
-      url: 'https://www.ascentwealth.in',
-      image: 'https://www.ascentwealth.in/Ascent-Wealth-logo-2.png',
-    },
-    datePublished: post.createdAt,
-    articleSection: post.categories.join(', '),
-    publisher: {
-      '@type': 'Organization',
-      name: 'Ascent Wealth',
-      logo: 'https://www.ascentwealth.in/Ascent-Wealth-logo-2.png',
-    },
-  };
+  const jsonLd = getBlogJsonLd(post);
 
   return (
     <main>
